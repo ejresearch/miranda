@@ -1,0 +1,51 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.Python
+env/
+venv/
+.lizzy_env/
+lizzy_env/
+
+# --- FastAPI / Uvicorn logs ---
+*.log
+*.db
+
+# --- Jupyter Notebooks (optional) ---
+.ipynb_checkpoints/
+
+# --- Vite / Node / React ---
+node_modules/
+dist/
+build/
+.vite/
+.vscode/
+
+# --- OS and Editor Crap ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+*.code-workspace
+
+# --- dotenv / secrets ---
+.env
+.env.*
+
+# --- Weaviate bucket artifacts ---
+lightrag_working_dir/
+tmp/
+
+# --- Frontend build outputs ---
+frontend/dist/
+frontend/.vite/
+
+# --- Test output / scratch ---
+test_commands.sh
+*.bak
+
