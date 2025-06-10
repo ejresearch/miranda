@@ -75,3 +75,22 @@ async def get_table(project: str, table_name: str, column: Optional[str] = None,
     finally:
         conn.close()
 
+@router.get("/tables/list")
+async def list_tables(project: str):
+    db_path = get_db_path(project)
+    if not os.path.isfile(db_path):
+        raise HTTPException(status_code=404, detail=f"Project database not found: {db_path}")
+
+    try:
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        # Avoid listing internal SQLite system tables
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
+        result = cur.fetchall()
+        tables = [row[0] for row in result]
+        return {"project": project, "tables": tables}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Unable to list tables: {str(e)}")
+    finally:
+        conn.close()
+
