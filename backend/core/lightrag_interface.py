@@ -105,12 +105,15 @@ async def delete_file(bucket: str, doc_id: str):
 async def query_bucket(bucket: str, query: str, user_prompt: str = "", mode: str = "hybrid"):
     """
     Run a retrieval-augmented generation query scoped to `bucket`.
-    Returns the LLM’s response.
+    Combines user guidance + query and executes a LightRAG query.
     """
     rag = await _ensure_initialized(bucket)
-    param = QueryParam(mode=mode, user_prompt=user_prompt)
-    # Use the async query to avoid event-loop conflicts
-    result = await rag.aquery(query, param=param)
+
+    combined_query = f"{user_prompt.strip()}\n\n{query.strip()}" if user_prompt else query.strip()
+
+    # LightRAG v1.3.6 expects query as a string, mode separately
+    result = await rag.aquery(combined_query, mode=mode)
+
     return {"bucket": bucket, "result": result}
 
 async def export_graph():
