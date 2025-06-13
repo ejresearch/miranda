@@ -14,7 +14,7 @@ setup_logger("lighrag", level="INFO")
 
 # Working directory for all bucket subfolders
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-WORKING_DIR = os.path.join(BASE_DIR, "lightrag_working_dir")
+WORKING_DIR = os.path.join(BASE_DIR, "lighrag_working_dir")
 os.makedirs(WORKING_DIR, exist_ok=True)
 
 # In-memory caches
@@ -69,11 +69,15 @@ async def ingest_file(bucket: str, file_path: str):
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
     doc_id = await rag.ainsert(content)
+    # fallback if no doc_id was returned
+    if not doc_id:
+        doc_id = f"doc-{hash(content)}"
     _bucket_docs.setdefault(bucket, []).append(doc_id)
     return {"status": "success", "bucket": bucket, "doc_id": doc_id}
 
 async def list_bucket_files(bucket: str):
-    return _bucket_docs.get(bucket, [])
+    docs = _bucket_docs.get(bucket, [])
+    return [{"doc_id": doc_id, "filename": "unknown"} for doc_id in docs]
 
 async def delete_file(bucket: str, doc_id: str):
     rag = await _ensure_initialized(bucket)
