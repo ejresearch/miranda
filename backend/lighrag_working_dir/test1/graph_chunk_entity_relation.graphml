@@ -1,0 +1,1034 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d9" for="edge" attr.name="file_path" attr.type="string"/>
+<key id="d8" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d7" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d6" for="edge" attr.name="description" attr.type="string"/>
+<key id="d5" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d4" for="node" attr.name="file_path" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d2" for="node" attr.name="description" attr.type="string"/>
+<key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Multiprimary Displays">
+  <data key="d0">Multiprimary Displays</data>
+  <data key="d1">category</data>
+  <data key="d2">Multiprimary Displays (MPDs) represent a technological advancement in color reproduction, moving beyond traditional RGB systems to deliver more realistic and vibrant colors.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Full Color Range (FCR™)">
+  <data key="d0">Full Color Range (FCR™)</data>
+  <data key="d1">category</data>
+  <data key="d2">Full Color Range (FCR™) is a method for encoding color data that allows for greater flexibility in displaying colors across various primaries, improving color fidelity.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Briggs">
+  <data key="d0">Briggs</data>
+  <data key="d1">person</data>
+  <data key="d2">Briggs is a referenced individual associated with the historical development of color photography, showing significance in the documentation of color evolution.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Hubbell">
+  <data key="d0">Hubbell</data>
+  <data key="d1">person</data>
+  <data key="d2">Hubbell is a credited individual for his contributions to the understanding of color technology and its evolution.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bell Labs">
+  <data key="d0">Bell Labs</data>
+  <data key="d1">organization</data>
+  <data key="d2">Bell Labs is a notable research organization recognized for its innovations in technology, including contributions to color display systems.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="RCA">
+  <data key="d0">RCA</data>
+  <data key="d1">organization</data>
+  <data key="d2">RCA is a significant entity in the technology field known for its developments in color television and displays.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="University of Baylor">
+  <data key="d0">University of Baylor</data>
+  <data key="d1">organization</data>
+  <data key="d2">The University of Baylor is mentioned in context regarding a study that explored emotional responses to color in displays.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="6P Color">
+  <data key="d0">6P Color</data>
+  <data key="d1">organization</data>
+  <data key="d2">6P Color is a company or entity involved in the advancement of color technology, particularly related to display systems with enhanced color capabilities.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="RGB Triangle">
+  <data key="d0">RGB Triangle</data>
+  <data key="d1">category</data>
+  <data key="d2">The RGB Triangle represents the range of colors achievable through the RGB color model, highlighting its limitations in capturing the full spectrum of perceived colors.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="CIE Chromaticity Diagram">
+  <data key="d0">CIE Chromaticity Diagram</data>
+  <data key="d1">category</data>
+  <data key="d2">The CIE Chromaticity Diagram is a tool used to illustrate the colors visible to the human eye, showcasing the RGB triangle's limitations.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Medical Imaging">
+  <data key="d0">Medical Imaging</data>
+  <data key="d1">category</data>
+  <data key="d2">Medical Imaging refers to the field that utilizes enhanced color technologies to detect biological changes through subtle hue shifts.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="AR/VR &amp; Defence">
+  <data key="d0">AR/VR &amp; Defence</data>
+  <data key="d1">category</data>
+  <data key="d2">AR/VR &amp; Defence refers to industries applying advanced color technology for improved terrain recognition and target identification.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Sharp RGBY Quattron TVs">
+  <data key="d0">Sharp RGBY Quattron TVs</data>
+  <data key="d1">product</data>
+  <data key="d2">Sharp's RGBY Quattron TVs are television units that incorporate yellow sub-pixels to enhance color representation, indicative of advancements in display technology.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chorin &amp; Eliav">
+  <data key="d0">Chorin &amp; Eliav</data>
+  <data key="d1">person</data>
+  <data key="d2">Chorin &amp; Eliav are referenced individuals who contributed to the development of five-primary monitors designed for soft proofing.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Ajito et al.">
+  <data key="d0">Ajito et al.</data>
+  <data key="d1">person</data>
+  <data key="d2">Ajito et al. refers to a group of researchers who developed six-primary prototypes with significantly enhanced gamut volume.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Northern Illinois University">
+  <data key="d0">Northern Illinois University</data>
+  <data key="d1">organization</data>
+  <data key="d2">Northern Illinois University is mentioned for its research contributions pertaining to color technology development.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Energy &amp; Sustainability">
+  <data key="d0">Energy &amp; Sustainability</data>
+  <data key="d1">category</data>
+  <data key="d2">Energy &amp; Sustainability highlights the efficiency of color technologies that reduce power consumption in displaying images.</data>
+  <data key="d3">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Baylor University">
+  <data key="d0">Baylor University</data>
+  <data key="d1">organization</data>
+  <data key="d2">Baylor University is a private Christian university known for its research programs and academic excellence.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="NASA-JSC">
+  <data key="d0">NASA-JSC</data>
+  <data key="d1">organization</data>
+  <data key="d2">NASA Johnson Space Center (NASA-JSC) is involved in human spaceflight and aeronautics research.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="RGB vs RGBCEY">
+  <data key="d0">RGB vs RGBCEY</data>
+  <data key="d1">category</data>
+  <data key="d2">RGB vs RGBCEY refers to the comparison of two color representation models under HDR loads for benchmarking performance.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="FCR">
+  <data key="d0">FCR</data>
+  <data key="d1">category</data>
+  <data key="d2">FCR stands for FlexColor Rendering, which enhances representation of colors in displays and is backward compatible with existing systems.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="SMPTE 32NF">
+  <data key="d0">SMPTE 32NF</data>
+  <data key="d1">category</data>
+  <data key="d2">SMPTE 32NF is a standard related to color processing in motion picture technology being deliberated upon for approval.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="IEC TC110 WG 9">
+  <data key="d0">IEC TC110 WG 9</data>
+  <data key="d1">category</data>
+  <data key="d2">IEC TC110 WG 9 is a working group that focuses on standardization processes for electronic display systems.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="PANAS &amp; SPANE trials">
+  <data key="d0">PANAS &amp; SPANE trials</data>
+  <data key="d1">event</data>
+  <data key="d2">PANAS &amp; SPANE trials are psychological assessments used in research to measure emotional responses in various genres.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color in Electronic Display Systems: Advantages of Multi-Primary Displays">
+  <data key="d0">Color in Electronic Display Systems: Advantages of Multi-Primary Displays</data>
+  <data key="d1">event</data>
+  <data key="d2">This refers to a work published by Miller that discusses the benefits of using multiprimary displays in electronic systems.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="The Moment color Comes of Age">
+  <data key="d0">The Moment color Comes of Age</data>
+  <data key="d1">event</data>
+  <data key="d2">This statement refers to the concept that technologies in color representation are finally aligning with human perception.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Agoston 2013">
+  <data key="d0">Agoston 2013</data>
+  <data key="d1">person</data>
+  <data key="d2">Agoston is an author who wrote about color theory and its application in art and design in a text respected in academic circles.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Birch 2012">
+  <data key="d0">Birch 2012</data>
+  <data key="d1">person</data>
+  <data key="d2">Birch is referenced as an author whose work contributes to the understanding of color technology and human perception.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shafer et al. 2023">
+  <data key="d0">Shafer et al. 2023</data>
+  <data key="d1">person</data>
+  <data key="d2">Shafer et al. are researchers whose recent findings indicate significant improvements in color representation technology.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Duan &amp; Lei 2018">
+  <data key="d0">Duan &amp; Lei 2018</data>
+  <data key="d1">person</data>
+  <data key="d2">Duan and Lei are authors who conducted research on energy benchmarking in color display systems.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Watson et al. 1988">
+  <data key="d0">Watson et al. 1988</data>
+  <data key="d1">person</data>
+  <data key="d2">Watson is an author involved in the development of psychological assessment tools used in emotional research.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Diener et al. 2010">
+  <data key="d0">Diener et al. 2010</data>
+  <data key="d1">person</data>
+  <data key="d2">Diener is known for contributing to psychological research, including the development of the SPANE tool for measuring emotional states.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Teragawa et al. 2012">
+  <data key="d0">Teragawa et al. 2012</data>
+  <data key="d1">person</data>
+  <data key="d2">Teragawa is referenced as a researcher discussing the applications of color technology in defense and AR/VR.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Representation Technologies">
+  <data key="d0">Color Representation Technologies</data>
+  <data key="d1">category</data>
+  <data key="d2">Color representation technologies include various systems and methods aimed at improving how color is captured, processed, and displayed.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Extra Primaries">
+  <data key="d0">Extra Primaries</data>
+  <data key="d1">category</data>
+  <data key="d2">Extra primaries refer to additional colors used in color representation systems that enhance the display gamut and emotional response.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Technology">
+  <data key="d0">Color Technology</data>
+  <data key="d1">category</data>
+  <data key="d2">Color technology encompasses the advancements in systems and methods for creating, displaying, and perceiving color accurately.</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Hu, Y.">
+  <data key="d0">Hu, Y.</data>
+  <data key="d1">person</data>
+  <data key="d2">Hu, Y. is an author who contributed to research on observer metamerism in optics.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wei, M.">
+  <data key="d0">Wei, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Wei, M. is a co-author with Hu, Y. on research related to optics and color display.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Luo, M. R.">
+  <data key="d0">Luo, M. R.</data>
+  <data key="d1">person</data>
+  <data key="d2">Luo, M. R. collaborated with Hu, Y. and Wei, M. on exploring observer metamerism in color display technology.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Optics Express">
+  <data key="d0">Optics Express</data>
+  <data key="d1">organization</data>
+  <data key="d2">Optics Express is a scientific journal that published an article regarding observer metamerism.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Kamen, I.">
+  <data key="d0">Kamen, I.</data>
+  <data key="d1">person</data>
+  <data key="d2">Kamen, I. authored a paper on subtractive color television technology.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="TV Engineering">
+  <data key="d0">TV Engineering</data>
+  <data key="d1">organization</data>
+  <data key="d2">TV Engineering is a publication in which Kamen's work on subtractive color TV was featured.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Garrett, J.">
+  <data key="d0">Garrett, J.</data>
+  <data key="d1">person</data>
+  <data key="d2">Garrett, J. wrote an article discussing the Sharp Aquos Quattron TV and its unique fourth pixel.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="GadgetyNews">
+  <data key="d0">GadgetyNews</data>
+  <data key="d1">organization</data>
+  <data key="d2">GadgetyNews is a website that published Garrett's article about the Sharp Aquos Quattron TV.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Katzmaier, D.">
+  <data key="d0">Katzmaier, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">Katzmaier, D. reviewed the Sharp Quattron LC-LE847U series, discussing its value proposition.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="CNET">
+  <data key="d0">CNET</data>
+  <data key="d1">organization</data>
+  <data key="d2">CNET is a tech news and review site where Katzmaier's review of the Sharp Quattron was published.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wakabayashi, D.">
+  <data key="d0">Wakabayashi, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">Wakabayashi, D. wrote about Sharp's expansion of their TV color palette with a yellow pixel.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="The Wall Street Journal">
+  <data key="d0">The Wall Street Journal</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Wall Street Journal is the outlet that published Wakabayashi's article about Sharp's TV color advancements.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chorin, M. B.">
+  <data key="d0">Chorin, M. B.</data>
+  <data key="d1">person</data>
+  <data key="d2">Chorin, M. B. contributed to research on multi-primary color displays and their design.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Eliav, D.">
+  <data key="d0">Eliav, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">Eliav, D. co-authored studies with Chorin on spectrally accurate displays and their applications.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Society for Information Display">
+  <data key="d0">Society for Information Display</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Society for Information Display is a professional organization that publishes research on display technologies.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Duan, L.">
+  <data key="d0">Duan, L.</data>
+  <data key="d1">person</data>
+  <data key="d2">Duan, L. researched wide-color-gamut displays and contributed to advancements in display technology.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Applied Optics">
+  <data key="d0">Applied Optics</data>
+  <data key="d1">organization</data>
+  <data key="d2">Applied Optics is a journal that published Duan's research on wide-color-gamut LCDs.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shafer, D. M.">
+  <data key="d0">Shafer, D. M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Shafer, D. M. is an author who wrote about emotional responses to wide-gamut color footage.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Projections">
+  <data key="d0">Projections</data>
+  <data key="d1">organization</data>
+  <data key="d2">Projections is a journal that published Shafer's article on the emotional power of multiprimary displays.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Birch, J.">
+  <data key="d0">Birch, J.</data>
+  <data key="d1">person</data>
+  <data key="d2">Birch, J. conducted a study on the prevalence of red-green color deficiency.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Journal of the Optical Society of America A">
+  <data key="d0">Journal of the Optical Society of America A</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Journal of the Optical Society of America A is where Birch's study was published.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bellantoni, P.">
+  <data key="d0">Bellantoni, P.</data>
+  <data key="d1">person</data>
+  <data key="d2">Bellantoni, P. authored a book discussing the influence of color in visual storytelling.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Routledge">
+  <data key="d0">Routledge</data>
+  <data key="d1">organization</data>
+  <data key="d2">Routledge is the publisher of Bellantoni's book on the power of color in storytelling.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Amsteus, M.">
+  <data key="d0">Amsteus, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Amsteus, M. studied the effects of color in marketing and consumer perception.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="International Journal of Business and Social Science">
+  <data key="d0">International Journal of Business and Social Science</data>
+  <data key="d1">organization</data>
+  <data key="d2">The International Journal of Business and Social Science published Amsteus's research on color associations.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Observer Metamerism">
+  <data key="d0">Observer Metamerism</data>
+  <data key="d1">category</data>
+  <data key="d2">Observer Metamerism refers to the phenomenon where different colors appear the same under certain lighting conditions, a topic explored in color theory.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Subtractive Color TV">
+  <data key="d0">Subtractive Color TV</data>
+  <data key="d1">category</data>
+  <data key="d2">Subtractive Color TV is a technology that uses the principles of subtractive color mixing to produce images, focusing on color rendition in the broadcasting medium.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Sharp Aquos Quattron TV">
+  <data key="d0">Sharp Aquos Quattron TV</data>
+  <data key="d1">product</data>
+  <data key="d2">The Sharp Aquos Quattron TV is a television model known for incorporating a fourth yellow pixel in addition to the standard RGB, aiming for a wider color gamut.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="LC-LE847U Series">
+  <data key="d0">LC-LE847U Series</data>
+  <data key="d1">product</data>
+  <data key="d2">The LC-LE847U Series is a line of televisions from Sharp that features the Quattron technology, which adds a yellow pixel for enhanced color performance.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Gamut">
+  <data key="d0">Color Gamut</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Gamut refers to the range of colors that a display can reproduce, which is a significant aspect in evaluating display technologies.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Multi-primary Colors">
+  <data key="d0">Multi-primary Colors</data>
+  <data key="d1">category</data>
+  <data key="d2">Multi-primary Colors refers to the use of more than three colors in color displays to achieve a more extensive range of reproducing colors, as discussed in display technology research.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Marketing">
+  <data key="d0">Color Marketing</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Marketing is a field of study focusing on how colors affect consumer behavior and perceptions in advertising and branding.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Emotional Responses to Color">
+  <data key="d0">Emotional Responses to Color</data>
+  <data key="d1">category</data>
+  <data key="d2">Emotional Responses to Color explores how various colors can elicit emotional reactions in viewers, relevant in fields such as marketing and film.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wide-gamut Display">
+  <data key="d0">Wide-gamut Display</data>
+  <data key="d1">category</data>
+  <data key="d2">Wide-gamut Display refers to displays that can show a wider array of colors compared to standard displays, important for color accuracy in various applications.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Association Studies">
+  <data key="d0">Color Association Studies</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Association Studies examine how different colors are perceived and associated in various contexts, providing insights into consumer psychology.</data>
+  <data key="d3">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Zettl, H.">
+  <data key="d0">Zettl, H.</data>
+  <data key="d1">person</data>
+  <data key="d2">H. Zettl is an author who wrote the book 'Sight, Sound, Motion: Applied Media Aesthetics.'</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Cengage Learning">
+  <data key="d0">Cengage Learning</data>
+  <data key="d1">organization</data>
+  <data key="d2">Cengage Learning is the publisher of the textbook 'Sight, Sound, Motion: Applied Media Aesthetics.'</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bakony, E.">
+  <data key="d0">Bakony, E.</data>
+  <data key="d1">person</data>
+  <data key="d2">E. Bakony authored 'Symbolism in the Feature Film,' which is accessible through ERIC.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chen, I.-P.">
+  <data key="d0">Chen, I.-P.</data>
+  <data key="d1">person</data>
+  <data key="d2">I.-P. Chen is a co-author of a study published in 'Empirical Studies of the Arts' on color use in film genres.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wu, F.-Y.">
+  <data key="d0">Wu, F.-Y.</data>
+  <data key="d1">person</data>
+  <data key="d2">F.-Y. Wu is a contributor to the study regarding characteristic color use in different film genres.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Lin, C.-H.">
+  <data key="d0">Lin, C.-H.</data>
+  <data key="d1">person</data>
+  <data key="d2">C.-H. Lin co-authored a research paper focusing on characteristic color use in film genres.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Brown, S.">
+  <data key="d0">Brown, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">S. Brown is an editor of the book 'Color and the Moving Image: History, Theory, Aesthetics, Archive.'</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Street, S.">
+  <data key="d0">Street, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">S. Street is a co-editor of 'Color and the Moving Image,' which explores the aesthetics of color in films.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Watkins, L.">
+  <data key="d0">Watkins, L.</data>
+  <data key="d1">person</data>
+  <data key="d2">L. Watkins is also an editor of the work 'Color and the Moving Image,' contributing to film theory.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Aitken, S. C.">
+  <data key="d0">Aitken, S. C.</data>
+  <data key="d1">person</data>
+  <data key="d2">S. C. Aitken authored 'Place, Power, Situation, and Spectacle: A Geography of Film.'</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Rowman &amp; Littlefield">
+  <data key="d0">Rowman &amp; Littlefield</data>
+  <data key="d1">organization</data>
+  <data key="d2">Rowman &amp; Littlefield is the publisher of 'Place, Power, Situation, and Spectacle: A Geography of Film.'</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="DeRuvo, J.">
+  <data key="d0">DeRuvo, J.</data>
+  <data key="d1">person</data>
+  <data key="d2">J. DeRuvo is an author of the article 'Creating emotion with color in cinematography' published on No Film School.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="No Film School">
+  <data key="d0">No Film School</data>
+  <data key="d1">organization</data>
+  <data key="d2">No Film School is an online platform where the article on color in cinematography was published.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Mohebbi, B.">
+  <data key="d0">Mohebbi, B.</data>
+  <data key="d1">person</data>
+  <data key="d2">B. Mohebbi wrote a working paper on the role of color in packaging, marketing, and branding.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="SSRN">
+  <data key="d0">SSRN</data>
+  <data key="d1">organization</data>
+  <data key="d2">SSRN is the platform where B. Mohebbi's working paper was published.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Kodžoman, D.">
+  <data key="d0">Kodžoman, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">D. Kodžoman authored a study on the psychology of clothing and its relationship with color and gender expression.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Textile &amp; Leather Review">
+  <data key="d0">Textile &amp; Leather Review</data>
+  <data key="d1">organization</data>
+  <data key="d2">Textile &amp; Leather Review is the journal that published Kodžoman's research.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Watson, D.">
+  <data key="d0">Watson, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">D. Watson is a co-author of the PANAS scales, which measure positive and negative affect.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Clark, L. A.">
+  <data key="d0">Clark, L. A.</data>
+  <data key="d1">person</data>
+  <data key="d2">L. A. Clark contributed to the development and validation of the PANAS scales.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Tellegen, A.">
+  <data key="d0">Tellegen, A.</data>
+  <data key="d1">person</data>
+  <data key="d2">A. Tellegen is also a co-author of the PANAS scales for measuring affect.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Diener, E.">
+  <data key="d0">Diener, E.</data>
+  <data key="d1">person</data>
+  <data key="d2">E. Diener co-authored new well-being measures for evaluating subjective well-being in social research.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Social Indicators Research">
+  <data key="d0">Social Indicators Research</data>
+  <data key="d1">organization</data>
+  <data key="d2">Social Indicators Research is the journal that published the study on well-being measures.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Empirical Studies of the Arts">
+  <data key="d0">Empirical Studies of the Arts</data>
+  <data key="d1">organization</data>
+  <data key="d2">Empirical Studies of the Arts is a journal that publishes research articles related to the arts, including film studies.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="SSRN Working Paper">
+  <data key="d0">SSRN Working Paper</data>
+  <data key="d1">event</data>
+  <data key="d2">SSRN Working Paper refers to the series of academic papers published on the SSRN platform.</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Energy Benchmarking">
+  <data key="d0">Energy Benchmarking</data>
+  <data key="d3">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d2">"Duan and Lei's research on benchmarking energy usage in color systems relates directly to enhancing display technologies.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="ERİC">
+  <data key="d0">ERİC</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d2">E. Bakony's work 'Symbolism in the Feature Film' is accessible through the ERIC database.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color and the Moving Image">
+  <data key="d0">Color and the Moving Image</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d2">S. Brown is an editor of a book that explores the role of color in film aesthetics.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="PANAS scales">
+  <data key="d0">PANAS scales</data>
+  <data key="d3">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d2">D. Watson co-developed the PANAS scales with other authors for measuring affect.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<edge source="Multiprimary Displays" target="Full Color Range (FCR™)">
+  <data key="d5">9.0</data>
+  <data key="d6">Multiprimary Displays utilize Full Color Range (FCR™) technology to encode color more accurately than traditional RGB systems.</data>
+  <data key="d7">color technology, advancements</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="University of Baylor">
+  <data key="d5">8.0</data>
+  <data key="d6">The University of Baylor is linked to studies on emotional responses in he context of Multiprimary Displays, indicating research implications for this technology.</data>
+  <data key="d7">research impact, emotional studies</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Medical Imaging">
+  <data key="d5">9.0</data>
+  <data key="d6">Multiprimary Displays have applications in Medical Imaging, aiding in the detection of subtle biological changes through enhanced color representation.</data>
+  <data key="d7">color applications, medical technology</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="AR/VR &amp; Defence">
+  <data key="d5">9.0</data>
+  <data key="d6">Multiprimary Displays improve performance in AR/VR &amp; Defence industries by enhancing color fidelity for better terrain recognition and target identification.</data>
+  <data key="d7">industry application, technological integration</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Chorin &amp; Eliav">
+  <data key="d5">8.0</data>
+  <data key="d6">Chorin &amp; Eliav's work on five-primary monitors is related to the development and advancement of Multiprimary Displays technology.</data>
+  <data key="d7">research contribution, technology development</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Ajito et al.">
+  <data key="d5">8.0</data>
+  <data key="d6">Ajito et al.'s development of six-primary prototypes relates directly to the advancements seen in Multiprimary Displays.</data>
+  <data key="d7">research impact, technology prototype</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Energy &amp; Sustainability">
+  <data key="d5">9.0</data>
+  <data key="d6">Multiprimary Displays contribute to Energy &amp; Sustainability by improving efficiency and reducing power consumption in color displays.</data>
+  <data key="d7">energy efficiency, display technology</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Briggs" target="Hubbell">
+  <data key="d5">8.0</data>
+  <data key="d6">Both Hubbell and Briggs are referenced as influential figures in the historical development of color photography and technology.</data>
+  <data key="d7">historical contributions, color evolution</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Bell Labs" target="RCA">
+  <data key="d5">9.0</data>
+  <data key="d6">Bell Labs and RCA are both recognized organizations in the field of technology and color display innovations.</data>
+  <data key="d7">technology advancement, influential organizations</data>
+  <data key="d8">chunk-023c78131be2e996163060268dfe6caa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Baylor University" target="NASA-JSC">
+  <data key="d5">7.0</data>
+  <data key="d6">Baylor University and NASA-JSC are both pursuing research directions that involve advancements in color processing and display technology.</data>
+  <data key="d7">collaboration, research direction</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Baylor University" target="PANAS &amp; SPANE trials">
+  <data key="d5">6.0</data>
+  <data key="d6">Baylor University is conducting PANAS &amp; SPANE trials, showcasing their commitment to research in emotional responses to color usage.</data>
+  <data key="d7">psychological research, university studies</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="RGB vs RGBCEY" target="FCR">
+  <data key="d5">8.0</data>
+  <data key="d6">FCR technology and RGB vs RGBCEY are related as they are both concerned with the improvement in color representation under different conditions.</data>
+  <data key="d7">color technology improvement, performance benchmarking</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="FCR" target="SMPTE 32NF">
+  <data key="d5">9.0</data>
+  <data key="d6">Findings on FCR are entering the deliberations for SMPTE 32NF, indicating a connection between color representation technology and industry standards.</data>
+  <data key="d7">standardization effort, color technology</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="SMPTE 32NF" target="IEC TC110 WG 9">
+  <data key="d5">8.0</data>
+  <data key="d6">IEC TC110 WG 9 is involved in the deliberation of SMPTE 32NF standards, linking them through regulatory processes.</data>
+  <data key="d7">standardization process, industry regulations</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="PANAS &amp; SPANE trials" target="Watson et al. 1988">
+  <data key="d5">7.0</data>
+  <data key="d6">Watson's development of psychological tools like PANAS showcases the intersection of psychology and emotional responses to color displays.</data>
+  <data key="d7">psychology, emotional assessment</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color in Electronic Display Systems: Advantages of Multi-Primary Displays" target="The Moment color Comes of Age">
+  <data key="d5">7.0</data>
+  <data key="d6">This publication discusses how display technology is evolving, just as the idea of color coming of age suggests a transformation in perception.</data>
+  <data key="d7">technological evolution, perception</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Agoston 2013" target="Birch 2012">
+  <data key="d5">8.0</data>
+  <data key="d6">Both Birch and Agoston have authored significant works on color technology, contributing to the understanding and application of color theory.</data>
+  <data key="d7">academic contributions, color theory</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shafer et al. 2023" target="Extra Primaries">
+  <data key="d5">9.0</data>
+  <data key="d6">Shafer et al.'s research on color technology supports the premise of using extra primaries to enhance visual experience, such as in displays.</data>
+  <data key="d7">research application, visual enhancement</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Duan &amp; Lei 2018" target="Energy Benchmarking">
+  <data key="d5">8.0</data>
+  <data key="d6">"Duan and Lei's research on benchmarking energy usage in color systems relates directly to enhancing display technologies.</data>
+  <data key="d7">energy efficiency, display technology</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color Representation Technologies" target="Color Technology">
+  <data key="d5">9.0</data>
+  <data key="d6">Color representation technologies are a subset of color technology aimed at improving display methods and perception.</data>
+  <data key="d7">technological advancement, perception improvement</data>
+  <data key="d8">chunk-3d45a417de380cf0c70243497505c6fb</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Hu, Y." target="Optics Express">
+  <data key="d5">9.0</data>
+  <data key="d6">Hu, Y. published research on observer metamerism in the Optics Express journal.</data>
+  <data key="d7">academic publication, research contribution</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Hu, Y." target="Wei, M.">
+  <data key="d5">8.0</data>
+  <data key="d6">Wei, M. collaborated with Hu, Y. on research in optics displayed in a scientific journal.</data>
+  <data key="d7">collaboration, research partnership</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Hu, Y." target="Luo, M. R.">
+  <data key="d5">8.0</data>
+  <data key="d6">Luo, M. R. worked with Hu, Y. and Wei, M. on a significant optics study published in Optics Express.</data>
+  <data key="d7">collaboration, research contribution</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Kamen, I." target="TV Engineering">
+  <data key="d5">8.0</data>
+  <data key="d6">Kamen's article on subtractive color TV was published in TV Engineering.</data>
+  <data key="d7">academic publication, technology focus</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Garrett, J." target="GadgetyNews">
+  <data key="d5">9.0</data>
+  <data key="d6">Garrett's article discussing the Sharp Aquos Quattron TV was featured on GadgetyNews.</data>
+  <data key="d7">product review, media coverage</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Katzmaier, D." target="CNET">
+  <data key="d5">9.0</data>
+  <data key="d6">Katzmaier's review of the Sharp Quattron LC-LE847U series appeared on CNET.</data>
+  <data key="d7">product review, media coverage</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Wakabayashi, D." target="The Wall Street Journal">
+  <data key="d5">9.0</data>
+  <data key="d6">Wakabayashi's article on Sharp's TV advancements was published in The Wall Street Journal.</data>
+  <data key="d7">product innovation, media coverage</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Chorin, M. B." target="Society for Information Display">
+  <data key="d5">9.0</data>
+  <data key="d6">Chorin's research on multi-primary designs was published by the Society for Information Display.</data>
+  <data key="d7">academic contribution, research publication</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Duan, L." target="Applied Optics">
+  <data key="d5">9.0</data>
+  <data key="d6">Duan's research on wide-color-gamut displays was published in Applied Optics.</data>
+  <data key="d7">academic publication, technology advancement</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shafer, D. M." target="Projections">
+  <data key="d5">8.0</data>
+  <data key="d6">Shafer's article on emotional responses to color was published in Projections.</data>
+  <data key="d7">subject impact, academic contribution</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Birch, J." target="Journal of the Optical Society of America A">
+  <data key="d5">9.0</data>
+  <data key="d6">Birch's study on color deficiency was published in the Journal of the Optical Society of America A.</data>
+  <data key="d7">academic publication, research study</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Bellantoni, P." target="Routledge">
+  <data key="d5">9.0</data>
+  <data key="d6">Bellantoni's book discussing color in storytelling was published by Routledge.</data>
+  <data key="d7">book publication, subject focus</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Amsteus, M." target="International Journal of Business and Social Science">
+  <data key="d5">9.0</data>
+  <data key="d6">Amsteus's research on color and marketing was published in the International Journal of Business and Social Science.</data>
+  <data key="d7">academic publication, marketing focus</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Sharp Aquos Quattron TV" target="Color Gamut">
+  <data key="d5">8.0</data>
+  <data key="d6">The Sharp Aquos Quattron TV enhances color gamut through the addition of a fourth pixel, improving color accuracy.</data>
+  <data key="d7">technology enhancement, display quality</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multi-primary Colors" target="Wide-gamut Display">
+  <data key="d5">9.0</data>
+  <data key="d6">Multi-primary colors are key to achieving wide-gamut displays, showcasing advancements in visual technology.</data>
+  <data key="d7">technological advancement, color reproduction</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color Marketing" target="Emotional Responses to Color">
+  <data key="d5">8.0</data>
+  <data key="d6">Color marketing strategies often rely on understanding emotional responses to color, linking psychology with advertising.</data>
+  <data key="d7">consumer behavior, marketing strategy</data>
+  <data key="d8">chunk-a8d43a25120e8af24edc0000be381fb1</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Zettl, H." target="Cengage Learning">
+  <data key="d5">8.0</data>
+  <data key="d6">H. Zettl authored a textbook that was published by Cengage Learning.</data>
+  <data key="d7">authorship, publishing</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Bakony, E." target="ERİC">
+  <data key="d5">7.0</data>
+  <data key="d6">E. Bakony's work 'Symbolism in the Feature Film' is accessible through the ERIC database.</data>
+  <data key="d7">publication access, educational resource</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Chen, I.-P." target="Wu, F.-Y.">
+  <data key="d5">8.0</data>
+  <data key="d6">I.-P. Chen and F.-Y. Wu collaborated on a study published in 'Empirical Studies of the Arts.'</data>
+  <data key="d7">co-authorship, collaboration</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Chen, I.-P." target="Lin, C.-H.">
+  <data key="d5">8.0</data>
+  <data key="d6">I.-P. Chen collaborated with C.-H. Lin on a study regarding color use in films.</data>
+  <data key="d7">co-authorship, collaboration</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Brown, S." target="Color and the Moving Image">
+  <data key="d5">8.0</data>
+  <data key="d6">S. Brown is an editor of a book that explores the role of color in film aesthetics.</data>
+  <data key="d7">editing, collective work</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="DeRuvo, J." target="No Film School">
+  <data key="d5">7.0</data>
+  <data key="d6">J. DeRuvo wrote an article for No Film School on color in cinematography.</data>
+  <data key="d7">publication, feature article</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Mohebbi, B." target="SSRN">
+  <data key="d5">8.0</data>
+  <data key="d6">B. Mohebbi's working paper on color in marketing was published on SSRN.</data>
+  <data key="d7">publication, academic resource</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Mohebbi, B." target="SSRN Working Paper">
+  <data key="d5">9.0</data>
+  <data key="d6">B. Mohebbi's investigation into the role of color in marketing was shared as an SSRN Working Paper.</data>
+  <data key="d7">academic publication, research dissemination</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Kodžoman, D." target="Textile &amp; Leather Review">
+  <data key="d5">8.0</data>
+  <data key="d6">D. Kodžoman's research was published in the journal Textile &amp; Leather Review.</data>
+  <data key="d7">publication, academic resource</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Watson, D." target="PANAS scales">
+  <data key="d5">9.0</data>
+  <data key="d6">D. Watson co-developed the PANAS scales with other authors for measuring affect.</data>
+  <data key="d7">theoretical contribution, psychological measurement</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Diener, E." target="Social Indicators Research">
+  <data key="d5">8.0</data>
+  <data key="d6">E. Diener's study on well-being measures was published in Social Indicators Research.</data>
+  <data key="d7">publication, academic research</data>
+  <data key="d8">chunk-d1e2d9bb16e277b80d8cd2639a573e6f</data>
+  <data key="d9">unknown_source</data>
+</edge>
+</graph></graphml>

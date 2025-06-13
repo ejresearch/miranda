@@ -1,0 +1,1342 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d9" for="edge" attr.name="file_path" attr.type="string"/>
+<key id="d8" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d7" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d6" for="edge" attr.name="description" attr.type="string"/>
+<key id="d5" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d4" for="node" attr.name="file_path" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d2" for="node" attr.name="description" attr.type="string"/>
+<key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Agoston, G. A.">
+  <data key="d0">Agoston, G. A.</data>
+  <data key="d1">person</data>
+  <data key="d2">Agoston, G. A. is the author of a foundational text on color theory, emphasizing principles of color perception, mixing, and the RGB triangle.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Springer">
+  <data key="d0">Springer</data>
+  <data key="d1">organization</data>
+  <data key="d2">Springer is a publishing company known for academic publications, including books and journals in various scientific fields.&lt;SEP&gt;Springer is the publishing company that published Agoston's foundational text on color theory.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e&lt;SEP&gt;chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Aitken, S. C.">
+  <data key="d0">Aitken, S. C.</data>
+  <data key="d1">person</data>
+  <data key="d2">Aitken, S. C. is a co-author of a book analyzing the impact of spatial and visual elements in film on audience interpretation.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Zonn, L.">
+  <data key="d0">Zonn, L.</data>
+  <data key="d1">person</data>
+  <data key="d2">Zonn, L. is a co-author with Aitken on the subject of film geography and meaning through visual elements.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Rowman &amp; Littlefield">
+  <data key="d0">Rowman &amp; Littlefield</data>
+  <data key="d1">organization</data>
+  <data key="d2">Rowman &amp; Littlefield is the publisher of the book by Aitken and Zonn, which discusses geography and film.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Ajito, T.">
+  <data key="d0">Ajito, T.</data>
+  <data key="d1">person</data>
+  <data key="d2">Ajito, T. is a co-author of a research paper presenting empirical work on six-primary projection displays and color gamut expansion.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Kato, S.">
+  <data key="d0">Kato, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">Kato, S. is a co-author with Ajito on the topic of multiprimary displays and their effectiveness in color reproduction.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Akimoto, M.">
+  <data key="d0">Akimoto, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Akimoto, M. is a co-author of research on expanding color gamut in projection displays, providing quantifiable evidence.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="International Journal of Business and Social Science">
+  <data key="d0">International Journal of Business and Social Science</data>
+  <data key="d1">organization</data>
+  <data key="d2">The International Journal of Business and Social Science published the study on color associations by Amsteus and colleagues.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Amsteus, M.">
+  <data key="d0">Amsteus, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Amsteus, M. is a co-author of a study analyzing how color associations vary in marketing contexts.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Al-Shaaban, S.">
+  <data key="d0">Al-Shaaban, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">Al-Shaaban, S. is a co-author working with Amsteus on the impact of color in marketing.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wallin, E.">
+  <data key="d0">Wallin, E.</data>
+  <data key="d1">person</data>
+  <data key="d2">Wallin, E. is another co-author with Amsteus on the study regarding color associations in marketing.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Sjöqvist, S.">
+  <data key="d0">Sjöqvist, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">Sjöqvist, S. is a co-author providing insights on color and marketing in the study by Amsteus et al.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Babolhavaeji, M.">
+  <data key="d0">Babolhavaeji, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">Babolhavaeji, M. co-authored a paper on the role of product color in influencing consumer behavior.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Vakilian, M. A.">
+  <data key="d0">Vakilian, M. A.</data>
+  <data key="d1">person</data>
+  <data key="d2">Vakilian, M. A. is a co-author alongside Babolhavaeji focusing on consumer behavior related to product colors.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Slambolchi, A.">
+  <data key="d0">Slambolchi, A.</data>
+  <data key="d1">person</data>
+  <data key="d2">Slambolchi, A. co-authored the study investigating the impact of color on consumer purchasing decisions.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bakony, E.">
+  <data key="d0">Bakony, E.</data>
+  <data key="d1">person</data>
+  <data key="d2">Bakony, E. wrote a paper exploring the symbolic functions of color in narrative films.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bellantoni, P.">
+  <data key="d0">Bellantoni, P.</data>
+  <data key="d1">person</data>
+  <data key="d2">Bellantoni, P. is the author of a book analyzing the power of color in visual storytelling in film.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Briggs, A.">
+  <data key="d0">Briggs, A.</data>
+  <data key="d1">person</data>
+  <data key="d2">Briggs, A. documented the history of broadcasting, discussing early color display technology in the UK.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Oxford University Press">
+  <data key="d0">Oxford University Press</data>
+  <data key="d1">organization</data>
+  <data key="d2">Oxford University Press is the publisher of Briggs' work on the history of broadcasting.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Gamut Limitations">
+  <data key="d0">Gamut Limitations</data>
+  <data key="d1">category</data>
+  <data key="d2">Gamut Limitations refers to the constraints in the range of colors that can be represented in various color systems, as discussed in the context of color theory and its application.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="RGB Triangle">
+  <data key="d0">RGB Triangle</data>
+  <data key="d1">category</data>
+  <data key="d2">The RGB Triangle is a representation of color mixing in additive color systems, crucial for understanding color perception in digital displays and design.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Multiprimary Displays">
+  <data key="d0">Multiprimary Displays</data>
+  <data key="d1">category</data>
+  <data key="d2">Multiprimary Displays are advanced display technologies that utilize multiple primary colors to expand color reproduction capabilities beyond traditional RGB systems.&lt;SEP&gt;Multiprimary Displays are innovative display technologies that utilize more than three primary colors to enhance color reproduction and accuracy in visual media.&lt;SEP&gt;Multiprimary Displays are technologies that utilize more than three colors (e.g., RGBY) to improve image quality and viewer perception.&lt;SEP&gt;Multiprimary Displays refer to advanced display technologies that utilize multiple primary colors to enhance visual representation and improve color perception.&lt;SEP&gt;Multiprimary displays are advanced display technologies offering enhanced color reproduction, discussed in multiple essays and research articles.</data>
+  <data key="d3">chunk-086dd2b5dd7b4b0d4736ff949c1bf491&lt;SEP&gt;chunk-c5ac2a09fee8f7c8be9b8a7948aceffa&lt;SEP&gt;chunk-5c60b5f14a325386c84be0336e11d3f5&lt;SEP&gt;chunk-69e3b609af85d990c0d209c00ad52c59&lt;SEP&gt;chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Associations">
+  <data key="d0">Color Associations</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Associations relate to the psychological and emotional meanings that different colors evoke in various contexts, particularly in marketing and consumer behavior.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Fidelity">
+  <data key="d0">Color Fidelity</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Fidelity refers to the accuracy with which colors are reproduced in various media and displays, affecting perception and visual quality.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Visual Storytelling">
+  <data key="d0">Visual Storytelling</data>
+  <data key="d1">category</data>
+  <data key="d2">Visual Storytelling encompasses techniques in film and media that utilize visual elements, including color, to convey narrative and evoke emotions.</data>
+  <data key="d3">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="G. H. Brown (1982)">
+  <data key="d0">G. H. Brown (1982)</data>
+  <data key="d1">person</data>
+  <data key="d2">G. H. Brown is a research engineer whose memoir details his experiences and contributions to the development of color display technology.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="And part of which I was: Recollections of a research engineer">
+  <data key="d0">And part of which I was: Recollections of a research engineer</data>
+  <data key="d1">event</data>
+  <data key="d2">This memoir recounts the journey of a research engineer involved in the color development process in technology.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color and the moving image: History, theory, aesthetics, archive">
+  <data key="d0">Color and the moving image: History, theory, aesthetics, archive</data>
+  <data key="d1">event</data>
+  <data key="d2">A collection of essays exploring the significance of color in film aesthetics and technology.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="C. P. Carbonara (1989)">
+  <data key="d0">C. P. Carbonara (1989)</data>
+  <data key="d1">person</data>
+  <data key="d2">C. P. Carbonara is a researcher who presented a dissertation focusing on management and innovation in the American television industry.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Characteristic color use in different film genres">
+  <data key="d0">Characteristic color use in different film genres</data>
+  <data key="d1">event</data>
+  <data key="d2">An empirical study analyzing the use of color in film genres and its emotional impacts.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Multi-primary design of spectrally accurate displays">
+  <data key="d0">Multi-primary design of spectrally accurate displays</data>
+  <data key="d1">event</data>
+  <data key="d2">A research paper that discusses the principles and benefits of multi-primary pixel architectures in display technology.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Multi-primary spectral display for soft proofing">
+  <data key="d0">Multi-primary spectral display for soft proofing</data>
+  <data key="d1">event</data>
+  <data key="d2">A study presenting a multiprimary prototype aimed at enhancing color matching and accuracy in pre-press proofing.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Creating emotion with color in cinematography">
+  <data key="d0">Creating emotion with color in cinematography</data>
+  <data key="d1">event</data>
+  <data key="d2">An article detailing the emotional impact of color in cinematography and how it guides narrative.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="D. Chorin ">
+  <data key="d0">D. Chorin </data>
+  <data key="d1">person</data>
+  <data key="d2">D. Chorin is a researcher involved in the study of multi-primary display technologies and their applications.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="L. Duan">
+  <data key="d0">L. Duan</data>
+  <data key="d1">person</data>
+  <data key="d2">L. Duan is an author who focused on advancements in color display technology, particularly in relation to backlighting.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Brown, G. H. (1982)">
+  <data key="d0">Brown, G. H. (1982)</data>
+  <data key="d1">person</data>
+  <data key="d2">G. H. Brown is a research engineer whose memoir provides insights into the historical development of color technologies in broadcasting.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Augus Cupar Publishers">
+  <data key="d0">Augus Cupar Publishers</data>
+  <data key="d1">organization</data>
+  <data key="d2">Augus Cupar Publishers is the publisher of G. H. Brown's memoir, contributing to the dissemination of knowledge in color technology history.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Brown, S., Street, S., &amp; Watkins, L. (2012)">
+  <data key="d0">Brown, S., Street, S., &amp; Watkins, L. (2012)</data>
+  <data key="d1">person</data>
+  <data key="d2">Brown, S., Street, S., &amp; Watkins, L. are editors who compiled essays on color's role in film aesthetics, contributing to academic discussions in this field.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color and the Moving Image">
+  <data key="d0">Color and the Moving Image</data>
+  <data key="d1">event</data>
+  <data key="d2">This collection of essays examines color's influence on film, encompassing historical, theoretical, and aesthetic aspects.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Carbonara, C. P. (1989)">
+  <data key="d0">Carbonara, C. P. (1989)</data>
+  <data key="d1">person</data>
+  <data key="d2">C. P. Carbonara is a researcher who wrote a doctoral dissertation discussing innovation and technological management in the American television industry.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="The University of Texas at Austin">
+  <data key="d0">The University of Texas at Austin</data>
+  <data key="d1">organization</data>
+  <data key="d2">The University of Texas at Austin is the institution where C. P. Carbonara completed his doctoral dissertation on television technology.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chen, I.-P., Wu, F.-Y., &amp; Lin, C.-H. (2012)">
+  <data key="d0">Chen, I.-P., Wu, F.-Y., &amp; Lin, C.-H. (2012)</data>
+  <data key="d1">person</data>
+  <data key="d2">Chen, I.-P., Wu, F.-Y., &amp; Lin, C.-H. are researchers who analyzed color usage across different film genres in a published study.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Characteristic Color Use in Different Film Genres">
+  <data key="d0">Characteristic Color Use in Different Film Genres</data>
+  <data key="d1">event</data>
+  <data key="d2">This empirical study investigates how color palettes are employed in various film genres, linking color to mood and narrative.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chorin, M. B. &amp; Eliav, D. (2007)">
+  <data key="d0">Chorin, M. B. &amp; Eliav, D. (2007)</data>
+  <data key="d1">person</data>
+  <data key="d2">Chorin, M. B. &amp; Eliav, D. are researchers focused on multi-primary display technology and its design principles.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Journal of the Society for Information Display">
+  <data key="d0">Journal of the Society for Information Display</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Journal of the Society for Information Display publishes research articles, including Teragawa et al.'s comprehensive review of multiprimary display technologies.&lt;SEP&gt;This journal publishes research findings on display technologies, including works by Chorin and Eliav.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa&lt;SEP&gt;chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Chorin, M. B., Eliav, D., &amp; Roth, S. (2007)">
+  <data key="d0">Chorin, M. B., Eliav, D., &amp; Roth, S. (2007)</data>
+  <data key="d1">person</data>
+  <data key="d2">This team contributed to research on multiprimary displays for improved color accuracy in imaging technologies.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Multi-Primary Spectral Display for Soft Proofing">
+  <data key="d0">Multi-Primary Spectral Display for Soft Proofing</data>
+  <data key="d1">event</data>
+  <data key="d2">A paper describing a prototype for color proofing that enhances color accuracy and efficiency in digital pre-press.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="DeRuvo, J. (2019)">
+  <data key="d0">DeRuvo, J. (2019)</data>
+  <data key="d1">person</data>
+  <data key="d2">DeRuvo, J. is an author who writes about the impact of color in cinematography on narrative and viewer emotion.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Creating Emotion with Color in Cinematography">
+  <data key="d0">Creating Emotion with Color in Cinematography</data>
+  <data key="d1">event</data>
+  <data key="d2">This article discusses how cinematographers utilize color as a narrative tool to influence audience emotion and atmosphere.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Duan, L. &amp; Lei, Z. (2018)">
+  <data key="d0">Duan, L. &amp; Lei, Z. (2018)</data>
+  <data key="d1">person</data>
+  <data key="d2">Duan, L. &amp; Lei, Z. are researchers exploring advancements in wide color gamut displays in their published work.</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Duan, L. &amp; Lei, Z.">
+  <data key="d0">Duan, L. &amp; Lei, Z.</data>
+  <data key="d1">person</data>
+  <data key="d2">Duan, L. and Lei, Z. are researchers who explored improvements in color gamut and energy efficiency through alternative LED backlight compositions, including non-RGB emitters like emerald.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Early Television Museum">
+  <data key="d0">Early Television Museum</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Early Television Museum provides historical context and information about the development of television technology, including RCA’s dot-sequential color system.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Flueckiger, B.">
+  <data key="d0">Flueckiger, B.</data>
+  <data key="d1">person</data>
+  <data key="d2">Flueckiger, B. is an academic who discusses how color affects viewer subjectivity and emotional alignment in film.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Garrett, J.">
+  <data key="d0">Garrett, J.</data>
+  <data key="d1">person</data>
+  <data key="d2">Garrett, J. is a journalist who reported on Sharp’s commercial release of a four-primary display (RGBY) and its implications for enhanced color reproduction.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Goldmark, P. &amp; Edson, L.">
+  <data key="d0">Goldmark, P. &amp; Edson, L.</data>
+  <data key="d1">person</data>
+  <data key="d2">Goldmark, P. and Edson, L. co-authored a memoir providing insights into early efforts to represent full-spectrum color in analog systems in broadcasting.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Grossman, R. P. &amp; Wisenblit, J. Z.">
+  <data key="d0">Grossman, R. P. &amp; Wisenblit, J. Z.</data>
+  <data key="d1">person</data>
+  <data key="d2">Grossman, R. P. and Wisenblit, J. Z. conducted research on consumers' color choices and their impact on marketing outcomes and brand perception.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Hanson, W. T., Jr. &amp; Kisner, W. I.">
+  <data key="d0">Hanson, W. T., Jr. &amp; Kisner, W. I.</data>
+  <data key="d1">person</data>
+  <data key="d2">Hanson, W. T., Jr. and Kisner, W. I. worked on improved color films for motion picture production, detailing innovations in color fidelity and saturation.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Hubbell, R. W.">
+  <data key="d0">Hubbell, R. W.</data>
+  <data key="d1">person</data>
+  <data key="d2">Hubbell, R. W. authored a narrative tracing the history of visual information transmission up to modern display technology.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Ives, H. E.">
+  <data key="d0">Ives, H. E.</data>
+  <data key="d1">person</data>
+  <data key="d2">Ives, H. E. proposed one of the earliest technical theories for color television, introducing foundational concepts of electronic chromatic reproduction.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Gamut Display">
+  <data key="d0">Color Gamut Display</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Gamut Display refers to technology aimed at expanding the range of colors that can be displayed by visual systems, enhancing viewer experience and accuracy.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Emerald Backlighting">
+  <data key="d0">Emerald Backlighting</data>
+  <data key="d1">category</data>
+  <data key="d2">Emerald Backlighting is an alternative LED backlight technology that improves color reproduction and energy efficiency compared to traditional RGB systems.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="RCA Dot Sequential Color System">
+  <data key="d0">RCA Dot Sequential Color System</data>
+  <data key="d1">category</data>
+  <data key="d2">RCA Dot Sequential Color System is a foundational technology in NTSC color broadcasting that allowed for color television transmission.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Television Color Technology">
+  <data key="d0">Television Color Technology</data>
+  <data key="d1">category</data>
+  <data key="d2">Television Color Technology encompasses various advancements in displaying vibrant and accurate colors in visual media over time.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="SMPTE Journal">
+  <data key="d0">SMPTE Journal</data>
+  <data key="d1">organization</data>
+  <data key="d2">SMPTE Journal is a publication that covers advancements and research in motion picture technology, including color film processing.</data>
+  <data key="d3">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="H. E. Ives">
+  <data key="d0">H. E. Ives</data>
+  <data key="d1">person</data>
+  <data key="d2">H. E. Ives is an author noted for his early technical proposal for color television, particularly focused on electronic chromatic reproduction.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bell Laboratories Record">
+  <data key="d0">Bell Laboratories Record</data>
+  <data key="d1">organization</data>
+  <data key="d2">Bell Laboratories Record is a publication that features articles and research related to telecommunications, including foundational work in color television.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="I. Kamen">
+  <data key="d0">I. Kamen</data>
+  <data key="d1">person</data>
+  <data key="d2">I. Kamen is an author who discussed subtractive color television as an alternative to RGB systems in 1950.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="TV Engineering">
+  <data key="d0">TV Engineering</data>
+  <data key="d1">organization</data>
+  <data key="d2">TV Engineering is a publication where technical discussions about television technology, including color systems, are featured.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="D. Katzmaier">
+  <data key="d0">D. Katzmaier</data>
+  <data key="d1">person</data>
+  <data key="d2">D. Katzmaier is a reviewer known for critiquing Sharp’s RGBY display technology and examining its perceptual benefits.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="CNET">
+  <data key="d0">CNET</data>
+  <data key="d1">organization</data>
+  <data key="d2">CNET is a technology news and reviews website that provides evaluations of electronic products, including display technologies.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="D. Kodžoman">
+  <data key="d0">D. Kodžoman</data>
+  <data key="d1">person</data>
+  <data key="d2">D. Kodžoman is an author who explores the psychology of color in clothing and its significance in identity expression.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Textile &amp; Leather Review">
+  <data key="d0">Textile &amp; Leather Review</data>
+  <data key="d1">organization</data>
+  <data key="d2">Textile &amp; Leather Review is an academic journal that publishes studies on textiles, fashion, and related subjects.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="D. L. Long">
+  <data key="d0">D. L. Long</data>
+  <data key="d1">person</data>
+  <data key="d2">D. L. Long is an author who contributed significantly to studies on observer metamerism and multiprimary display systems.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="SMPTE Motion Imaging Journal">
+  <data key="d0">SMPTE Motion Imaging Journal</data>
+  <data key="d1">organization</data>
+  <data key="d2">SMPTE Motion Imaging Journal publishes research around motion imaging and standards in film and television.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="CIC Conference">
+  <data key="d0">CIC Conference</data>
+  <data key="d1">event</data>
+  <data key="d2">CIC Conference is an event where research papers and findings about color and imaging are presented and discussed.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="M. E. Miller">
+  <data key="d0">M. E. Miller</data>
+  <data key="d1">person</data>
+  <data key="d2">M. E. Miller is the author of a comprehensive work examining the advantages of multi-primary display systems in electronic displays.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="S. Millman">
+  <data key="d0">S. Millman</data>
+  <data key="d1">person</data>
+  <data key="d2">S. Millman is the editor of a historical reference chronicling the work done at Bell System through AT&amp;T Bell Laboratories.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="AT&amp;T Bell Laboratories">
+  <data key="d0">AT&amp;T Bell Laboratories</data>
+  <data key="d1">organization</data>
+  <data key="d2">AT&amp;T Bell Laboratories is a renowned research and development organization known for its significant contributions to communications technology, including early work on television and frequency interleaving.&lt;SEP&gt;AT&amp;T Bell Laboratories is a research and development organization significantly involved in telecommunications innovations.</data>
+  <data key="d3">chunk-584c6c13e7930cd45a126a2674141af6&lt;SEP&gt;chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Mohebbi, B.&quot;">
+  <data key="d0">Mohebbi, B."</data>
+  <data key="d1">person</data>
+  <data key="d2">Mohebbi, B. is an academic whose research focuses on the impact of color in marketing and packaging, highlighting its influence on consumer decision-making.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Nowotny, R. A.&quot;">
+  <data key="d0">Nowotny, R. A."</data>
+  <data key="d1">person</data>
+  <data key="d2">Nowotny, R. A. is an author and historian specializing in the development of color motion picture processes, documenting advancements from the late 19th century to the early 20th century.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Roman, A.&quot;">
+  <data key="d0">Roman, A."</data>
+  <data key="d1">person</data>
+  <data key="d2">Roman, A. is a researcher who conducted a comprehensive doctoral study on color television systems, exploring their technological and historical development.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Sano, Y. et al.">
+  <data key="d0">Sano, Y. et al.</data>
+  <data key="d1">person</data>
+  <data key="d2">Sano, Y., Nonaka, R., &amp; Baba, M. are researchers who developed a prototype of a wide gamut LCD that enhances color reproduction while optimizing energy use.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shafer, D. M. et al.">
+  <data key="d0">Shafer, D. M. et al.</data>
+  <data key="d1">person</data>
+  <data key="d2">Shafer, D. M., Carbonara, C. P., Korpi, M. F., &amp; Mandle, G. are authors of a study exploring emotional responses to wide-gamut color footage in media.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shen, Y.-C. et al.">
+  <data key="d0">Shen, Y.-C. et al.</data>
+  <data key="d1">person</data>
+  <data key="d2">Shen, Y.-C., Yuan, W.-H., Hsu, W.-H., &amp; Chen, Y.-S. are researchers who investigated color harmony in interior design and its implications on color perception.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shiers, G. (Ed.)">
+  <data key="d0">Shiers, G. (Ed.)</data>
+  <data key="d1">person</data>
+  <data key="d2">Shiers, G. is the editor of a collection of essays discussing the technological advancements in television throughout history.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Bell Labs Work on Communication Technologies">
+  <data key="d0">Bell Labs Work on Communication Technologies</data>
+  <data key="d1">category</data>
+  <data key="d2">Bell Labs Work on Communication Technologies refers to the early foundational research and development activities by AT&amp;T Bell Laboratories that advanced communication technologies including color television and frequency interleaving.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color in Packaging">
+  <data key="d0">Color in Packaging</data>
+  <data key="d1">category</data>
+  <data key="d2">Color in Packaging represents the research focus on how color affects consumer behavior, especially in marketing, branding, and packaging decisions.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Motion Picture Processes">
+  <data key="d0">Color Motion Picture Processes</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Motion Picture Processes encompass historical developments in the techniques used for color film production from 1895 to 1929.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Television Systems">
+  <data key="d0">Color Television Systems</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Television Systems involve the technological advancements and innovations in the broadcasting of color television, impacting the entertainment industry significantly.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Harmony">
+  <data key="d0">Color Harmony</data>
+  <data key="d1">category</data>
+  <data key="d2">Color Harmony investigates perceptual coherence in color combinations, relevant to various fields, including design and aesthetics.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Shiers, G.">
+  <data key="d0">Shiers, G.</data>
+  <data key="d1">person</data>
+  <data key="d2">G. Shiers is an editor of a collection of essays on the technical development of television, providing insights into transmission, display, and color systems.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Singh, S.">
+  <data key="d0">Singh, S.</data>
+  <data key="d1">person</data>
+  <data key="d2">S. Singh is an author who analyzes the impact of color on marketing, arguing its significant influence on consumer behavior and attitudes.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Spring, K. R.">
+  <data key="d0">Spring, K. R.</data>
+  <data key="d1">person</data>
+  <data key="d2">K. R. Spring is a co-author of a paper discussing human vision and color perception, contributing to the understanding of light and color in visual displays.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Teragawa, M.">
+  <data key="d0">Teragawa, M.</data>
+  <data key="d1">person</data>
+  <data key="d2">"M. Teragawa is a co-author of a comprehensive review on multiprimary display technologies and their benefits.'</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wakabayashi, D.">
+  <data key="d0">Wakabayashi, D.</data>
+  <data key="d1">person</data>
+  <data key="d2">D. Wakabayashi is a journalist who reported on Sharp's new television color palette and the introduction of multiprimary technology to consumers.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Yeasel, L.">
+  <data key="d0">Yeasel, L.</data>
+  <data key="d1">person</data>
+  <data key="d2">L. Yeasel authored a historical analysis of color television, detailing the bureaucratic and technological challenges in the U.S. adoption of color TV standards.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Zettl, H.">
+  <data key="d0">Zettl, H.</data>
+  <data key="d1">person</data>
+  <data key="d2">H. Zettl is the author of a foundational media theory text emphasizing the importance of visual elements in constructing meaning in media aesthetics.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Arno Press">
+  <data key="d0">Arno Press</data>
+  <data key="d1">organization</data>
+  <data key="d2">Arno Press is the publisher of G. Shiers' edited volume on the technical development of television, focusing on various technological aspects.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Management Decision">
+  <data key="d0">Management Decision</data>
+  <data key="d1">organization</data>
+  <data key="d2">Management Decision is a journal that published Singh's article on the impact of color on marketing.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Wall Street Journal">
+  <data key="d0">Wall Street Journal</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Wall Street Journal published Wakabayashi's coverage of Sharp's innovations in television color technology.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Television">
+  <data key="d0">Color Television</data>
+  <data key="d1">category</data>
+  <data key="d2">Color television refers to the technology and standards used for broadcasting color images, a historical subject of analysis in Yeasel's work.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Technical Development of Television">
+  <data key="d0">Technical Development of Television</data>
+  <data key="d1">category</data>
+  <data key="d2">This category encompasses various essays that analyze the advancements and challenges in television technology, as outlined by Shiers.</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Color Energy">
+  <data key="d0">Color Energy</data>
+  <data key="d1">category</data>
+  <data key="d2">Color energy refers to the use of colors as a fundamental element in media to convey mood and narrative tone.</data>
+  <data key="d3">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Aesthetic and Communicative Theory">
+  <data key="d0">Aesthetic and Communicative Theory</data>
+  <data key="d1">category</data>
+  <data key="d2">Aesthetic and Communicative Theory examines the role of aesthetics in communication, focusing on how visual elements convey meaning and emotional response.</data>
+  <data key="d3">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Media">
+  <data key="d0">Media</data>
+  <data key="d1">category</data>
+  <data key="d2">Media encompasses various channels of communication, including digital and traditional platforms, through which narratives are shared and interpreted.</data>
+  <data key="d3">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="D. Chorin">
+  <data key="d0">D. Chorin</data>
+  <data key="d3">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d2">D. Chorin's research aligns with multi-primary design principles, highlighting technical advancements in the field of display technology.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="color technology">
+  <data key="d0">color technology</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d2">AT&amp;T Bell Laboratories' foundational research includes significant advancements in color television technology.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Nowotny, R. A.">
+  <data key="d0">Nowotny, R. A.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d2">Nowotny's historical overview illustrates the evolution of color processes, contributing knowledge relevant to technological advancements in television.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Roman, A.">
+  <data key="d0">Roman, A.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d2">Roman's comprehensive study tracks the development of color television systems, reinforcing the connection with resultant technologies in visual media.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Mohebbi, B.">
+  <data key="d0">Mohebbi, B.</data>
+  <data key="d3">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d2">Mohebbi's research on the role of color complements the category of Color in Packaging, highlighting its importance in consumer decision-making.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Media Theory">
+  <data key="d0">Media Theory</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d2">H. Zettl's work explores the significance of color in media aesthetics, connecting theory to practical applications in media production.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<node id="Media Aesthetics">
+  <data key="d0">Media Aesthetics</data>
+  <data key="d3">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d2">H. Zettl's work explores the significance of color in media aesthetics, connecting theory to practical applications in media production.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">unknown_source</data>
+</node>
+<edge source="Agoston, G. A." target="Springer">
+  <data key="d5">8.0</data>
+  <data key="d6">Agoston authored a text on color theory published by Springer, indicating their connection in academic publishing.</data>
+  <data key="d7">academic authorship, publishing</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Agoston, G. A." target="Gamut Limitations">
+  <data key="d5">8.0</data>
+  <data key="d6">Agoston's work addresses the principles of color mixing and the limitations of color representation in systems, linking to the concept of Gamut Limitations.</data>
+  <data key="d7">color theory, color representation</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Agoston, G. A." target="RGB Triangle">
+  <data key="d5">9.0</data>
+  <data key="d6">Agoston outlines the importance of the RGB Triangle in understanding color perception and display constraints, establishing a connection between the two.</data>
+  <data key="d7">color theory, perception</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Springer" target="M. E. Miller">
+  <data key="d5">9.0</data>
+  <data key="d6">M. E. Miller's comprehensive book on multi-primary displays was published by Springer, providing foundational knowledge in the field.</data>
+  <data key="d7">academic publication, comprehensive study</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Aitken, S. C." target="Zonn, L.">
+  <data key="d5">9.0</data>
+  <data key="d6">Aitken and Zonn collaborated on a book analyzing the relationship between film elements and audience interpretation.</data>
+  <data key="d7">co-authorship, analysis</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Aitken, S. C." target="Rowman &amp; Littlefield">
+  <data key="d5">7.0</data>
+  <data key="d6">Aitken's book was published by Rowman &amp; Littlefield, establishing a publishing relationship.</data>
+  <data key="d7">publication connection</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Ajito, T." target="Kato, S.">
+  <data key="d5">9.0</data>
+  <data key="d6">Ajito and Kato collaborated on research to present evidence for color gamut expansion in display technology.</data>
+  <data key="d7">co-research, empirical evidence</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Ajito, T." target="Akimoto, M.">
+  <data key="d5">8.0</data>
+  <data key="d6">Ajito, Kato, and Akimoto worked together on a paper discussing six-primary projection displays, indicating collaboration.</data>
+  <data key="d7">research collaboration</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Ajito, T." target="Multiprimary Displays">
+  <data key="d5">9.0</data>
+  <data key="d6">Ajito's research focuses on expanding color gamut through multiprimary displays, demonstrating their effectiveness in color reproduction.</data>
+  <data key="d7">color technology, display advancement</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Ajito, T." target="Color Fidelity">
+  <data key="d5">8.0</data>
+  <data key="d6">Ajito's research on display technology also ties into color fidelity, as enhancing fidelity is a key outcome of multiprimary systems.</data>
+  <data key="d7">technology impact, display accuracy</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Amsteus, M." target="Al-Shaaban, S.">
+  <data key="d5">8.0</data>
+  <data key="d6">Amsteus and Al-Shaaban co-authored a study analyzing color associations in marketing context.</data>
+  <data key="d7">co-authorship, marketing analysis</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Amsteus, M." target="Color Fidelity">
+  <data key="d5">8.0</data>
+  <data key="d6">Amsteus's research discusses the impact of color fidelity on emotional responses and perception, linking to the importance of accurate color reproduction.</data>
+  <data key="d7">perception, accuracy</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Babolhavaeji, M." target="Vakilian, M. A.">
+  <data key="d5">9.0</data>
+  <data key="d6">Babolhavaeji and Vakilian co-authored a study regarding the importance of product color in consumer behavior.</data>
+  <data key="d7">co-authorship, consumer behavior</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Babolhavaeji, M." target="Color Associations">
+  <data key="d5">7.0</data>
+  <data key="d6">Babolhavaeji's investigation includes how color influences consumer behavior, connecting to color associations in marketing contextualization.</data>
+  <data key="d7">marketing, consumer behavior</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Babolhavaeji, M." target="Color Fidelity">
+  <data key="d5">7.0</data>
+  <data key="d6">Babolhavaeji's work on consumer behavior emphasizes the effects of color fidelity on perceptions and purchasing decisions, indicating a strong relationship.</data>
+  <data key="d7">consumer perception, fidelity</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Bakony, E." target="Bellantoni, P.">
+  <data key="d5">6.0</data>
+  <data key="d6">Bakony's exploration of color symbolism in film complements Bellantoni's analysis on emotional impact of color in storytelling.</data>
+  <data key="d7">thematic connection, film analysis</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Bellantoni, P." target="Visual Storytelling">
+  <data key="d5">9.0</data>
+  <data key="d6">Bellantoni's analysis of color in storytelling highlights its role in shaping emotional responses and narratives, connecting to visual storytelling techniques.</data>
+  <data key="d7">emotional impact, narrative</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Briggs, A." target="Oxford University Press">
+  <data key="d5">7.0</data>
+  <data key="d6">Briggs's work on broadcasting history was published by Oxford University Press, linking the author to the publisher.</data>
+  <data key="d7">academic connection, publication</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Briggs, A." target="Gamut Limitations">
+  <data key="d5">6.0</data>
+  <data key="d6">Briggs discusses historical broadcasting demand for visual realism, linking it to the ongoing challenges of gamut limitations in color systems.</data>
+  <data key="d7">historical context, visual realism</data>
+  <data key="d8">chunk-ab4158b91528a25c6e49b7e22ee43f0e</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Garrett, J.">
+  <data key="d5">8.0</data>
+  <data key="d6">Garrett discusses Sharp's RGBY display, which is a type of multiprimary display aimed at enhancing color reproduction.</data>
+  <data key="d7">technological advancement, color reproduction</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Sano, Y. et al.">
+  <data key="d5">8.0</data>
+  <data key="d6">Sano et al.'s work on wide gamut LCD prototypes relates to the category of Multiprimary Displays that enhance color reproduction technology.</data>
+  <data key="d7">technological innovation, energy efficiency</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Shafer, D. M. et al.">
+  <data key="d5">9.0</data>
+  <data key="d6">Shafer et al.'s research on emotional responses to wide-gamut color footage is tied to the effectiveness of Multiprimary Displays in media.</data>
+  <data key="d7">emotional engagement, technological impact</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Teragawa, M.">
+  <data key="d5">9.0</data>
+  <data key="d6">M. Teragawa's review discusses the latest multiprimary display technologies, which are a key subject within the technical development of television.</data>
+  <data key="d7">technology review, advancements</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Singh, S.">
+  <data key="d5">7.0</data>
+  <data key="d6">S. Singh's findings on color's impact in marketing relate to the color capabilities of multiprimary displays, emphasizing their significance in marketing contexts.</data>
+  <data key="d7">marketing relevance, technological impact</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Color Energy">
+  <data key="d5">8.0</data>
+  <data key="d6">Color energy is essential for understanding the importance of multiprimary displays as it relates to conveying narrative through color.</data>
+  <data key="d7">media theory, narrative communication</data>
+  <data key="d8">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multiprimary Displays" target="Aesthetic and Communicative Theory">
+  <data key="d5">9.0</data>
+  <data key="d6">Multiprimary Displays relate to aesthetic theory as they enhance the conveyance of mood and narrative through improved color representation.</data>
+  <data key="d7">visual technology, narrative communication</data>
+  <data key="d8">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="G. H. Brown (1982)" target="And part of which I was: Recollections of a research engineer">
+  <data key="d5">9.0</data>
+  <data key="d6">G. H. Brown's memoir provides first-hand accounts of engineering challenges in color development, connecting personal experience to a broader history of technology.</data>
+  <data key="d7">personal narrative, engineering history</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="And part of which I was: Recollections of a research engineer" target="Brown, G. H. (1982)">
+  <data key="d5">9.0</data>
+  <data key="d6">G. H. Brown's memoir details his engineering experiences that correlate with the historical narrative of color development in technology.</data>
+  <data key="d7">engineering history, personal narrative</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color and the moving image: History, theory, aesthetics, archive" target="C. P. Carbonara (1989)">
+  <data key="d5">7.0</data>
+  <data key="d6">C. P. Carbonara's dissertation complements the themes in the collected essays by examining the evolution of color technology in television, indicating interdisciplinary connections.</data>
+  <data key="d7">academic collaboration, technology evolution</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Characteristic color use in different film genres" target="Creating emotion with color in cinematography">
+  <data key="d5">8.0</data>
+  <data key="d6">The article discusses how color management influences narrative techniques in film, echoing principles studied in color usage across genres.</data>
+  <data key="d7">narrative techniques, emotional impact</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Multi-primary design of spectrally accurate displays" target="D. Chorin">
+  <data key="d5">8.0</data>
+  <data key="d6">D. Chorin's research aligns with multi-primary design principles, highlighting technical advancements in the field of display technology.</data>
+  <data key="d7">research connection, technology advancement</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Brown, G. H. (1982)" target="Augus Cupar Publishers">
+  <data key="d5">7.0</data>
+  <data key="d6">The publisher helps disseminate G. H. Brown's insights on color technology, thus playing a role in the history of media technology.".</data>
+  <data key="d7">publication, media history</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Brown, S., Street, S., &amp; Watkins, L. (2012)" target="Color and the Moving Image">
+  <data key="d5">8.0</data>
+  <data key="d6">The compilation edited by them discusses themes and innovations in film aesthetics related to color, expanding on the technological aspects of color development.</data>
+  <data key="d7">film aesthetics, academic contribution</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Carbonara, C. P. (1989)" target="The University of Texas at Austin">
+  <data key="d5">8.0</data>
+  <data key="d6">The University of Texas at Austin provided the academic environment for Carbonara's research on television technology, indicating an institutional connection to technological advancements.</data>
+  <data key="d7">academic environment, technology research</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Chen, I.-P., Wu, F.-Y., &amp; Lin, C.-H. (2012)" target="Characteristic Color Use in Different Film Genres">
+  <data key="d5">8.0</data>
+  <data key="d6">Their study contributes empirical findings reinforcing the link between color use in film and narrative delivery, connecting academic research to practical film theory.</data>
+  <data key="d7">research contribution, film theory</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Chorin, M. B. &amp; Eliav, D. (2007)" target="Multi-Primary Spectral Display for Soft Proofing">
+  <data key="d5">9.0</data>
+  <data key="d6">The research by Chorin and Eliav establishes foundational principles for multiprimary display designs, influencing color accuracy in digital environments.</data>
+  <data key="d7">research foundation, color accuracy</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Journal of the Society for Information Display" target="Spring, K. R.">
+  <data key="d5">8.0</data>
+  <data key="d6">K. R. Spring's co-authored work on human vision and color perception was published in this journal, indicating collaboration in academic research.</data>
+  <data key="d7">academic publishing, research collaboration</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Journal of the Society for Information Display" target="Teragawa, M.">
+  <data key="d5">9.0</data>
+  <data key="d6">The comprehensive review on multiprimary displays authored by M. Teragawa and others was published in this journal, linking their findings to the field.</data>
+  <data key="d7">academic work, technology review</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="DeRuvo, J. (2019)" target="Creating Emotion with Color in Cinematography">
+  <data key="d5">8.0</data>
+  <data key="d6">DeRuvo's article discusses techniques that resonate with the technical color improvements addressed in research on color accuracy in visual storytelling.</data>
+  <data key="d7">narrative techniques, emotional storytelling</data>
+  <data key="d8">chunk-4b32dee4ed99c9a16cbacf2ff5cb6421</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Duan, L. &amp; Lei, Z." target="Emerald Backlighting">
+  <data key="d5">8.0</data>
+  <data key="d6">Duan and Lei's research explores the use of emerald backlighting to enhance color gamut and energy efficiency in displays.</data>
+  <data key="d7">color technology, energy efficiency</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Early Television Museum" target="RCA Dot Sequential Color System">
+  <data key="d5">9.0</data>
+  <data key="d6">The Early Television Museum provides historical context and information about the RCA Dot Sequential Color System's significance in broadcasting history.</data>
+  <data key="d7">historical reference, broadcasting</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Flueckiger, B." target="Color Gamut Display">
+  <data key="d5">7.0</data>
+  <data key="d6">Flueckiger discusses how advancements in color can enhance viewer emotional response, which is relevant to color gamut display technologies.</data>
+  <data key="d7">viewer perception, color impact</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Goldmark, P. &amp; Edson, L." target="Television Color Technology">
+  <data key="d5">8.0</data>
+  <data key="d6">Goldmark's memoir provides insights into early efforts in color television, contributing to the broader narrative of color technology evolution.</data>
+  <data key="d7">historical context, color evolution</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Grossman, R. P. &amp; Wisenblit, J. Z." target="Television Color Technology">
+  <data key="d5">8.0</data>
+  <data key="d6">Grossman and Wisenblit's research on consumer color choices supports the importance of accurate color technology in marketing and branding.</data>
+  <data key="d7">consumer perception, marketing</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Hanson, W. T., Jr. &amp; Kisner, W. I." target="SMPTE Journal">
+  <data key="d5">9.0</data>
+  <data key="d6">Hanson and Kisner's work on improved color films contributed to discussions in the SMPTE Journal about advancements in color fidelity in motion pictures.</data>
+  <data key="d7">film technology, color fidelity</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Hubbell, R. W." target="Television Color Technology">
+  <data key="d5">7.0</data>
+  <data key="d6">Hubbell's narrative traces the history of visual information transmission, underpinning the development of color technology in television.</data>
+  <data key="d7">historical perspective, visual transmission</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Ives, H. E." target="Television Color Technology">
+  <data key="d5">9.0</data>
+  <data key="d6">Ives proposed early theories on electronic chromatic reproduction, foundational for the advancements seen in television color technology.</data>
+  <data key="d7">theoretical foundations, electronic reproduction</data>
+  <data key="d8">chunk-5c60b5f14a325386c84be0336e11d3f5</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="H. E. Ives" target="Bell Laboratories Record">
+  <data key="d5">9.0</data>
+  <data key="d6">H. E. Ives contributed foundational theories on color television published in the Bell Laboratories Record.</data>
+  <data key="d7">publication contribution, foundational theory</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="I. Kamen" target="TV Engineering">
+  <data key="d5">8.0</data>
+  <data key="d6">I. Kamen's discussions on subtractive color television were featured in TV Engineering, contributing to ongoing debates in the field.</data>
+  <data key="d7">technical discussions, color systems</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="D. Katzmaier" target="CNET">
+  <data key="d5">8.0</data>
+  <data key="d6">D. Katzmaier reviewed Sharp's RGBY display technology on CNET, raising questions about its practical benefits.</data>
+  <data key="d7">product review, consumer technology</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="D. Kodžoman" target="Textile &amp; Leather Review">
+  <data key="d5">7.0</data>
+  <data key="d6">D. Kodžoman's exploration of color psychology was published in Textile &amp; Leather Review, emphasizing its cultural significance.</data>
+  <data key="d7">academic publication, cultural studies</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="D. L. Long" target="SMPTE Motion Imaging Journal">
+  <data key="d5">9.0</data>
+  <data key="d6">D. L. Long's work on metamerism models was published in the SMPTE Motion Imaging Journal, contributing to the understanding of display technology.</data>
+  <data key="d7">research publication, display technology</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="D. L. Long" target="CIC Conference">
+  <data key="d5">8.0</data>
+  <data key="d6">D. L. Long presented findings on multispectral video systems at the CIC Conference, discussing future standards for cinema color.</data>
+  <data key="d7">conference presentation, future research</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="S. Millman" target="AT&amp;T Bell Laboratories">
+  <data key="d5">10.0</data>
+  <data key="d6">S. Millman's edited work details the historical innovations of AT&amp;T Bell Laboratories, including early television developments.</data>
+  <data key="d7">historical documentation, telecommunications innovation</data>
+  <data key="d8">chunk-584c6c13e7930cd45a126a2674141af6</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="AT&amp;T Bell Laboratories" target="color technology">
+  <data key="d5">9.0</data>
+  <data key="d6">AT&amp;T Bell Laboratories' foundational research includes significant advancements in color television technology.</data>
+  <data key="d7">technology development, communications</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="AT&amp;T Bell Laboratories" target="Bell Labs Work on Communication Technologies">
+  <data key="d5">8.0</data>
+  <data key="d6">The work done at AT&amp;T Bell Laboratories is foundational for advancements in communication technologies, including early color broadcasting advancements.</data>
+  <data key="d7">foundation, technological advancement</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Mohebbi, B.&quot;" target="color technology">
+  <data key="d5">8.0</data>
+  <data key="d6">Mohebbi's work on color in packaging supports the broader implications of color technology in marketing and consumer engagement.</data>
+  <data key="d7">consumer influence, branding</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Sano, Y. et al." target="color technology">
+  <data key="d5">8.0</data>
+  <data key="d6">Sano et al.'s research on wide gamut LCD prototypes contributes to the ongoing evolution of color displays and technology standards.</data>
+  <data key="d7">innovation, energy efficiency</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shafer, D. M. et al." target="color technology">
+  <data key="d5">7.0</data>
+  <data key="d6">Shafer et al.'s focus on emotional responses to wide-gamut displays underscores the psychological impacts of color technology in media.</data>
+  <data key="d7">emotional engagement, media effects</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shen, Y.-C. et al." target="color technology">
+  <data key="d5">8.0</data>
+  <data key="d6">Shen et al.'s findings on color harmony have implications for color applications in technology, particularly in display designs.</data>
+  <data key="d7">design principles, color perception</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shen, Y.-C. et al." target="Color Harmony">
+  <data key="d5">8.0</data>
+  <data key="d6">Shen et al.'s research on color harmony supports the principles relevant to color applications in design, thus linking to the category of Color Harmony.</data>
+  <data key="d7">design principles, perception</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shiers, G. (Ed.)" target="color technology">
+  <data key="d5">7.0</data>
+  <data key="d6">Shiers' edited volume contains essays discussing various technological advancements, including those related to color in television.</data>
+  <data key="d7">editorial compilation, technology advancement</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shiers, G. (Ed.)" target="Color Television Systems">
+  <data key="d5">7.0</data>
+  <data key="d6">Shiers’ edited volume includes discussions relevant to the technological advancements in Color Television Systems, bringing historical insights into the narrative.</data>
+  <data key="d7">editorial viewpoint, technology</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color in Packaging" target="Mohebbi, B.">
+  <data key="d5">9.0</data>
+  <data key="d6">Mohebbi's research on the role of color complements the category of Color in Packaging, highlighting its importance in consumer decision-making.</data>
+  <data key="d7">research impact, marketing</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color Motion Picture Processes" target="Nowotny, R. A.">
+  <data key="d5">9.0</data>
+  <data key="d6">Nowotny provides historical insights that enrich the understanding of Color Motion Picture Processes, documenting early film innovations.</data>
+  <data key="d7">historical context, innovation</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color Television Systems" target="Roman, A.">
+  <data key="d5">8.0</data>
+  <data key="d6">Roman's study on color television systems provides a comprehensive understanding of technological developments impacting the category of Color Television Systems.</data>
+  <data key="d7">historical analysis, technology</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shiers, G." target="Arno Press">
+  <data key="d5">8.0</data>
+  <data key="d6">G. Shiers edited a volume on television's technical development published by Arno Press, which includes various essays on the topic.</data>
+  <data key="d7">publication, editorial work</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Shiers, G." target="Technical Development of Television">
+  <data key="d5">8.0</data>
+  <data key="d6">G. Shiers' edited volume provides insights on the historical and technical development of television, aligning with the category of technical development.</data>
+  <data key="d7">historical context, editorial contribution</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Singh, S." target="Management Decision">
+  <data key="d5">9.0</data>
+  <data key="d6">S. Singh's article on color's impact on marketing was published in Management Decision, linking his research to the journal.</data>
+  <data key="d7">research publication, marketing</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Wakabayashi, D." target="Wall Street Journal">
+  <data key="d5">9.0</data>
+  <data key="d6">D. Wakabayashi's article on Sharp's television technology appeared in the Wall Street Journal, showing the media's role in technology dissemination.</data>
+  <data key="d7">journalism, technology reporting</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Yeasel, L." target="Color Television">
+  <data key="d5">7.0</data>
+  <data key="d6">L. Yeasel discusses the history and challenges of color television standards, tying his work to the broader category of color television technology.</data>
+  <data key="d7">historical analysis, technology standards</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Zettl, H." target="Media Theory">
+  <data key="d5">8.0</data>
+  <data key="d6">H. Zettl's work explores the significance of color in media aesthetics, connecting theory to practical applications in media production.</data>
+  <data key="d7">theory application, aesthetics</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Zettl, H." target="Media Aesthetics">
+  <data key="d5">8.0</data>
+  <data key="d6">H. Zettl's work explores the significance of color in media aesthetics, connecting theory to practical applications in media production.</data>
+  <data key="d7">theory application, aesthetics</data>
+  <data key="d8">chunk-c5ac2a09fee8f7c8be9b8a7948aceffa</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Color Energy" target="Aesthetic and Communicative Theory">
+  <data key="d5">8.0</data>
+  <data key="d6">Color energy is a concept within aesthetic theory, highlighting how color affects communication and emotional engagement in media.</data>
+  <data key="d7">theory application, emotional engagement</data>
+  <data key="d8">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="Aesthetic and Communicative Theory" target="Media">
+  <data key="d5">7.0</data>
+  <data key="d6">Aesthetic and communicative theory provides insights into how media can shape and convey aesthetic experiences and narratives.</data>
+  <data key="d7">media analysis, aesthetic experience</data>
+  <data key="d8">chunk-086dd2b5dd7b4b0d4736ff949c1bf491</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="color technology" target="Nowotny, R. A.">
+  <data key="d5">9.0</data>
+  <data key="d6">Nowotny's historical overview illustrates the evolution of color processes, contributing knowledge relevant to technological advancements in television.</data>
+  <data key="d7">historical context, filmmaking</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+<edge source="color technology" target="Roman, A.">
+  <data key="d5">9.0</data>
+  <data key="d6">Roman's comprehensive study tracks the development of color television systems, reinforcing the connection with resultant technologies in visual media.</data>
+  <data key="d7">historical analysis, television technology</data>
+  <data key="d8">chunk-69e3b609af85d990c0d209c00ad52c59</data>
+  <data key="d9">unknown_source</data>
+</edge>
+</graph></graphml>
