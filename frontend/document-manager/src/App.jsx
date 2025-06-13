@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import { Home, FileText, Brain, Database } from 'lucide-react';
-import HomePage from './components/HomePage';
+import { Folder, FileText, Brain, Database } from 'lucide-react';
+import ProjectDashboard from './components/ProjectDashboard';
 import DocumentManager from './components/DocumentManager';
 import BrainstormManager from './components/BrainstormManager';
 import TableManager from './components/TableManager';
 import './index.css';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('projects');
 
   const tabs = [
     {
-      id: 'home',
-      name: 'Home',
-      icon: Home,
+      id: 'projects',
+      name: 'Projects',
+      icon: Folder,
     },
     {
       id: 'documents',
@@ -68,7 +68,7 @@ function App() {
       </nav>
 
       <main className="flex-1">
-        {activeTab === 'home' && <HomePage />}
+        {activeTab === 'projects' && <ProjectDashboard />}
         {activeTab === 'documents' && <DocumentManager />}
         {activeTab === 'tables' && <TableManager />}
         {activeTab === 'brainstorm' && <BrainstormManager />}
