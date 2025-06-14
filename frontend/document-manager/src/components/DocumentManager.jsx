@@ -1,466 +1,259 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Upload, Plus, Trash2, Search, FileText, Folder, Check, AlertCircle, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const DocumentManager = () => {
- const [buckets, setBuckets] = useState([]);
- const [selectedBucket, setSelectedBucket] = useState(null);
- const [files, setFiles] = useState([]);
- const [isCreatingBucket, setIsCreatingBucket] = useState(false);
- const [newBucketName, setNewBucketName] = useState('');
- const [isDragging, setIsDragging] = useState(false);
- const [uploading, setUploading] = useState(false);
- const [selectedFiles, setSelectedFiles] = useState([]);
- const [uploadProgress, setUploadProgress] = useState({});
- const [query, setQuery] = useState('');
- const [queryResult, setQueryResult] = useState(null);
- const [querying, setQuerying] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [selectedDoc, setSelectedDoc] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
- useEffect(() => {
-   loadBuckets();
- }, []);
+  // Mock data for now - replace with your actual data source
+  useEffect(() => {
+    const mockDocs = [
+      {
+        id: 1,
+        title: 'Marketing Strategy 2024',
+        content: 'Our comprehensive marketing strategy...',
+        lastModified: new Date('2024-06-10'),
+        type: 'strategy',
+        tags: ['marketing', 'strategy', '2024']
+      },
+      {
+        id: 2,
+        title: 'Product Requirements Document',
+        content: 'This document outlines the requirements...',
+        lastModified: new Date('2024-06-12'),
+        type: 'requirements',
+        tags: ['product', 'requirements', 'development']
+      },
+      {
+        id: 3,
+        title: 'Meeting Notes - June 14',
+        content: 'Key decisions made in today\'s meeting...',
+        lastModified: new Date('2024-06-14'),
+        type: 'notes',
+        tags: ['meeting', 'notes', 'decisions']
+      }
+    ];
+    setDocuments(mockDocs);
+  }, []);
 
- const loadBuckets = async () => {
-   try {
-     const response = await fetch('/api/buckets');
-     const data = await response.json();
-     setBuckets(Array.isArray(data) ? data : []);
-   } catch (err) {
-     console.error('Failed to load buckets:', err);
-   }
- };
+  const filteredDocs = documents.filter(doc =>
+    doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    doc.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
- const createBucket = async () => {
-   if (!newBucketName.trim()) return;
-   
-   try {
-     const response = await fetch('/api/buckets/new', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({ bucket: newBucketName })
-     });
-     
-     if (response.ok) {
-       setNewBucketName('');
-       setIsCreatingBucket(false);
-       loadBuckets();
-     }
-   } catch (err) {
-     console.error('Failed to create bucket:', err);
-   }
- };
+  const handleCreateNew = () => {
+    const newDoc = {
+      id: Date.now(),
+      title: 'Untitled Document',
+      content: '',
+      lastModified: new Date(),
+      type: 'document',
+      tags: []
+    };
+    setDocuments([newDoc, ...documents]);
+    setSelectedDoc(newDoc);
+    setIsCreating(true);
+  };
 
- const deleteBucket = async (bucketName) => {
-   if (!confirm(`Delete bucket "${bucketName}"? This cannot be undone.`)) return;
-   
-   try {
-     const response = await fetch(`/api/buckets/${bucketName}`, {
-       method: 'DELETE'
-     });
-     
-     if (response.ok) {
-       if (selectedBucket === bucketName) {
-         setSelectedBucket(null);
-         setFiles([]);
-       }
-       loadBuckets();
-     }
-   } catch (err) {
-     console.error('Failed to delete bucket:', err);
-   }
- };
+  const handleSaveDocument = (doc) => {
+    setDocuments(docs => 
+      docs.map(d => d.id === doc.id ? { ...doc, lastModified: new Date() } : d)
+    );
+    setIsCreating(false);
+  };
 
- const selectBucket = async (bucketName) => {
-   setSelectedBucket(bucketName);
-   setQueryResult(null);
-   
-   try {
-     const response = await fetch(`/api/buckets/${bucketName}/files`);
-     const data = await response.json();
-     setFiles(Array.isArray(data) ? data : []);
-   } catch (err) {
-     console.error('Failed to load files:', err);
-     setFiles([]);
-   }
- };
+  const handleDeleteDocument = (docId) => {
+    setDocuments(docs => docs.filter(d => d.id !== docId));
+    if (selectedDoc?.id === docId) {
+      setSelectedDoc(null);
+    }
+  };
 
- const handleDrop = useCallback(async (e) => {
-   e.preventDefault();
-   setIsDragging(false);
-   
-   if (!selectedBucket) return;
-   
-   const droppedFiles = Array.from(e.dataTransfer.files);
-   setSelectedFiles(prev => [...prev, ...droppedFiles]);
- }, [selectedBucket]);
+  return (
+    <div className="h-screen flex bg-white">
+      {/* Sidebar */}
+      <div className="w-80 border-r border-gray-200 flex flex-col">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Documents</h2>
+            <button
+              onClick={handleCreateNew}
+              className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm font-medium"
+            >
+              + New
+            </button>
+          </div>
+          
+          {/* Search */}
+          <input
+            type="text"
+            placeholder="Search documents..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+          />
+        </div>
 
- const handleFileSelect = (e) => {
-   const files = Array.from(e.target.files);
-   setSelectedFiles(prev => [...prev, ...files]);
- };
+        {/* Document List */}
+        <div className="flex-1 overflow-y-auto">
+          {filteredDocs.map((doc) => (
+            <div
+              key={doc.id}
+              onClick={() => setSelectedDoc(doc)}
+              className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
+                selectedDoc?.id === doc.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium text-gray-900 truncate">{doc.title}</h3>
+                  <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                    {doc.content || 'No content yet...'}
+                  </p>
+                  <div className="flex items-center mt-2 space-x-2">
+                    <span className="text-xs text-gray-500">
+                      {doc.lastModified.toLocaleDateString()}
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {doc.tags.slice(0, 2).map(tag => (
+                        <span
+                          key={tag}
+                          className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteDocument(doc.id);
+                  }}
+                  className="text-gray-400 hover:text-red-500 ml-2"
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
- const removeFile = (index) => {
-   setSelectedFiles(prev => prev.filter((_, i) => i !== index));
- };
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {selectedDoc ? (
+          <DocumentEditor 
+            document={selectedDoc}
+            onSave={handleSaveDocument}
+            isNew={isCreating}
+          />
+        ) : (
+          <div className="flex-1 flex items-center justify-center text-gray-500">
+            <div className="text-center">
+              <div className="text-6xl mb-4">📄</div>
+              <h3 className="text-lg font-medium mb-2">No document selected</h3>
+              <p>Choose a document from the sidebar or create a new one</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
- const uploadFiles = async () => {
-   if (!selectedBucket || selectedFiles.length === 0) return;
-   
-   setUploading(true);
-   setUploadProgress({});
-   
-   try {
-     for (let i = 0; i < selectedFiles.length; i++) {
-       const file = selectedFiles[i];
-       setUploadProgress(prev => ({
-         ...prev,
-         [i]: { status: 'uploading', name: file.name }
-       }));
-       
-       const formData = new FormData();
-       formData.append('file', file);
-       
-       const response = await fetch(`/api/buckets/${selectedBucket}/ingest`, {
-         method: 'POST',
-         body: formData
-       });
-       
-       if (response.ok) {
-         setUploadProgress(prev => ({
-           ...prev,
-           [i]: { status: 'success', name: file.name }
-         }));
-       } else {
-         setUploadProgress(prev => ({
-           ...prev,
-           [i]: { status: 'error', name: file.name }
-         }));
-       }
-     }
-     
-     // Reload files and clear selection
-     await selectBucket(selectedBucket);
-     setSelectedFiles([]);
-     setUploadProgress({});
-   } catch (err) {
-     console.error('Upload failed:', err);
-   } finally {
-     setUploading(false);
-   }
- };
+// Document Editor Component
+const DocumentEditor = ({ document, onSave, isNew }) => {
+  const [title, setTitle] = useState(document.title);
+  const [content, setContent] = useState(document.content);
+  const [tags, setTags] = useState(document.tags.join(', '));
+  const [hasChanges, setHasChanges] = useState(isNew);
 
- const queryBucket = async () => {
-   if (!selectedBucket || !query.trim()) return;
-   
-   setQuerying(true);
-   try {
-     const response = await fetch(`/api/buckets/${selectedBucket}/query`, {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify({ query: query.trim() })
-     });
-     
-     if (response.ok) {
-       const data = await response.json();
-       setQueryResult(data.result);
-     }
-   } catch (err) {
-     console.error('Query failed:', err);
-   } finally {
-     setQuerying(false);
-   }
- };
+  useEffect(() => {
+    setTitle(document.title);
+    setContent(document.content);
+    setTags(document.tags.join(', '));
+    setHasChanges(isNew);
+  }, [document, isNew]);
 
- return (
-   <div className="min-h-screen bg-stone-50">
-     <div className="bg-white shadow-sm border-b border-stone-200">
-       <div className="max-w-7xl mx-auto px-8 py-6">
-         <h1 className="text-3xl font-bold text-stone-900">Document Manager</h1>
-         <p className="text-stone-600 mt-2">Organize and search your document collections with AI</p>
-       </div>
-     </div>
+  const handleSave = () => {
+    const updatedDoc = {
+      ...document,
+      title,
+      content,
+      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag)
+    };
+    onSave(updatedDoc);
+    setHasChanges(false);
+  };
 
-     <div className="max-w-7xl mx-auto p-8">
-       <div className="grid grid-cols-12 gap-8">
-         
-         <div className="col-span-4">
-           <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-             <div className="p-6 border-b border-stone-100">
-               <h2 className="text-lg font-semibold text-stone-800 mb-4">Document Buckets</h2>
-               
-               {!isCreatingBucket ? (
-                 <button
-                   onClick={() => setIsCreatingBucket(true)}
-                   className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors font-medium"
-                 >
-                   <Plus className="w-5 h-5" />
-                   Create New Bucket
-                 </button>
-               ) : (
-                 <div className="space-y-3">
-                   <input
-                     type="text"
-                     value={newBucketName}
-                     onChange={(e) => setNewBucketName(e.target.value)}
-                     placeholder="Enter bucket name..."
-                     className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                     onKeyDown={(e) => e.key === 'Enter' && createBucket()}
-                     autoFocus
-                   />
-                   <div className="flex gap-3">
-                     <button
-                       onClick={createBucket}
-                       className="flex-1 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
-                     >
-                       Create
-                     </button>
-                     <button
-                       onClick={() => {
-                         setIsCreatingBucket(false);
-                         setNewBucketName('');
-                       }}
-                       className="px-4 py-2 text-stone-600 hover:bg-stone-100 rounded-lg transition-colors"
-                     >
-                       Cancel
-                     </button>
-                   </div>
-                 </div>
-               )}
-             </div>
+  const handleChange = () => {
+    setHasChanges(true);
+  };
 
-             <div className="max-h-96 overflow-y-auto">
-               {buckets.length === 0 ? (
-                 <div className="p-8 text-center text-stone-500">
-                   <Folder className="w-12 h-12 mx-auto mb-3 opacity-40" />
-                   <p className="font-medium">No buckets yet</p>
-                   <p className="text-sm mt-1">Create your first bucket to get started</p>
-                 </div>
-               ) : (
-                 <div className="p-3">
-                   {buckets.map((bucket) => (
-                     <div
-                       key={bucket}
-                       className={`group flex items-center justify-between p-4 mb-2 rounded-lg cursor-pointer transition-all ${
-                         selectedBucket === bucket
-                           ? 'bg-emerald-50 border-2 border-emerald-200 shadow-sm'
-                           : 'hover:bg-stone-50 border-2 border-transparent'
-                       }`}
-                       onClick={() => selectBucket(bucket)}
-                     >
-                       <div className="flex items-center gap-3">
-                         <Folder className={`w-6 h-6 ${
-                           selectedBucket === bucket ? 'text-emerald-600' : 'text-stone-400'
-                         }`} />
-                         <span className={`font-medium ${
-                           selectedBucket === bucket ? 'text-emerald-900' : 'text-stone-700'
-                         }`}>
-                           {bucket}
-                         </span>
-                       </div>
-                       <button
-                         onClick={(e) => {
-                           e.stopPropagation();
-                           deleteBucket(bucket);
-                         }}
-                         className="opacity-0 group-hover:opacity-100 p-2 hover:bg-red-100 hover:text-red-600 rounded-lg transition-all"
-                       >
-                         <Trash2 className="w-4 h-4" />
-                       </button>
-                     </div>
-                   ))}
-                 </div>
-               )}
-             </div>
-           </div>
-         </div>
+  return (
+    <div className="flex-1 flex flex-col">
+      {/* Editor Header */}
+      <div className="border-b border-gray-200 p-4">
+        <div className="flex items-center justify-between">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              handleChange();
+            }}
+            className="text-xl font-semibold bg-transparent border-none outline-none flex-1 mr-4"
+            placeholder="Document title..."
+          />
+          <div className="flex items-center space-x-2">
+            {hasChanges && (
+              <span className="text-sm text-orange-600">Unsaved changes</span>
+            )}
+            <button
+              onClick={handleSave}
+              disabled={!hasChanges}
+              className={`px-4 py-2 rounded font-medium ${
+                hasChanges
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
+                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+        
+        {/* Tags */}
+        <input
+          type="text"
+          value={tags}
+          onChange={(e) => {
+            setTags(e.target.value);
+            handleChange();
+          }}
+          placeholder="Tags (comma separated)..."
+          className="mt-2 text-sm text-gray-600 bg-transparent border-none outline-none w-full"
+        />
+      </div>
 
-         <div className="col-span-8">
-           {!selectedBucket ? (
-             <div className="bg-white rounded-xl shadow-sm border border-stone-200 p-12 text-center">
-               <Folder className="w-20 h-20 mx-auto mb-6 text-stone-300" />
-               <h2 className="text-2xl font-semibold text-stone-600 mb-3">Select a Bucket</h2>
-               <p className="text-stone-500 text-lg">Choose a bucket from the sidebar to start managing your documents</p>
-             </div>
-           ) : (
-             <div className="space-y-8">
-               
-               <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                 <div className="p-6 border-b border-stone-100">
-                   <h2 className="text-xl font-semibold text-stone-800">Upload Documents</h2>
-                   <p className="text-stone-600 mt-1">Add files to the "{selectedBucket}" bucket</p>
-                 </div>
-                 
-                 <div className="p-6">
-                   <div
-                     className={`border-2 border-dashed rounded-xl p-8 text-center transition-all ${
-                       isDragging
-                         ? 'border-emerald-400 bg-emerald-50'
-                         : 'border-stone-300 hover:border-emerald-400 hover:bg-emerald-50'
-                     }`}
-                     onDrop={handleDrop}
-                     onDragOver={(e) => {
-                       e.preventDefault();
-                       setIsDragging(true);
-                     }}
-                     onDragLeave={() => setIsDragging(false)}
-                   >
-                     <Upload className="w-12 h-12 mx-auto mb-4 text-stone-400" />
-                     <h3 className="text-lg font-semibold text-stone-700 mb-2">
-                       Drop files here or browse to select
-                     </h3>
-                     <p className="text-stone-500 mb-4">
-                       <label className="text-emerald-600 hover:text-emerald-700 cursor-pointer font-medium">
-                         Choose files
-                         <input
-                           type="file"
-                           multiple
-                           className="hidden"
-                           onChange={handleFileSelect}
-                           disabled={uploading}
-                         />
-                       </label>
-                     </p>
-                     <div className="inline-flex items-center px-3 py-1 bg-stone-100 rounded-full text-sm">
-                       <FileText className="w-4 h-4 mr-2 text-stone-500" />
-                       <span className="font-medium text-stone-600">
-                         {files.length} files in bucket
-                       </span>
-                     </div>
-                   </div>
-
-                   {/* Selected Files Queue */}
-                   {selectedFiles.length > 0 && (
-                     <div className="mt-6">
-                       <h4 className="font-medium text-stone-800 mb-3">Files ready to upload:</h4>
-                       <div className="space-y-2 mb-4">
-                         {selectedFiles.map((file, index) => (
-                           <div key={index} className="flex items-center justify-between p-3 bg-stone-50 rounded-lg">
-                             <div className="flex items-center gap-3">
-                               <FileText className="w-5 h-5 text-stone-400" />
-                               <div>
-                                 <p className="font-medium text-stone-700">{file.name}</p>
-                                 <p className="text-sm text-stone-500">
-                                   {(file.size / 1024 / 1024).toFixed(2)} MB
-                                 </p>
-                               </div>
-                             </div>
-                             {uploadProgress[index] ? (
-                               <div className="flex items-center gap-2">
-                                 {uploadProgress[index].status === 'uploading' && (
-                                   <div className="w-4 h-4 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-                                 )}
-                                 {uploadProgress[index].status === 'success' && (
-                                   <Check className="w-5 h-5 text-emerald-600" />
-                                 )}
-                                 {uploadProgress[index].status === 'error' && (
-                                   <AlertCircle className="w-5 h-5 text-red-500" />
-                                 )}
-                               </div>
-                             ) : (
-                               <button
-                                 onClick={() => removeFile(index)}
-                                 className="p-1 hover:bg-stone-200 rounded"
-                                 disabled={uploading}
-                               >
-                                 <X className="w-4 h-4 text-stone-500" />
-                               </button>
-                             )}
-                           </div>
-                         ))}
-                       </div>
-                       
-                       <div className="flex gap-3">
-                         <button
-                           onClick={uploadFiles}
-                           disabled={uploading || selectedFiles.length === 0}
-                           className="flex-1 bg-emerald-500 text-white px-6 py-3 rounded-lg hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
-                         >
-                           {uploading ? (
-                             <div className="flex items-center justify-center gap-2">
-                               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                               Uploading {Object.keys(uploadProgress).length}/{selectedFiles.length}...
-                             </div>
-                           ) : (
-                             `Upload ${selectedFiles.length} file${selectedFiles.length > 1 ? 's' : ''}`
-                           )}
-                         </button>
-                         <button
-                           onClick={() => setSelectedFiles([])}
-                           disabled={uploading}
-                           className="px-4 py-3 text-stone-600 hover:bg-stone-100 rounded-lg transition-colors"
-                         >
-                           Clear
-                         </button>
-                       </div>
-                     </div>
-                   )}
-                 </div>
-               </div>
-
-               <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                 <div className="p-6 border-b border-stone-100">
-                   <h2 className="text-xl font-semibold text-stone-800">Ask Questions</h2>
-                   <p className="text-stone-600 mt-1">Search and query your uploaded documents</p>
-                 </div>
-                 
-                 <div className="p-6">
-                   <div className="flex gap-4 mb-6">
-                     <div className="flex-1 relative">
-                       <Search className="absolute left-4 top-4 w-5 h-5 text-stone-400" />
-                       <input
-                         type="text"
-                         value={query}
-                         onChange={(e) => setQuery(e.target.value)}
-                         placeholder="Ask a question about your documents..."
-                         className="w-full pl-12 pr-4 py-4 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-lg"
-                         onKeyDown={(e) => e.key === 'Enter' && queryBucket()}
-                         disabled={querying}
-                       />
-                     </div>
-                     <button
-                       onClick={queryBucket}
-                       disabled={!query.trim() || querying}
-                       className="px-8 py-4 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium text-lg"
-                     >
-                       {querying ? 'Searching...' : 'Ask'}
-                     </button>
-                   </div>
-
-                   {queryResult ? (
-                     <div className="bg-stone-50 rounded-xl border border-stone-200 p-6">
-                       <div className="flex items-start gap-4">
-                         <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
-                           <Check className="w-6 h-6 text-emerald-600" />
-                         </div>
-                         <div className="flex-1">
-                           <h3 className="font-semibold text-stone-800 mb-3 text-lg">Answer</h3>
-                           <div className="text-stone-700 leading-relaxed whitespace-pre-wrap text-base">
-                             {queryResult}
-                           </div>
-                         </div>
-                       </div>
-                     </div>
-                   ) : query && !querying ? (
-                     <div className="text-center text-stone-500 py-8">
-                       <AlertCircle className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                       <p className="text-lg">Click "Ask" to search your documents</p>
-                     </div>
-                   ) : (
-                     <div className="text-center text-stone-500 py-8">
-                       <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                       <p className="text-lg">Upload documents and ask questions to get started</p>
-                     </div>
-                   )}
-                 </div>
-               </div>
-
-             </div>
-           )}
-         </div>
-
-       </div>
-     </div>
-   </div>
- );
+      {/* Content Editor */}
+      <div className="flex-1 p-4">
+        <textarea
+          value={content}
+          onChange={(e) => {
+            setContent(e.target.value);
+            handleChange();
+          }}
+          placeholder="Start writing your document..."
+          className="w-full h-full resize-none border-none outline-none text-gray-900 leading-relaxed"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default DocumentManager;

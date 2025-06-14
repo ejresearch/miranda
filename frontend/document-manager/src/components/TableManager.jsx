@@ -1,455 +1,377 @@
-import { useState, useEffect } from 'react';
-import { Upload, Database, Table, Eye, Plus, FileText, Folder, Check, AlertCircle, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const TableManager = () => {
-  const [projects, setProjects] = useState(['project1', 'project2']); // Mock for now
-  const [selectedProject, setSelectedProject] = useState('');
   const [tables, setTables] = useState([]);
-  const [selectedTable, setSelectedTable] = useState('');
-  const [tableData, setTableData] = useState([]);
-  const [isCreatingProject, setIsCreatingProject] = useState(false);
-  const [newProjectName, setNewProjectName] = useState('');
-  const [uploading, setUploading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [newTableName, setNewTableName] = useState('');
-  const [isDragging, setIsDragging] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [selectedTable, setSelectedTable] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Load tables when project is selected
+  // Mock data for now
   useEffect(() => {
-    if (selectedProject) {
-      loadTables(selectedProject);
-    }
-  }, [selectedProject]);
-
-  // Load table data when table is selected
-  useEffect(() => {
-    if (selectedProject && selectedTable) {
-      loadTableData(selectedTable);
-    }
-  }, [selectedProject, selectedTable]);
-
-  const loadTables = async (project) => {
-    try {
-      const response = await fetch(`/api/tables/list?project=${project}`);
-      const data = await response.json();
-      setTables(data.tables || []);
-      setSelectedTable('');
-      setTableData([]);
-    } catch (err) {
-      console.error('Failed to load tables:', err);
-      setError('Failed to load tables');
-    }
-  };
-
-  const loadTableData = async (tableName) => {
-    try {
-      const response = await fetch(`/api/tables/${tableName}?project=${selectedProject}`);
-      const data = await response.json();
-      setTableData(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error('Failed to load table data:', err);
-      setError('Failed to load table data');
-    }
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragging(false);
-    
-    const files = Array.from(e.dataTransfer.files);
-    const csvFile = files.find(file => file.name.endsWith('.csv'));
-    
-    if (csvFile) {
-      setSelectedFile(csvFile);
-      setNewTableName(csvFile.name.replace('.csv', ''));
-    } else {
-      setError('Please upload a CSV file');
-    }
-  };
-
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    if (file && file.name.endsWith('.csv')) {
-      setSelectedFile(file);
-      setNewTableName(file.name.replace('.csv', ''));
-      setError('');
-    } else {
-      setError('Please select a CSV file');
-    }
-  };
-
-  const uploadCSV = async () => {
-    if (!selectedProject || !selectedFile || !newTableName.trim()) {
-      setError('Please select a project, file, and table name');
-      return;
-    }
-
-    setUploading(true);
-    setError('');
-    setSuccess('');
-
-    try {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('project', selectedProject);
-      formData.append('table_name', newTableName);
-
-      const response = await fetch('/api/tables/upload_csv', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        setSuccess(`Table "${newTableName}" created successfully!`);
-        setSelectedFile(null);
-        setNewTableName('');
-        loadTables(selectedProject);
-      } else {
-        throw new Error('Upload failed');
+    const mockTables = [
+      {
+        id: 1,
+        name: 'Customer Database',
+        description: 'Main customer information and contact details',
+        columns: ['Name', 'Email', 'Phone', 'Company', 'Status'],
+        data: [
+          ['John Doe', 'john@example.com', '555-0123', 'Acme Corp', 'Active'],
+          ['Jane Smith', 'jane@example.com', '555-0124', 'Tech Co', 'Active'],
+          ['Bob Johnson', 'bob@example.com', '555-0125', 'StartupXYZ', 'Pending']
+        ],
+        lastModified: new Date('2024-06-14'),
+        tags: ['customers', 'contacts', 'sales']
+      },
+      {
+        id: 2,
+        name: 'Product Inventory',
+        description: 'Current product stock and pricing information',
+        columns: ['Product', 'SKU', 'Stock', 'Price', 'Category'],
+        data: [
+          ['Widget A', 'WDG-001', '150', '$29.99', 'Electronics'],
+          ['Widget B', 'WDG-002', '75', '$39.99', 'Electronics'],
+          ['Widget C', 'WDG-003', '200', '$19.99', 'Accessories']
+        ],
+        lastModified: new Date('2024-06-13'),
+        tags: ['inventory', 'products', 'pricing']
       }
-    } catch (err) {
-      console.error('Upload failed:', err);
-      setError('Failed to upload CSV');
-    } finally {
-      setUploading(false);
-    }
+    ];
+    setTables(mockTables);
+  }, []);
+
+  const filteredTables = tables.filter(table =>
+    table.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    table.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const handleCreateNew = () => {
+    const newTable = {
+      id: Date.now(),
+      name: 'New Table',
+      description: '',
+      columns: ['Column 1', 'Column 2', 'Column 3'],
+      data: [['', '', '']],
+      lastModified: new Date(),
+      tags: []
+    };
+    setTables([newTable, ...tables]);
+    setSelectedTable(newTable);
+    setIsCreating(true);
   };
 
-  const clearMessages = () => {
-    setError('');
-    setSuccess('');
+  const handleSaveTable = (table) => {
+    setTables(tables => 
+      tables.map(t => t.id === table.id ? { ...table, lastModified: new Date() } : t)
+    );
+    setIsCreating(false);
+  };
+
+  const handleDeleteTable = (tableId) => {
+    setTables(tables => tables.filter(t => t.id !== tableId));
+    if (selectedTable?.id === tableId) {
+      setSelectedTable(null);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-stone-50">
-      <div className="bg-white shadow-sm border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-8 py-6">
-          <h1 className="text-3xl font-bold text-stone-900">Table Manager</h1>
-          <p className="text-stone-600 mt-2">Upload CSV files and manage your structured data</p>
+    <div className="h-screen flex bg-white">
+      {/* Sidebar */}
+      <div className="w-80 border-r border-gray-200 flex flex-col">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Tables</h2>
+            <button
+              onClick={handleCreateNew}
+              className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm font-medium"
+            >
+              + New
+            </button>
+          </div>
+          
+          {/* Search */}
+          <input
+            type="text"
+            placeholder="Search tables..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+          />
+        </div>
+
+        {/* Table List */}
+        <div className="flex-1 overflow-y-auto">
+          {filteredTables.map((table) => (
+            <div
+              key={table.id}
+              onClick={() => setSelectedTable(table)}
+              className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
+                selectedTable?.id === table.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium text-gray-900 truncate">{table.name}</h3>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {table.description || 'No description'}
+                  </p>
+                  <div className="flex items-center mt-2 text-xs text-gray-500">
+                    <span>{table.columns.length} columns</span>
+                    <span className="mx-2">•</span>
+                    <span>{table.data.length} rows</span>
+                    <span className="mx-2">•</span>
+                    <span>{table.lastModified.toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {table.tags.slice(0, 2).map(tag => (
+                      <span
+                        key={tag}
+                        className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteTable(table.id);
+                  }}
+                  className="text-gray-400 hover:text-red-500 ml-2"
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto p-8">
-        <div className="grid grid-cols-12 gap-8">
-          
-          {/* Left Panel - Project & Table Selection */}
-          <div className="col-span-4 space-y-6">
-            
-            {/* Project Selection */}
-            <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-              <div className="p-6 border-b border-stone-100">
-                <h2 className="text-lg font-semibold text-stone-800 mb-4">Project Selection</h2>
-                
-                {!isCreatingProject ? (
-                  <div className="space-y-3">
-                    <select
-                      value={selectedProject}
-                      onChange={(e) => setSelectedProject(e.target.value)}
-                      className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                    >
-                      <option value="">Select a project...</option>
-                      {projects.map(project => (
-                        <option key={project} value={project}>{project}</option>
-                      ))}
-                    </select>
-                    <button
-                      onClick={() => setIsCreatingProject(true)}
-                      className="w-full flex items-center justify-center gap-2 px-4 py-2 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-50 transition-colors font-medium"
-                    >
-                      <Plus className="w-4 h-4" />
-                      Create New Project
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      value={newProjectName}
-                      onChange={(e) => setNewProjectName(e.target.value)}
-                      placeholder="Enter project name..."
-                      className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                      onKeyDown={(e) => e.key === 'Enter' && setIsCreatingProject(false)}
-                      autoFocus
-                    />
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => {
-                          if (newProjectName.trim()) {
-                            setProjects(prev => [...prev, newProjectName]);
-                            setSelectedProject(newProjectName);
-                          }
-                          setNewProjectName('');
-                          setIsCreatingProject(false);
-                        }}
-                        className="flex-1 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors font-medium"
-                      >
-                        Create
-                      </button>
-                      <button
-                        onClick={() => {
-                          setIsCreatingProject(false);
-                          setNewProjectName('');
-                        }}
-                        className="px-4 py-2 text-stone-600 hover:bg-stone-100 rounded-lg transition-colors"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {selectedTable ? (
+          <TableEditor 
+            table={selectedTable}
+            onSave={handleSaveTable}
+            isNew={isCreating}
+          />
+        ) : (
+          <div className="flex-1 flex items-center justify-center text-gray-500">
+            <div className="text-center">
+              <div className="text-6xl mb-4">📊</div>
+              <h3 className="text-lg font-medium mb-2">No table selected</h3>
+              <p>Choose a table from the sidebar or create a new one</p>
             </div>
-
-            {/* Tables List */}
-            {selectedProject && (
-              <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                <div className="p-6 border-b border-stone-100">
-                  <h2 className="text-lg font-semibold text-stone-800 mb-4">Data Tables</h2>
-                  <p className="text-stone-600 text-sm">Tables in "{selectedProject}"</p>
-                </div>
-                
-                <div className="max-h-64 overflow-y-auto">
-                  {tables.length === 0 ? (
-                    <div className="p-8 text-center text-stone-500">
-                      <Database className="w-12 h-12 mx-auto mb-3 opacity-40" />
-                      <p className="font-medium">No tables yet</p>
-                      <p className="text-sm mt-1">Upload a CSV file to get started</p>
-                    </div>
-                  ) : (
-                    <div className="p-3">
-                      {tables.map((table) => (
-                        <div
-                          key={table}
-                          className={`group flex items-center justify-between p-4 mb-2 rounded-lg cursor-pointer transition-all ${
-                            selectedTable === table
-                              ? 'bg-emerald-50 border-2 border-emerald-200 shadow-sm'
-                              : 'hover:bg-stone-50 border-2 border-transparent'
-                          }`}
-                          onClick={() => setSelectedTable(table)}
-                        >
-                          <div className="flex items-center gap-3">
-                            <Table className={`w-6 h-6 ${
-                              selectedTable === table ? 'text-emerald-600' : 'text-stone-400'
-                            }`} />
-                            <span className={`font-medium ${
-                              selectedTable === table ? 'text-emerald-900' : 'text-stone-700'
-                            }`}>
-                              {table}
-                            </span>
-                          </div>
-                          <Eye className="w-4 h-4 text-stone-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-          {/* Right Panel - Upload & Data View */}
-          <div className="col-span-8">
-            {!selectedProject ? (
-              <div className="bg-white rounded-xl shadow-sm border border-stone-200 p-12 text-center">
-                <Folder className="w-20 h-20 mx-auto mb-6 text-stone-300" />
-                <h2 className="text-2xl font-semibold text-stone-600 mb-3">Select a Project</h2>
-                <p className="text-stone-500 text-lg">Choose or create a project to start managing your data tables</p>
-              </div>
-            ) : (
-              <div className="space-y-8">
-                
-                {/* CSV Upload */}
-                <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                  <div className="p-6 border-b border-stone-100">
-                    <h2 className="text-xl font-semibold text-stone-800">Upload CSV File</h2>
-                    <p className="text-stone-600 mt-1">Add a new data table to "{selectedProject}"</p>
-                  </div>
-                  
-                  <div className="p-6">
-                    <div
-                      className={`border-2 border-dashed rounded-xl p-8 text-center transition-all ${
-                        isDragging
-                          ? 'border-emerald-400 bg-emerald-50'
-                          : 'border-stone-300 hover:border-emerald-400 hover:bg-emerald-50'
-                      }`}
-                      onDrop={handleDrop}
-                      onDragOver={(e) => {
-                        e.preventDefault();
-                        setIsDragging(true);
-                      }}
-                      onDragLeave={() => setIsDragging(false)}
+// Table Editor Component
+const TableEditor = ({ table, onSave, isNew }) => {
+  const [name, setName] = useState(table.name);
+  const [description, setDescription] = useState(table.description);
+  const [columns, setColumns] = useState([...table.columns]);
+  const [data, setData] = useState(table.data.map(row => [...row]));
+  const [tags, setTags] = useState(table.tags.join(', '));
+  const [hasChanges, setHasChanges] = useState(isNew);
+
+  useEffect(() => {
+    setName(table.name);
+    setDescription(table.description);
+    setColumns([...table.columns]);
+    setData(table.data.map(row => [...row]));
+    setTags(table.tags.join(', '));
+    setHasChanges(isNew);
+  }, [table, isNew]);
+
+  const handleSave = () => {
+    const updatedTable = {
+      ...table,
+      name,
+      description,
+      columns,
+      data,
+      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag)
+    };
+    onSave(updatedTable);
+    setHasChanges(false);
+  };
+
+  const handleChange = () => {
+    setHasChanges(true);
+  };
+
+  const addColumn = () => {
+    setColumns([...columns, `Column ${columns.length + 1}`]);
+    setData(data.map(row => [...row, '']));
+    handleChange();
+  };
+
+  const removeColumn = (index) => {
+    setColumns(columns.filter((_, i) => i !== index));
+    setData(data.map(row => row.filter((_, i) => i !== index)));
+    handleChange();
+  };
+
+  const addRow = () => {
+    setData([...data, new Array(columns.length).fill('')]);
+    handleChange();
+  };
+
+  const removeRow = (index) => {
+    setData(data.filter((_, i) => i !== index));
+    handleChange();
+  };
+
+  const updateCell = (rowIndex, colIndex, value) => {
+    const newData = [...data];
+    newData[rowIndex][colIndex] = value;
+    setData(newData);
+    handleChange();
+  };
+
+  const updateColumn = (index, value) => {
+    const newColumns = [...columns];
+    newColumns[index] = value;
+    setColumns(newColumns);
+    handleChange();
+  };
+
+  return (
+    <div className="flex-1 flex flex-col">
+      {/* Editor Header */}
+      <div className="border-b border-gray-200 p-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex-1 mr-4">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                handleChange();
+              }}
+              className="text-xl font-semibold bg-transparent border-none outline-none w-full"
+              placeholder="Table name..."
+            />
+            <input
+              type="text"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                handleChange();
+              }}
+              placeholder="Description..."
+              className="mt-1 text-sm text-gray-600 bg-transparent border-none outline-none w-full"
+            />
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => {
+                setTags(e.target.value);
+                handleChange();
+              }}
+              placeholder="Tags (comma separated)..."
+              className="mt-1 text-sm text-gray-600 bg-transparent border-none outline-none w-full"
+            />
+          </div>
+          <div className="flex items-center space-x-2">
+            {hasChanges && (
+              <span className="text-sm text-orange-600">Unsaved changes</span>
+            )}
+            <button
+              onClick={handleSave}
+              disabled={!hasChanges}
+              className={`px-4 py-2 rounded font-medium ${
+                hasChanges
+                  ? 'bg-green-600 hover:bg-green-700 text-white'
+                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+              }`}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Table Editor */}
+      <div className="flex-1 p-4 overflow-auto">
+        <div className="mb-4 flex space-x-2">
+          <button
+            onClick={addColumn}
+            className="px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700"
+          >
+            + Column
+          </button>
+          <button
+            onClick={addRow}
+            className="px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700"
+          >
+            + Row
+          </button>
+        </div>
+
+        <div className="border border-gray-300 rounded-lg overflow-hidden">
+          <table className="min-w-full">
+            {/* Header */}
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="w-8 px-2 py-2 text-center text-xs text-gray-500">#</th>
+                {columns.map((column, index) => (
+                  <th key={index} className="px-3 py-2 text-left min-w-32">
+                    <div className="flex items-center justify-between">
+                      <input
+                        type="text"
+                        value={column}
+                        onChange={(e) => updateColumn(index, e.target.value)}
+                        className="font-medium text-gray-900 bg-transparent border-none outline-none flex-1 text-sm"
+                      />
+                      <button
+                        onClick={() => removeColumn(index)}
+                        className="ml-2 text-gray-400 hover:text-red-500 text-xs"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </th>
+                ))}
+                <th className="w-8"></th>
+              </tr>
+            </thead>
+
+            {/* Body */}
+            <tbody className="bg-white">
+              {data.map((row, rowIndex) => (
+                <tr key={rowIndex} className="border-t border-gray-200">
+                  <td className="px-2 py-2 text-center text-xs text-gray-400">
+                    {rowIndex + 1}
+                  </td>
+                  {row.map((cell, colIndex) => (
+                    <td key={colIndex} className="px-3 py-2">
+                      <input
+                        type="text"
+                        value={cell}
+                        onChange={(e) => updateCell(rowIndex, colIndex, e.target.value)}
+                        className="w-full bg-transparent border-none outline-none text-sm"
+                        placeholder="Enter value..."
+                      />
+                    </td>
+                  ))}
+                  <td className="px-2 py-2 text-center">
+                    <button
+                      onClick={() => removeRow(rowIndex)}
+                      className="text-gray-400 hover:text-red-500 text-xs"
                     >
-                      <Upload className="w-12 h-12 mx-auto mb-4 text-stone-400" />
-                      <h3 className="text-lg font-semibold text-stone-700 mb-2">
-                        Drop CSV file here or browse to select
-                      </h3>
-                      <p className="text-stone-500 mb-4">
-                        <label className="text-emerald-600 hover:text-emerald-700 cursor-pointer font-medium">
-                          Choose CSV file
-                          <input
-                            type="file"
-                            accept=".csv"
-                            className="hidden"
-                            onChange={handleFileSelect}
-                            disabled={uploading}
-                          />
-                        </label>
-                      </p>
-                      <div className="inline-flex items-center px-3 py-1 bg-stone-100 rounded-full text-sm">
-                        <Database className="w-4 h-4 mr-2 text-stone-500" />
-                        <span className="font-medium text-stone-600">
-                          {tables.length} tables in project
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Selected File & Upload */}
-                    {selectedFile && (
-                      <div className="mt-6">
-                        <h4 className="font-medium text-stone-800 mb-3">File ready to upload:</h4>
-                        <div className="bg-stone-50 rounded-lg p-4 mb-4">
-                          <div className="flex items-center gap-3 mb-3">
-                            <FileText className="w-5 h-5 text-stone-400" />
-                            <div>
-                              <p className="font-medium text-stone-700">{selectedFile.name}</p>
-                              <p className="text-sm text-stone-500">
-                                {(selectedFile.size / 1024).toFixed(1)} KB
-                              </p>
-                            </div>
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-stone-700 mb-2">
-                              Table Name:
-                            </label>
-                            <input
-                              type="text"
-                              value={newTableName}
-                              onChange={(e) => setNewTableName(e.target.value)}
-                              className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                              placeholder="Enter table name..."
-                            />
-                          </div>
-                        </div>
-                        
-                        <div className="flex gap-3">
-                          <button
-                            onClick={uploadCSV}
-                            disabled={uploading || !newTableName.trim()}
-                            className="flex-1 bg-emerald-500 text-white px-6 py-3 rounded-lg hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center gap-2"
-                          >
-                            {uploading ? (
-                              <>
-                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                Uploading...
-                              </>
-                            ) : (
-                              <>
-                                <Upload className="w-4 h-4" />
-                                Create Table
-                              </>
-                            )}
-                          </button>
-                          <button
-                            onClick={() => {
-                              setSelectedFile(null);
-                              setNewTableName('');
-                              clearMessages();
-                            }}
-                            disabled={uploading}
-                            className="px-4 py-3 text-stone-600 hover:bg-stone-100 rounded-lg transition-colors"
-                          >
-                            Clear
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Messages */}
-                    {error && (
-                      <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-red-700 font-medium">Error</p>
-                          <p className="text-red-600 text-sm">{error}</p>
-                        </div>
-                        <button onClick={clearMessages} className="ml-auto">
-                          <X className="w-4 h-4 text-red-500" />
-                        </button>
-                      </div>
-                    )}
-
-                    {success && (
-                      <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-lg p-4 flex items-start gap-3">
-                        <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-emerald-700 font-medium">Success</p>
-                          <p className="text-emerald-600 text-sm">{success}</p>
-                        </div>
-                        <button onClick={clearMessages} className="ml-auto">
-                          <X className="w-4 h-4 text-emerald-500" />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Table Data Preview */}
-                {selectedTable && (
-                  <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
-                    <div className="p-6 border-b border-stone-100">
-                      <h2 className="text-xl font-semibold text-stone-800">Table: {selectedTable}</h2>
-                      <p className="text-stone-600 mt-1">{tableData.length} rows</p>
-                    </div>
-                    
-                    <div className="p-6">
-                      {tableData.length > 0 ? (
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-sm border border-stone-200 rounded-lg overflow-hidden">
-                            <thead className="bg-stone-50">
-                              <tr>
-                                {Object.keys(tableData[0]).map(column => (
-                                  <th key={column} className="px-4 py-3 text-left font-medium text-stone-700 border-b border-stone-200">
-                                    {column}
-                                  </th>
-                                ))}
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {tableData.slice(0, 50).map((row, index) => (
-                                <tr key={index} className="hover:bg-stone-50">
-                                  {Object.values(row).map((value, colIndex) => (
-                                    <td key={colIndex} className="px-4 py-3 text-stone-700 border-b border-stone-100">
-                                      {String(value).length > 100 
-                                        ? String(value).substring(0, 100) + '...' 
-                                        : String(value)
-                                      }
-                                    </td>
-                                  ))}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                          {tableData.length > 50 && (
-                            <div className="mt-4 text-center text-stone-500 text-sm">
-                              Showing first 50 of {tableData.length} rows
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <div className="text-center py-8 text-stone-500">
-                          <Table className="w-12 h-12 mx-auto mb-3 opacity-40" />
-                          <p className="text-lg">No data in this table</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-              </div>
-            )}
-          </div>
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
