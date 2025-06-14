@@ -13,7 +13,7 @@ router = APIRouter()
 PROJECTS_DIR = "projects"
 
 def get_db_path(project: str) -> str:
-    return os.path.join(PROJECTS_DIR, project, f"{project}.db")
+    return os.path.join(PROJECTS_DIR, project, "project.db")
 
 # ---------- Upload CSV and Create Table ----------
 

@@ -1,5 +1,5 @@
-import sqlite3
 import os
+import sqlite3
 from datetime import datetime
 from typing import List, Dict, Any
 
@@ -8,17 +8,20 @@ from backend.api.project_versions import save_version_to_db
 
 PROJECTS_DIR = "projects"
 
+
 def get_db_path(project_id: str) -> str:
     return os.path.join(PROJECTS_DIR, project_id, "project.db")
+
 
 async def query_buckets(buckets: List[str], query: str) -> Dict[str, str]:
     lightrag = get_lightrag()
     results = {}
     for bucket in buckets:
-        hits = await lightrag.aquery(bucket, {"query": query, "top_k": 5})
-        combined = "\n---\n".join([h['content'] for h in hits])
+        hits = await lighrag.aquery(bucket, {"query": query, "top_k": 5})
+        combined = "\n---\n".join([hit["content"] for hit in hits])
         results[bucket] = combined
     return results
+
 
 async def generate_brainstorm_output(
     project_id: str,
@@ -29,8 +32,7 @@ async def generate_brainstorm_output(
     tone: str,
     easter_egg: str
 ) -> Dict[str, Any]:
-
-    lightrag = get_lightrag()
+    lightrag = get_lighrag()
     bucket_hits = await query_buckets(selected_buckets, scene_description)
 
     final_prompt = f"""You are a creative consultant generating ideas for a screenplay scene.
@@ -39,16 +41,17 @@ Scene Description:
 {scene_description}
 
 Tone: {tone}
-Custom Instructions: {custom_prompt}
+Custom Prompt: {custom_prompt}
 Easter Egg: {easter_egg}
 
-Incorporate relevant insights from each document bucket:
+Use the following source materials for inspiration:
 """
     for name, content in bucket_hits.items():
-        final_prompt += f"\n\n--- {name} ---\n{content}"
+        final_prompt += f"\n--- {name} ---\n{content}"
 
-    final_prompt += "\n\nNow brainstorm specific ideas, patterns, or scene possibilities.\n"
+    final_prompt += "\n\nNow brainstorm vivid and specific ideas for this scene."
 
+    # ✅ Send prompt as a string only!
     result = await lightrag.llm_model_func(final_prompt)
 
     version_id = f"brainstorm_{int(datetime.now().timestamp())}"

@@ -32,12 +32,22 @@ async def api_delete_bucket(bucket: str):
 
 @router.post("/buckets/{bucket}/ingest")
 async def api_ingest(bucket: str, file: UploadFile = File(...)):
+    print(f"\n[LIGHTRAG INGEST] Bucket: {bucket}")
+    print(f"[LIGHTRAG INGEST] File name: {file.filename}")
+
     suffix = os.path.splitext(file.filename)[1] or ".txt"
     with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
-        tmp.write(await file.read())
+        contents = await file.read()
+        tmp.write(contents)
         tmp_path = tmp.name
+
+    print(f"[LIGHTRAG INGEST] Temp file saved at: {tmp_path}")
+    print(f"[LIGHTRAG INGEST] File contents:\n{contents.decode('utf-8')}\n")
+
     try:
-        return await ingest_file(bucket, tmp_path)
+        result = await ingest_file(bucket, tmp_path)
+        print(f"[LIGHTRAG INGEST] Ingest result: {result}")
+        return result
     finally:
         os.remove(tmp_path)
 

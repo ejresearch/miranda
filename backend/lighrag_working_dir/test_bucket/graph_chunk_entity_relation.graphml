@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d11" for="edge" attr.name="created_at" attr.type="long" />
+  <key id="d10" for="edge" attr.name="file_path" attr.type="string" />
+  <key id="d9" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d8" for="edge" attr.name="keywords" attr.type="string" />
+  <key id="d7" for="edge" attr.name="description" attr.type="string" />
+  <key id="d6" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d5" for="node" attr.name="created_at" attr.type="long" />
+  <key id="d4" for="node" attr.name="file_path" attr.type="string" />
+  <key id="d3" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="entity_type" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_id" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="Bob">
+      <data key="d0">Bob</data>
+      <data key="d1">person</data>
+      <data key="d2">Bob is a character who enters a room with a pineapple and a confident demeanor, suggesting a humorous or light-hearted situation.&lt;SEP&gt;Bob is a character who enters a room with a pineapple and shows confidence, suggesting a playful or humorous intent.</data>
+      <data key="d3">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749935687</data>
+    </node>
+    <node id="Pineapple">
+      <data key="d0">Pineapple</data>
+      <data key="d1">category</data>
+      <data key="d2">The pineapple is a fruit that is commonly associated with tropical themes and humor, particularly in light-hearted contexts.&lt;SEP&gt;The pineapple is presented as a quirky prop that Bob carries, implying a light-hearted context.</data>
+      <data key="d3">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749935687</data>
+    </node>
+    <node id="Room">
+      <data key="d0">Room</data>
+      <data key="d1">geo</data>
+      <data key="d2">The room is a physical space where Bob enters with a pineapple, setting the stage for the narrative.&lt;SEP&gt;The room is a physical space where the interaction involving Bob takes place, setting the stage for the humorous event.</data>
+      <data key="d3">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749935687</data>
+    </node>
+    <node id="Confidence">
+      <data key="d0">Confidence</data>
+      <data key="d1">category</data>
+      <data key="d2">Confidence is an attribute exhibited by Bob, suggesting his self-assuredness and ease in social situations.</data>
+      <data key="d3">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749935687</data>
+    </node>
+    <node id="Laughter">
+      <data key="d0">Laughter</data>
+      <data key="d1">category</data>
+      <data key="d2">Laughter is an emotional response that indicates joy and amusement, anticipated by Bob in the scenario.</data>
+      <data key="d3">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749935687</data>
+    </node>
+    <edge source="Bob" target="Pineapple">
+      <data key="d6">14.0</data>
+      <data key="d7">Bob carries the pineapple, indicating its role as a prop in his humorous or playful approach to the situation.&lt;SEP&gt;Bob's entrance with a pineapple suggests that it may play a role in creating a humorous situation, likely involving laughter.</data>
+      <data key="d8">humor,light-heartedness,playfulness</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+    <edge source="Bob" target="Room">
+      <data key="d6">14.0</data>
+      <data key="d7">Bob enters the room, initiating the scene and context for his actions involving humor and playfulness.&lt;SEP&gt;Bob enters the room, making it a key location for the unfolding event.</data>
+      <data key="d8">event setting,interaction,physical space,scene setting</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+    <edge source="Bob" target="Confidence">
+      <data key="d6">6.0</data>
+      <data key="d7">Bob's smirk and demeanor indicate a sense of confidence in his actions and social interaction.</data>
+      <data key="d8">self-assuredness,social skill</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+    <edge source="Bob" target="Laughter">
+      <data key="d6">8.0</data>
+      <data key="d7">Bob expresses anticipation of laughter in the situation, suggesting his intent to provoke a humorous reaction.</data>
+      <data key="d8">humor,social interaction</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+    <edge source="Pineapple" target="Room">
+      <data key="d6">5.0</data>
+      <data key="d7">The pineapple is brought into the room by Bob, contributing to the atmosphere of humor and surprise.</data>
+      <data key="d8">context,humorous prop</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749932592</data>
+    </edge>
+    <edge source="Pineapple" target="Laughter">
+      <data key="d6">9.0</data>
+      <data key="d7">The presence of the pineapple may be a humorous element that triggers laughter among those present.</data>
+      <data key="d8">humor,playful object</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+    <edge source="Confidence" target="Laughter">
+      <data key="d6">5.0</data>
+      <data key="d7">Confidence often leads to laughter in social situations, as it can encourage light-heartedness.</data>
+      <data key="d8">emotional response,social confidence</data>
+      <data key="d9">chunk-45d9331f743e20d9fb03eb6789f2d11e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749935687</data>
+    </edge>
+  </graph>
+</graphml>
