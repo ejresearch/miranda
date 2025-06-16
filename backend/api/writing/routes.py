@@ -2,33 +2,32 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 
-from backend.api.writing.logic import generate_brainstorm_output
-
 router = APIRouter()
 
+# TODO: Add your writing-specific routes here
+# Example structure for future writing endpoints:
 
-class BrainstormRequest(BaseModel):
-    project_id: str
-    scene_id: str
-    scene_description: str
-    selected_buckets: List[str]
-    custom_prompt: Optional[str] = ""
-    tone: Optional[str] = "neutral"
-    easter_egg: Optional[str] = ""
+# class WriteRequest(BaseModel):
+#     content: str
+#     style: Optional[str] = "neutral"
+#     format: Optional[str] = "markdown"
 
+# @router.post("/generate")
+# async def generate_writing(request: WriteRequest) -> Dict[str, Any]:
+#     try:
+#         # Import and call your writing logic here
+#         # from backend.api.writing.logic import generate_writing_content
+#         # return await generate_writing_content(...)
+#         pass
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/brainstorm")
-async def api_brainstorm(request: BrainstormRequest) -> Dict[str, Any]:
-    try:
-        return await generate_brainstorm_output(
-            project_id=request.project_id,
-            scene_id=request.scene_id,
-            scene_description=request.scene_description,
-            selected_buckets=request.selected_buckets,
-            custom_prompt=request.custom_prompt,
-            tone=request.tone,
-            easter_egg=request.easter_egg
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @router.post("/edit")
+# async def edit_writing(request: EditRequest) -> Dict[str, Any]:
+#     # Writing editing functionality
+#     pass
 
+# @router.get("/templates")
+# async def get_writing_templates() -> List[Dict[str, Any]]:
+#     # Return available writing templates
+#     pass

@@ -20,7 +20,7 @@ class BrainstormRequest(BaseModel):
 @router.post("/brainstorm")
 async def api_brainstorm(request: BrainstormRequest) -> Dict[str, Any]:
     try:
-        output = await generate_brainstorm_output(
+        return await generate_brainstorm_output(
             project_id=request.project_id,
             scene_id=request.scene_id,
             scene_description=request.scene_description,
@@ -29,7 +29,6 @@ async def api_brainstorm(request: BrainstormRequest) -> Dict[str, Any]:
             tone=request.tone,
             easter_egg=request.easter_egg
         )
-        return output
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
