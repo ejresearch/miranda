@@ -1,0 +1,254 @@
+﻿Nell Beta API - Complete End-to-End Testing Workflow (CORRECTED PATHS)
+Test Data Files Available
+* 01_ethics.txt (460 bytes) - /Users/elle/Desktop/nell_sample_project/01_ethics.txt
+* 01_researchers.csv (136 bytes) - /Users/elle/Desktop/nell_sample_project/01_researchers.csv
+* 02_key_terms.csv (285 bytes) - /Users/elle/Desktop/nell_sample_project/02_key_terms.csv
+* 02_memory.txt (420 bytes) - /Users/elle/Desktop/nell_sample_project/02_memory.txt
+* 03_case_studies.csv (291 bytes) - /Users/elle/Desktop/nell_sample_project/03_case_studies.csv
+* 03_design.txt (415 bytes) - /Users/elle/Desktop/nell_sample_project/03_design.txt
+Complete End-to-End Testing Workflow - FRESH START
+Phase 1: Project Setup & Health Check
+# 1. Health check
+curl -X GET "http://127.0.0.1:8000/healthcheck"
+
+
+# 2. List existing projects
+curl -X GET "http://127.0.0.1:8000/projects/projects"
+
+
+# 3. Create new test project (FRESH)
+curl -X POST "http://127.0.0.1:8000/projects/projects/new" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "nell_fresh_test"}'
+
+
+# 4. Verify project creation
+curl -X GET "http://127.0.0.1:8000/projects/projects/nell_fresh_test"
+
+
+Phase 2: Bucket Operations & Document Ingestion (CORRECTED PATHS)
+# 5. List existing buckets
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets"
+
+
+# 6. Create ethics research bucket
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/new" \
+  -H "Content-Type: application/json" \
+  -d '{"bucket": "ethics_research"}'
+
+
+# 7. Create design bucket
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/new" \
+  -H "Content-Type: application/json" \
+  -d '{"bucket": "design_docs"}'
+
+
+# 8. Create memory bucket
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/new" \
+  -H "Content-Type: application/json" \
+  -d '{"bucket": "memory_research"}'
+
+
+# 9. Upload ethics document (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/ethics_research/ingest" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/01_ethics.txt"
+
+
+# 10. Upload memory document (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/memory_research/ingest" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/02_memory.txt"
+
+
+# 11. Upload design document (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/design_docs/ingest" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/03_design.txt"
+
+
+# 12. List files in ethics bucket
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/ethics_research/files"
+
+
+# 13. List files in memory bucket
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/memory_research/files"
+
+
+# 14. List files in design bucket
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/design_docs/files"
+
+
+Phase 3: Table Operations & CSV Data (CORRECTED PATHS)
+# 15. Upload researchers CSV (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/upload_csv?project=nell_fresh_test&table_name=researchers" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/01_researchers.csv"
+
+
+# 16. Upload key terms CSV (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/upload_csv?project=nell_fresh_test&table_name=key_terms" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/02_key_terms.csv"
+
+
+# 17. Upload case studies CSV (CORRECT PATH)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/upload_csv?project=nell_fresh_test&table_name=case_studies" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/03_case_studies.csv"
+
+
+# 18. List all tables (should work after uploads)
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/list?project=nell_fresh_test"
+
+
+# 19. View researchers table
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/researchers?project=nell_fresh_test"
+
+
+# 20. View key terms table
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/key_terms?project=nell_fresh_test"
+
+
+# 21. View case studies table
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/case_studies?project=nell_fresh_test"
+
+
+Phase 4: Query Testing (After Documents Are Uploaded)
+# 22. Query ethics bucket (should have content now)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/ethics_research/query" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "ethics principles", "user_prompt": "What are the main ethical considerations?"}'
+
+
+# 23. Query memory bucket (should have content now)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/memory_research/query" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "memory research methods", "user_prompt": "How is memory studied?"}'
+
+
+# 24. Query design bucket (should have content now)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/design_docs/query" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "design principles", "user_prompt": "What are key design considerations?"}'
+
+
+Phase 5: Brainstorming (Content Generation)
+# 25. Ethics-focused brainstorm
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/brainstorm/brainstorm" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "nell_fresh_test",
+    "scene_id": "ethics_scene_01",
+    "scene_description": "A researcher grapples with ethical dilemmas in their study",
+    "selected_buckets": ["ethics_research"],
+    "custom_prompt": "Focus on internal conflict and moral reasoning",
+    "tone": "dramatic",
+    "easter_egg": "subtle reference to famous ethics cases"
+  }'
+
+
+# 26. Memory research brainstorm
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/brainstorm/brainstorm" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "nell_fresh_test", 
+    "scene_id": "memory_scene_01",
+    "scene_description": "Scientists discover a breakthrough in memory research",
+    "selected_buckets": ["memory_research"],
+    "custom_prompt": "Emphasize scientific discovery and wonder",
+    "tone": "hopeful",
+    "easter_egg": "reference to how memories shape identity"
+  }'
+
+
+# 27. Multi-source brainstorm (combining buckets)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/brainstorm/brainstorm" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "project_id": "nell_fresh_test",
+    "scene_id": "combined_scene_01", 
+    "scene_description": "A design team must balance ethics and innovation in their memory research project",
+    "selected_buckets": ["ethics_research", "memory_research", "design_docs"],
+    "custom_prompt": "Show the intersection of ethics, science, and design",
+    "tone": "thoughtful",
+    "easter_egg": "nod to how good design considers human values"
+  }'
+
+
+Phase 6: Version Management
+# 28. List brainstorm versions
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/versions/projects/nell_fresh_test/versions/brainstorm"
+
+
+# 29. Create a manual version (example)
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/versions/projects/nell_fresh_test/versions/brainstorm" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Manual Test Version",
+    "focus": "Testing version creation",
+    "prompt": "This is a test prompt for version management",
+    "result": "This is a test result showing version functionality works",
+    "metadata": {
+      "selectedSources": {
+        "buckets": ["ethics_research"],
+        "tables": ["researchers"],
+        "brainstormVersions": []
+      },
+      "customizations": {
+        "tone": "test",
+        "instructions": "testing instructions"
+      },
+      "dataSourcesCount": 2
+    }
+  }'
+
+
+Phase 7: Graph Operations (SKIPPED - Optional)
+# 30. Export graph data (SKIPPED - API mismatch issue)
+# curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/export_graph"
+
+
+# 31. Push graph to Neo4j (SKIPPED - requires Neo4j setup)
+# curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/graph/graph/push"
+
+
+# 32. Fetch graph data (SKIPPED - requires Neo4j setup)
+# curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/graph/graph/all?limit=50"
+
+
+Phase 8: Data Cleanup & Verification
+# 33. Filter table data (test specific values from your CSV files)
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/tables/tables/researchers?project=nell_fresh_test&column=name&value=Dr.%20Smith"
+
+
+# 34. List all buckets to verify
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets"
+
+
+# 35. Final project status check
+curl -X GET "http://127.0.0.1:8000/projects/projects/nell_fresh_test"
+
+
+Quick Start Commands (Run These First)
+# Fresh project creation
+curl -X POST "http://127.0.0.1:8000/projects/projects/new" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "nell_fresh_test"}'
+
+
+# Create ethics bucket
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/new" \
+  -H "Content-Type: application/json" \
+  -d '{"bucket": "ethics_research"}'
+
+
+# Upload ethics document
+curl -X POST "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/ethics_research/ingest" \
+  -F "file=@/Users/elle/Desktop/nell_sample_project/01_ethics.txt"
+
+
+# Verify upload worked
+curl -X GET "http://127.0.0.1:8000/projects/nell_fresh_test/buckets/buckets/ethics_research/files"
+
+
+Key Changes Made:
+1. ✅ Fixed all file paths to /Users/elle/Desktop/nell_sample_project/
+2. ✅ Created fresh project name nell_fresh_test to avoid conflicts
+3. ✅ Updated all project references throughout the workflow
+4. ✅ Added verification steps after each upload
+Start with Phase 1 and we'll test each phase step by step!

@@ -1,0 +1,3 @@
+Title: Designing for Intelligence
+
+Good design anticipates intention. In AI interfaces, this means making invisible processes interpretable, and complex reasoning legible. From prompt engineering to user-facing dashboards, design mediates the relationship between human users and nonhuman agents. Designers of the future will need to speak both in typography and tokens, balancing usability with algorithmic depth.

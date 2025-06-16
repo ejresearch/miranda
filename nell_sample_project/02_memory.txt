@@ -1,0 +1,3 @@
+Title: Memory in Machines and Minds
+
+Human memory is fluid, contextual, and often flawed. In contrast, machine memory is precise, persistent, and scaleable. But what happens when we design AI systems to forget, adapt, or prioritize context—just as humans do? The design of artificial memory architectures, from vector databases to neural attention layers, raises questions about what we choose to preserve or discard.
