@@ -7,6 +7,7 @@ import TableManager from './components/TableManager';
 import BrainstormManager from './components/BrainstormManager';
 import ProjectWorkflow from './components/project/ProjectWorkflow';
 import TemplateSelector from './components/templates/TemplateSelector';
+import TestConnection from './components/TestConnection'; // ← Add this import
 import { useProject } from './hooks/useProject';
 
 function AppContent() {
@@ -46,6 +47,7 @@ function AppContent() {
           <Route path="/brainstorm" element={<BrainstormManager />} />
           <Route path="/project/:id" element={<ProjectWorkflow />} />
           <Route path="/project/:id/:step" element={<ProjectWorkflow />} />
+          <Route path="/test" element={<TestConnection />} /> {/* ← Add this route */}
         </Routes>
       </main>
 

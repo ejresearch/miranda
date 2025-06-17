@@ -8,7 +8,8 @@ const Header = ({ onNewProject }) => {
     { name: 'Projects', path: '/', icon: '📁' },
     { name: 'Documents', path: '/documents', icon: '📄' },
     { name: 'Tables', path: '/tables', icon: '📊' },
-    { name: 'Brainstorm', path: '/brainstorm', icon: '🧠' }
+    { name: 'Brainstorm', path: '/brainstorm', icon: '🧠' },
+    { name: 'Test API', path: '/test', icon: '🔧' } // ← Add this
   ];
 
   const isActive = (path) => {

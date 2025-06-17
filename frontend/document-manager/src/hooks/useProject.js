@@ -1,100 +1,6 @@
+// frontend/document-manager/src/hooks/useProject.js
 import { useState, useCallback } from 'react';
-
-// Mock API functions - replace with your actual API calls
-const mockAPI = {
-  getProjects: async () => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Return mock project data
-    return [
-      {
-        id: 1,
-        name: 'Market Research Q4',
-        description: 'Customer analysis and market trends for Q4 planning',
-        createdAt: new Date('2024-06-12'),
-        updatedAt: new Date('2024-06-14'),
-        isFavorite: true,
-        stats: {
-          documents: 15,
-          tables: 4,
-          brainstorms: 8
-        },
-        type: 'research',
-        status: 'active'
-      },
-      {
-        id: 2,
-        name: 'Product Launch Analysis',
-        description: 'Data analysis for new product launch strategy',
-        createdAt: new Date('2024-06-13'),
-        updatedAt: new Date('2024-06-13'),
-        isFavorite: false,
-        stats: {
-          documents: 23,
-          tables: 7,
-          brainstorms: 12
-        },
-        type: 'product',
-        status: 'active'
-      },
-      {
-        id: 3,
-        name: 'Customer Feedback Study',
-        description: 'Analysis of customer satisfaction surveys',
-        createdAt: new Date('2024-06-11'),
-        updatedAt: new Date('2024-06-11'),
-        isFavorite: true,
-        stats: {
-          documents: 8,
-          tables: 3,
-          brainstorms: 5
-        },
-        type: 'research',
-        status: 'active'
-      }
-    ];
-  },
-
-  createProject: async (projectData) => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    const newProject = {
-      id: Date.now(),
-      name: projectData.name || 'New Project',
-      description: projectData.description || '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isFavorite: false,
-      stats: {
-        documents: 0,
-        tables: 0,
-        brainstorms: 0
-      },
-      type: projectData.type || 'general',
-      status: 'active',
-      template: projectData.template
-    };
-    
-    return newProject;
-  },
-
-  updateProject: async (projectId, updates) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    return { id: projectId, ...updates, updatedAt: new Date() };
-  },
-
-  deleteProject: async (projectId) => {
-    await new Promise(resolve => setTimeout(resolve, 200));
-    return { success: true };
-  },
-
-  favoriteProject: async (projectId, isFavorite) => {
-    await new Promise(resolve => setTimeout(resolve, 100));
-    return { id: projectId, isFavorite };
-  }
-};
+import apiClient from '../api/client';
 
 export const useProject = () => {
   const [projects, setProjects] = useState([]);
@@ -106,11 +12,35 @@ export const useProject = () => {
     try {
       setLoading(true);
       setError(null);
-      const projectList = await mockAPI.getProjects();
-      setProjects(projectList);
+      const projectList = await apiClient.getProjects();
+      
+      // Transform backend data to match frontend expectations
+      const transformedProjects = Array.isArray(projectList) 
+        ? projectList.map(project => ({
+            id: project.name || project.id, // Use name as ID for now
+            name: project.name,
+            description: project.description || 'No description',
+            createdAt: new Date(project.created || Date.now()),
+            updatedAt: new Date(project.updated || Date.now()),
+            isFavorite: project.isFavorite || false,
+            stats: {
+              documents: project.stats?.documents || 0,
+              tables: project.stats?.tables || 0,
+              brainstorms: project.stats?.brainstorms || 0
+            },
+            type: project.type || 'general',
+            template: project.template || 'custom',
+            status: 'active'
+          }))
+        : [];
+      
+      setProjects(transformedProjects);
+      return transformedProjects;
     } catch (err) {
-      setError(err.message);
       console.error('Failed to fetch projects:', err);
+      setError(err.message);
+      // Return empty array on error so UI doesn't break
+      return [];
     } finally {
       setLoading(false);
     }
@@ -121,26 +51,50 @@ export const useProject = () => {
     try {
       setLoading(true);
       setError(null);
-      const newProject = await mockAPI.createProject(projectData);
-      setProjects(prev => [newProject, ...prev]);
-      return newProject;
+      
+      const payload = {
+        name: projectData.name || 'New Project',
+      };
+      
+      const newProject = await apiClient.createProject(payload);
+      
+      // Transform response to match frontend format
+      const transformedProject = {
+        id: newProject.project || newProject.name,
+        name: newProject.project || newProject.name,
+        description: projectData.description || '',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isFavorite: false,
+        stats: {
+          documents: 0,
+          tables: 0,
+          brainstorms: 0
+        },
+        type: projectData.type || 'general',
+        template: projectData.template || 'custom',
+        status: 'active'
+      };
+      
+      setProjects(prev => [transformedProject, ...prev]);
+      return transformedProject;
     } catch (err) {
-      setError(err.message);
       console.error('Failed to create project:', err);
+      setError(err.message);
       throw err;
     } finally {
       setLoading(false);
     }
   }, []);
 
-  // Update project
+  // Update project (keep mock for now since no backend endpoint)
   const updateProject = useCallback(async (projectId, updates) => {
     try {
-      const updatedProject = await mockAPI.updateProject(projectId, updates);
+      // TODO: Implement when backend has update endpoint
       setProjects(prev => 
-        prev.map(p => p.id === projectId ? { ...p, ...updatedProject } : p)
+        prev.map(p => p.id === projectId ? { ...p, ...updates, updatedAt: new Date() } : p)
       );
-      return updatedProject;
+      return { id: projectId, ...updates, updatedAt: new Date() };
     } catch (err) {
       setError(err.message);
       console.error('Failed to update project:', err);
@@ -148,10 +102,10 @@ export const useProject = () => {
     }
   }, []);
 
-  // Delete project
+  // Delete project (keep mock for now since no backend endpoint)
   const deleteProject = useCallback(async (projectId) => {
     try {
-      await mockAPI.deleteProject(projectId);
+      // TODO: Implement when backend has delete endpoint
       setProjects(prev => prev.filter(p => p.id !== projectId));
     } catch (err) {
       setError(err.message);
@@ -160,14 +114,14 @@ export const useProject = () => {
     }
   }, []);
 
-  // Toggle favorite status
+  // Toggle favorite status (keep mock for now)
   const favoriteProject = useCallback(async (projectId) => {
     try {
       const project = projects.find(p => p.id === projectId);
       if (!project) return;
 
       const newFavoriteStatus = !project.isFavorite;
-      await mockAPI.favoriteProject(projectId, newFavoriteStatus);
+      // TODO: Call backend when endpoint exists
       
       setProjects(prev => 
         prev.map(p => 
@@ -182,7 +136,7 @@ export const useProject = () => {
 
   // Get single project by ID
   const getProject = useCallback((projectId) => {
-    return projects.find(p => p.id === parseInt(projectId));
+    return projects.find(p => p.id === projectId);
   }, [projects]);
 
   return {
