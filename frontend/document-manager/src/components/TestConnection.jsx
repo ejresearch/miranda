@@ -17,7 +17,7 @@ const TestConnection = () => {
       addLog('🏥 Testing health check...', 'info');
       const result = await apiClient.healthCheck();
       setResults(prev => ({ ...prev, health: result }));
-      addLog('✅ Health check passed: ' + result.message, 'success');
+      addLog('✅ Health check passed: ' + (result.message || result.status || 'OK'), 'success');
       return true;
     } catch (error) {
       addLog(`❌ Health check failed: ${error.message}`, 'error');
@@ -51,7 +51,7 @@ const TestConnection = () => {
         type: 'test'
       });
       setResults(prev => ({ ...prev, newProject: result }));
-      addLog(`✅ Created project: ${result.project || result.name}`, 'success');
+      addLog(`✅ Created project: ${result.project || result.name || testName}`, 'success');
       return true;
     } catch (error) {
       addLog(`❌ Project creation failed: ${error.message}`, 'error');
@@ -118,11 +118,51 @@ const TestConnection = () => {
       setResults(prev => ({ ...prev, cors: { error: error.message } }));
       
       // Additional CORS troubleshooting
-      if (error.message.includes('CORS')) {
+      if (error.message.includes('CORS') || error.message.includes('cors')) {
         addLog('💡 CORS issue detected. Check backend CORS configuration.', 'warning');
-      } else if (error.message.includes('Failed to fetch')) {
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('Network')) {
         addLog('💡 Connection refused. Make sure backend is running on port 8000.', 'warning');
+      } else if (error.message.includes('ERR_CONNECTION_REFUSED')) {
+        addLog('💡 Backend server not responding. Check if uvicorn is running.', 'warning');
       }
+      return false;
+    }
+  };
+
+  const testAdvancedOperations = async () => {
+    try {
+      addLog('🔧 Testing advanced operations...', 'info');
+      
+      // Test creating a bucket and uploading a file
+      const testBucketName = `test_bucket_${Date.now()}`;
+      await apiClient.createBucket(testBucketName);
+      addLog(`✅ Advanced test: Created bucket "${testBucketName}"`, 'success');
+      
+      // Create a small test file
+      const testContent = 'This is a test document for API validation.';
+      const testFile = new File([testContent], 'test.txt', { type: 'text/plain' });
+      
+      // Try to upload it (this will test the full pipeline)
+      try {
+        await apiClient.uploadDocument('test_project', testBucketName, testFile);
+        addLog('✅ Advanced test: File upload successful', 'success');
+      } catch (uploadError) {
+        addLog(`⚠️ Advanced test: File upload failed (${uploadError.message})`, 'warning');
+      }
+      
+      // Clean up - delete the test bucket
+      try {
+        await apiClient.deleteBucket(testBucketName);
+        addLog(`✅ Advanced test: Cleanup completed`, 'success');
+      } catch (cleanupError) {
+        addLog(`⚠️ Advanced test: Cleanup warning (${cleanupError.message})`, 'warning');
+      }
+      
+      setResults(prev => ({ ...prev, advanced: { status: 'success' } }));
+      return true;
+    } catch (error) {
+      addLog(`❌ Advanced operations failed: ${error.message}`, 'error');
+      setResults(prev => ({ ...prev, advanced: { error: error.message } }));
       return false;
     }
   };
@@ -133,6 +173,7 @@ const TestConnection = () => {
     setResults({});
     
     addLog('🚀 Starting comprehensive connection tests...', 'info');
+    addLog(`📍 Testing against: ${apiClient.baseURL}`, 'info');
     
     const tests = [
       { name: 'CORS Connection', fn: testCORSConnection },
@@ -140,6 +181,7 @@ const TestConnection = () => {
       { name: 'Project List', fn: testProjectList },
       { name: 'Create Project', fn: testCreateProject },
       { name: 'Bucket Operations', fn: testBucketOperations },
+      { name: 'Advanced Operations', fn: testAdvancedOperations },
     ];
     
     let passed = 0;
@@ -155,10 +197,16 @@ const TestConnection = () => {
     
     if (passed === tests.length) {
       addLog(`\n🎉 All tests passed! (${passed}/${tests.length})`, 'success');
+      addLog('✅ Backend connection is fully functional', 'success');
       setStatus('success');
-    } else {
+    } else if (passed > 0) {
       addLog(`\n⚠️ Some tests failed (${passed}/${tests.length})`, 'warning');
+      addLog('🔧 Basic connectivity works, but some features may need attention', 'warning');
       setStatus('partial');
+    } else {
+      addLog(`\n❌ All tests failed (${passed}/${tests.length})`, 'error');
+      addLog('💥 Backend appears to be unreachable or misconfigured', 'error');
+      setStatus('error');
     }
   };
 
@@ -182,12 +230,13 @@ const TestConnection = () => {
               <li>• Project creation and management</li>
               <li>• Bucket operations and file handling</li>
               <li>• Error handling and response formatting</li>
+              <li>• Advanced workflow operations and cleanup</li>
             </ul>
           </div>
         </div>
         
         <div className="p-6">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-6 flex-wrap">
             <button
               onClick={runAllTests}
               disabled={status === 'running'}
@@ -201,9 +250,17 @@ const TestConnection = () => {
             </button>
             
             <button
+              onClick={testHealthCheck}
+              disabled={status === 'running'}
+              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+            >
+              🏥 Quick Health Check
+            </button>
+            
+            <button
               onClick={clearResults}
               disabled={status === 'running'}
-              className="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
             >
               🗑️ Clear Results
             </button>
@@ -213,13 +270,15 @@ const TestConnection = () => {
                 status === 'idle' ? 'bg-gray-300' :
                 status === 'running' ? 'bg-yellow-400 animate-pulse' :
                 status === 'success' ? 'bg-green-400' :
+                status === 'partial' ? 'bg-yellow-500' :
                 'bg-red-400'
               }`}></div>
               <span className="text-sm font-medium">
                 {status === 'idle' ? 'Ready to test' :
                  status === 'running' ? 'Testing in progress...' :
                  status === 'success' ? 'All tests passed!' :
-                 'Some tests failed'}
+                 status === 'partial' ? 'Some tests failed' :
+                 'Tests failed'}
               </span>
             </div>
           </div>
@@ -301,10 +360,29 @@ const TestConnection = () => {
             <ul className="text-yellow-700 text-sm space-y-1">
               <li>• Make sure the backend is running: <code className="bg-yellow-100 px-1 rounded">uvicorn backend.main:app --reload --port 8000</code></li>
               <li>• Check that CORS is configured in <code className="bg-yellow-100 px-1 rounded">backend/main.py</code></li>
-              <li>• Verify the API routes are properly mounted</li>
-              <li>• Check browser console for additional error details</li>
+              <li>• Verify the API routes are properly mounted and imports are working</li>
+              <li>• Check browser console (F12) for additional error details</li>
               <li>• Ensure no firewall is blocking port 8000</li>
+              <li>• Try accessing <a href="http://localhost:8000/healthcheck" target="_blank" rel="noopener noreferrer" className="underline">http://localhost:8000/healthcheck</a> directly</li>
+              <li>• Check if environment variables like <code className="bg-yellow-100 px-1 rounded">OPENAI_API_KEY</code> are set</li>
+              <li>• Verify Python dependencies are installed: <code className="bg-yellow-100 px-1 rounded">pip install -r requirements.txt</code></li>
             </ul>
+          </div>
+
+          {/* Quick Debug Commands */}
+          <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h4 className="font-semibold text-blue-800 mb-2">🛠️ Quick Debug Commands</h4>
+            <div className="space-y-2 text-sm">
+              <div className="bg-blue-100 p-2 rounded font-mono">
+                curl -X GET "http://localhost:8000/healthcheck"
+              </div>
+              <div className="bg-blue-100 p-2 rounded font-mono">
+                curl -X GET "http://localhost:8000/projects"
+              </div>
+              <div className="bg-blue-100 p-2 rounded font-mono">
+                curl -X GET "http://localhost:8000/buckets"
+              </div>
+            </div>
           </div>
         </div>
       </div>
