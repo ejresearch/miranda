@@ -6,6 +6,18 @@ class APIClient {
     this.baseURL = API_BASE_URL;
   }
 
+  async requestWithFallback(endpoints, options) {
+    const errs = [];
+    for (const ep of endpoints) {
+      try {
+        return await this.request(ep, options);
+      } catch (err) {
+        errs.push(err);
+      }
+    }
+    throw errs.pop();
+  }
+
   async request(endpoint, options = {}) {
     // Always use /api prefix for consistency
     const url = endpoint.startsWith('/api') 
@@ -88,46 +100,76 @@ class APIClient {
 
   // Project-specific bucket methods
   async createProjectBucket(projectName, bucket) {
-    return this.request(`/projects/${projectName}/buckets/new`, {
-      method: 'POST',
-      body: JSON.stringify({ bucket }),
-    });
+    return this.requestWithFallback(
+      [
+        `/projects/${projectName}/buckets/new`,
+        `/projects/${projectName}/buckets/buckets/new`,
+      ],
+      {
+        method: 'POST',
+        body: JSON.stringify({ bucket }),
+      }
+    );
   }
 
   async uploadDocument(projectName, bucket, file) {
     const formData = new FormData();
     formData.append('file', file);
-    
-    return this.request(`/projects/${projectName}/buckets/${bucket}/ingest`, {
-      method: 'POST',
-      body: formData,
-    });
+
+    return this.requestWithFallback(
+      [
+        `/projects/${projectName}/buckets/${bucket}/ingest`,
+        `/projects/${projectName}/buckets/buckets/${bucket}/ingest`,
+      ],
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
   }
 
   async listBucketFiles(projectName, bucket) {
-    return this.request(`/projects/${projectName}/buckets/${bucket}/files`);
+    return this.requestWithFallback([
+      `/projects/${projectName}/buckets/${bucket}/files`,
+      `/projects/${projectName}/buckets/buckets/${bucket}/files`,
+    ]);
   }
 
   async queryBucket(projectName, bucket, query, userPrompt = '') {
-    return this.request(`/projects/${projectName}/buckets/${bucket}/query`, {
-      method: 'POST',
-      body: JSON.stringify({ query, user_prompt: userPrompt }),
-    });
+    return this.requestWithFallback(
+      [
+        `/projects/${projectName}/buckets/${bucket}/query`,
+        `/projects/${projectName}/buckets/buckets/${bucket}/query`,
+      ],
+      {
+        method: 'POST',
+        body: JSON.stringify({ query, user_prompt: userPrompt }),
+      }
+    );
   }
 
   // Table methods - Updated paths
   async uploadCSV(project, tableName, file) {
     const formData = new FormData();
     formData.append('file', file);
-    
-    return this.request(`/projects/${project}/tables/upload_csv?project=${project}&table_name=${tableName}`, {
-      method: 'POST',
-      body: formData,
-    });
+
+    return this.requestWithFallback(
+      [
+        `/projects/${project}/tables/upload_csv?project=${project}&table_name=${tableName}`,
+        `/projects/${project}/tables/tables/upload_csv?project=${project}&table_name=${tableName}`,
+      ],
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
   }
 
   async listTables(project) {
-    return this.request(`/projects/${project}/tables/list?project=${project}`);
+    return this.requestWithFallback([
+      `/projects/${project}/tables/list?project=${project}`,
+      `/projects/${project}/tables/tables/list?project=${project}`,
+    ]);
   }
 
   async getTable(project, tableName, column = null, value = null) {
@@ -135,7 +177,8 @@ class APIClient {
     if (column && value) {
       url += `&column=${column}&value=${value}`;
     }
-    return this.request(url);
+    const alt = `/projects/${project}/tables/tables/${tableName}?project=${project}${column && value ? `&column=${column}&value=${value}` : ''}`;
+    return this.requestWithFallback([url, alt]);
   }
 
   // Brainstorm methods - Updated paths
