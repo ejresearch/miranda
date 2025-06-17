@@ -7,15 +7,19 @@ class APIClient {
   }
 
   async requestWithFallback(endpoints, options) {
-    const errs = [];
+    const errors = [];
     for (const ep of endpoints) {
       try {
         return await this.request(ep, options);
       } catch (err) {
-        errs.push(err);
+        errors.push(err);
+        // Only fall back for 404/405 style errors
+        if (!err.message.includes('404') && !err.message.includes('405')) {
+          break;
+        }
       }
     }
-    throw errs.pop();
+    throw errors.pop();
   }
 
   async request(endpoint, options = {}) {
