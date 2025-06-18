@@ -7,10 +7,10 @@ class APIClient {
   }
 
   async request(endpoint, options = {}) {
-    // Always use /api prefix for consistency
-    const url = endpoint.startsWith('/api') 
-      ? `${this.baseURL}${endpoint}` 
-      : `${this.baseURL}/api${endpoint}`;
+    // Construct full URL without forcing an /api prefix
+    const url = endpoint.startsWith('http')
+      ? endpoint
+      : `${this.baseURL}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`;
     
     const config = {
       headers: {

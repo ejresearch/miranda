@@ -9,7 +9,8 @@ const Header = ({ onNewProject }) => {
     { name: 'Documents', path: '/documents', icon: '📄' },
     { name: 'Tables', path: '/tables', icon: '📊' },
     { name: 'Brainstorm', path: '/brainstorm', icon: '🧠' },
-    { name: 'Test API', path: '/test', icon: '🔧' } // ← Add this
+    { name: 'Explore API', path: '/explorer', icon: '📚' },
+    { name: 'Test API', path: '/test', icon: '🔧' }
   ];
 
   const isActive = (path) => {
