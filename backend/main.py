@@ -9,7 +9,9 @@ from backend.api import (
     sql_api,
     buckets,
     graph,
-    project_versions
+    project_versions,
+    templates,
+    export
 )
 
 # 🧠 Import submodule routers
@@ -40,13 +42,17 @@ def healthcheck():
 app.include_router(project_manager.router, prefix="/projects", tags=["Project Manager"])
 app.include_router(project_versions.router, prefix="/projects/{project_name}/versions", tags=["Table Versions"])
 
+# 🎯 Templates and Export
+app.include_router(templates.router, prefix="/templates", tags=["Templates"])
+app.include_router(export.router, prefix="/projects/{project_name}/export", tags=["Export"])
+
 # 📄 SQL Table Editor (Reference Documents)
 app.include_router(sql_api.router, prefix="/projects/{project_name}/tables", tags=["Reference Tables"])
 
 # 🧠 Brainstorming (Weaviate / LightRAG)
 app.include_router(brainstorming_routes.router, prefix="/projects/{project_name}/brainstorm", tags=["Brainstorm"])
 
-# ✍️ Writing Module (Final Drafts)
+# ✍️ Writing Module (Final Drafts) - UPDATED PATH
 app.include_router(writing_routes.router, prefix="/projects/{project_name}/write", tags=["Writing"])
 
 # 🪣 Bucket Manager (Vector Store)
@@ -54,5 +60,3 @@ app.include_router(buckets.router, prefix="/projects/{project_name}/buckets", ta
 
 # 🔗 Graph Operations (Neo4j)
 app.include_router(graph.router, prefix="/projects/{project_name}/graph", tags=["Graph"])
-
-
