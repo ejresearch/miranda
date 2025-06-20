@@ -1,4 +1,4 @@
-# backend/main.py
+# backend/main.py - FIXED VERSION
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,8 +10,8 @@ from backend.api import (
     buckets,
     graph,
     project_versions,
-    templates,
-    export
+    templates,  # This should import backend/api/templates.py
+    export      # This should import backend/api/export.py
 )
 
 # 🧠 Import submodule routers
