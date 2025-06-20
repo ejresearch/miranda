@@ -48,4 +48,5 @@ frontend/.vite/
 # --- Test output / scratch ---
 test_commands.sh
 *.bak
-
+# --- Zip ---
+*.zip
