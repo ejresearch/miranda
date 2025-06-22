@@ -38,6 +38,10 @@ app.add_middleware(
 def healthcheck():
     return {"status": "ok"}
 
+# Academic Writer
+from backend.api.academic import routes as academic_routes
+app.include_router(academic_routes.router, prefix="/academic", tags=["Academic Writing"])
+
 # 🔧 Project lifecycle
 app.include_router(project_manager.router, prefix="/projects", tags=["Project Manager"])
 app.include_router(project_versions.router, prefix="/projects/{project_name}/versions", tags=["Table Versions"])

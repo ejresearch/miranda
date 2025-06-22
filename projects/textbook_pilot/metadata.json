@@ -1,0 +1,24 @@
+{
+  "name": "textbook_pilot",
+  "original_name": "textbook_pilot",
+  "description": "Pilot project for academic textbook creation using AI-assisted content generation",
+  "template": "academic_textbook",
+  "template_name": "Academic Textbook",
+  "category": "academic",
+  "created": "2025-06-20T12:33:16.126028",
+  "updated": "2025-06-20T12:33:16.126148",
+  "buckets": [
+    "primary_sources",
+    "secondary_research",
+    "case_studies",
+    "methodologies"
+  ],
+  "tables": [
+    "chapters",
+    "references",
+    "figures",
+    "key_terms"
+  ],
+  "include_sample_data": true,
+  "version": "1.0"
+}

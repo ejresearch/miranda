@@ -1,0 +1,16 @@
+{
+  "name": "screenwriting_project",
+  "created": "2025-06-22T13:50:05.738038",
+  "updated": "2025-06-22T13:50:05.738463",
+  "type": "custom",
+  "template": "unknown",
+  "buckets": [],
+  "tables": [],
+  "stats": {
+    "table_count": 2,
+    "bucket_count": 0
+  },
+  "auto_created": true,
+  "version": "1.0",
+  "description": "Testing project creation"
+}

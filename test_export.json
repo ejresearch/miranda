@@ -1,0 +1,24 @@
+{
+  "project_name": "test_project",
+  "export_date": "2025-06-19T13:30:30.885748",
+  "metadata": {
+    "name": "test_project",
+    "created": "unknown",
+    "type": "custom"
+  },
+  "tables": {},
+  "versions": {
+    "brainstorm": [],
+    "write": []
+  },
+  "buckets": {
+    "buckets": [],
+    "total_buckets": 0
+  },
+  "summary": {
+    "total_tables": 0,
+    "total_brainstorms": 0,
+    "total_writes": 0,
+    "total_buckets": 0
+  }
+}

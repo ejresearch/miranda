@@ -1,0 +1,138 @@
+{
+  "project_name": "simple_test",
+  "export_date": "2025-06-19T13:17:56.696993",
+  "metadata": {
+    "name": "simple_test",
+    "original_name": "simple_test",
+    "description": "Simple test project",
+    "template": "screenplay",
+    "template_name": "Screenplay Writing",
+    "category": "creative",
+    "created": "2025-06-19T13:16:01.138913",
+    "updated": "2025-06-19T13:16:01.138926",
+    "buckets": [
+      "character_research",
+      "plot_devices",
+      "dialogue_samples"
+    ],
+    "tables": [
+      "characters",
+      "scenes",
+      "themes",
+      "locations"
+    ],
+    "include_sample_data": true,
+    "version": "1.0"
+  },
+  "tables": {
+    "characters": [
+      {
+        "name": "Alex Rivera",
+        "age": "28",
+        "role": "Protagonist",
+        "arc": "Learns to trust others and overcome isolation",
+        "traits": "Witty, intelligent, guarded",
+        "flaws": "Commitment issues, overthinks everything",
+        "backstory": "Former tech prodigy burned by corporate betrayal"
+      },
+      {
+        "name": "Morgan Chen",
+        "age": "32",
+        "role": "Love Interest",
+        "arc": "Helps Alex open up while pursuing own dreams",
+        "traits": "Patient, creative, determined",
+        "flaws": "Sometimes too accommodating",
+        "backstory": "Independent filmmaker struggling to break through"
+      }
+    ],
+    "scenes": [
+      {
+        "act": "1",
+        "scene": "1",
+        "location": "Alex's apartment",
+        "characters": "Alex",
+        "purpose": "Establish character isolation and routine",
+        "conflict": "Internal - resistance to change",
+        "outcome": "Forced to leave comfort zone"
+      }
+    ],
+    "themes": [
+      {
+        "theme": "Connection vs. Isolation",
+        "examples": "Alex's hermit lifestyle, Morgan's collaborative nature",
+        "character_connection": "Alex must learn to connect",
+        "scenes": "Opening isolation, meet-cute, final collaboration",
+        "development": "From complete isolation to meaningful partnership"
+      }
+    ],
+    "locations": [],
+    "test_dialogue": [
+      {
+        "character": "Alex",
+        "line": "This is working great!",
+        "emotion": "excited"
+      },
+      {
+        "character": "Alex",
+        "line": "This is working great!",
+        "emotion": "excited"
+      }
+    ],
+    "versions": [
+      {
+        "id": "write_1750357076",
+        "project_id": "simple_test",
+        "type": "write",
+        "name": "Write Output 2025-06-19T13:17:56.667341",
+        "focus": "Final Scene",
+        "created": "2025-06-19 18:17:56",
+        "prompt": "You are a screenwriter. Write a scene in a creative tone.\nInstructions: Write a short scene introduction\n\n--- Reference Tables ---\n\ncharacters:\n- {'name': 'Alex Rivera', 'age': '28', 'role': 'Protagonist', 'arc': 'Learns to trust others and overcome isolation', 'traits': 'Witty, intelligent, guarded', 'flaws': 'Commitment issues, overthinks everything', 'backstory': 'Former tech prodigy burned by corporate betrayal'}\n- {'name': 'Morgan Chen', 'age': '32', 'role': 'Love Interest', 'arc': 'Helps Alex open up while pursuing own dreams', 'traits': 'Patient, creative, determined', 'flaws': 'Sometimes too accommodating', 'backstory': 'Independent filmmaker struggling to break through'}\n\n--- Now write the scene:\n",
+        "result": "**INT. SMALL ART STUDIO - DAY**\n\nSunlight spills through large windows, illuminating a chaotic yet vibrant space draped in splashes of color and half-finished canvases. The scent of acrylic paint hangs thick in the air as ALEX RIVERA, a guarded soul with sharp wit, stares at a blank canvas like it's a stubborn puzzle. He taps a paintbrush against his jaw, lost in thought, eyes flickering back and forth between the canvas and a nearby stack of art books\u2014his battle-worn companions in creativity.\n\nALEX  \n(rolling his eyes)  \nRight... \u201cThink outside the box,\u201d they said. Easy for them to say after stealing my ideas.\n\nJust then, MORGAN CHEN bursts through the door, a whirlwind of energy with a camera slung over her shoulder. Her unruly hair barely keeps up with her enthusiastic entrance. \n\nMORGAN  \n(excitedly)  \nAlex! You won't believe the inspiration I found at that alley market!\n\nShe holds up a quirky ceramic figurine, a playful smile dancing across her face. Alex can't suppress a smirk, his defensive walls momentarily lowering.\n\nALEX  \n(feigning disinterest)  \nPlease tell me it\u2019s not some existential piece about the plight of modern society. \n\nMORGAN  \n(grinning)  \nOh, much worse! It\u2019s a sad-faced llama. \n\nALEX  \n(challenging)  \nThat sounds like art for the desperately optimistic. \n\nMORGAN  \n(mock serious)  \nExactly! It's a metaphor for hope. But you wouldn\u2019t know anything about that, would you? \n\nAlex chuckles, a genuine sound that fills the room, briefly piercing the thick veil of isolation he\u2019s woven. Morgan drops her bags and excitedly searches for her sketchbook, her energy infectious, reminding him that maybe there is still room for color in his life. \n\nBut with a flicker of doubt, Alex returns to his canvas, hesitation creeping back\u2014can hope truly fit into the confines of his guarded heart? \n\nMORGAN  \n(leaning over his shoulder, teasing)  \nWhat\u2019s it going to be, maestro? A post-apocalyptic scene, or do you want to join me in my llama-inspired breakthrough?\n\nALEX  \n(pretending to ponder)  \nHmm\u2026 I could use a double dose of that existential dread.\n\nHe rolls his eyes half-heartedly, but there\u2019s warmth in his smile. The tension stretches like the canvas before him\u2014tightly wound, yet just awaiting the bold stroke of creativity\u2026 or trust. \n\nMorgan watches closely, her patience flickering like the sunlight streaming in. In this moment, art isn\u2019t just about the canvas; it\u2019s about peeling back layers\u2014a brushstroke at a time. ",
+        "metadata_json": "{\"selectedSources\": {\"buckets\": [], \"tables\": [\"characters\"], \"brainstormVersions\": []}, \"customizations\": {\"tone\": \"creative\", \"instructions\": \"Write a short scene introduction\"}, \"dataSourcesCount\": 1}"
+      }
+    ]
+  },
+  "versions": {
+    "brainstorm": [],
+    "write": [
+      {
+        "id": "write_1750357076",
+        "project_id": "simple_test",
+        "type": "write",
+        "name": "Write Output 2025-06-19T13:17:56.667341",
+        "focus": "Final Scene",
+        "created": "2025-06-19 18:17:56",
+        "prompt": "You are a screenwriter. Write a scene in a creative tone.\nInstructions: Write a short scene introduction\n\n--- Reference Tables ---\n\ncharacters:\n- {'name': 'Alex Rivera', 'age': '28', 'role': 'Protagonist', 'arc': 'Learns to trust others and overcome isolation', 'traits': 'Witty, intelligent, guarded', 'flaws': 'Commitment issues, overthinks everything', 'backstory': 'Former tech prodigy burned by corporate betrayal'}\n- {'name': 'Morgan Chen', 'age': '32', 'role': 'Love Interest', 'arc': 'Helps Alex open up while pursuing own dreams', 'traits': 'Patient, creative, determined', 'flaws': 'Sometimes too accommodating', 'backstory': 'Independent filmmaker struggling to break through'}\n\n--- Now write the scene:\n",
+        "result": "**INT. SMALL ART STUDIO - DAY**\n\nSunlight spills through large windows, illuminating a chaotic yet vibrant space draped in splashes of color and half-finished canvases. The scent of acrylic paint hangs thick in the air as ALEX RIVERA, a guarded soul with sharp wit, stares at a blank canvas like it's a stubborn puzzle. He taps a paintbrush against his jaw, lost in thought, eyes flickering back and forth between the canvas and a nearby stack of art books\u2014his battle-worn companions in creativity.\n\nALEX  \n(rolling his eyes)  \nRight... \u201cThink outside the box,\u201d they said. Easy for them to say after stealing my ideas.\n\nJust then, MORGAN CHEN bursts through the door, a whirlwind of energy with a camera slung over her shoulder. Her unruly hair barely keeps up with her enthusiastic entrance. \n\nMORGAN  \n(excitedly)  \nAlex! You won't believe the inspiration I found at that alley market!\n\nShe holds up a quirky ceramic figurine, a playful smile dancing across her face. Alex can't suppress a smirk, his defensive walls momentarily lowering.\n\nALEX  \n(feigning disinterest)  \nPlease tell me it\u2019s not some existential piece about the plight of modern society. \n\nMORGAN  \n(grinning)  \nOh, much worse! It\u2019s a sad-faced llama. \n\nALEX  \n(challenging)  \nThat sounds like art for the desperately optimistic. \n\nMORGAN  \n(mock serious)  \nExactly! It's a metaphor for hope. But you wouldn\u2019t know anything about that, would you? \n\nAlex chuckles, a genuine sound that fills the room, briefly piercing the thick veil of isolation he\u2019s woven. Morgan drops her bags and excitedly searches for her sketchbook, her energy infectious, reminding him that maybe there is still room for color in his life. \n\nBut with a flicker of doubt, Alex returns to his canvas, hesitation creeping back\u2014can hope truly fit into the confines of his guarded heart? \n\nMORGAN  \n(leaning over his shoulder, teasing)  \nWhat\u2019s it going to be, maestro? A post-apocalyptic scene, or do you want to join me in my llama-inspired breakthrough?\n\nALEX  \n(pretending to ponder)  \nHmm\u2026 I could use a double dose of that existential dread.\n\nHe rolls his eyes half-heartedly, but there\u2019s warmth in his smile. The tension stretches like the canvas before him\u2014tightly wound, yet just awaiting the bold stroke of creativity\u2026 or trust. \n\nMorgan watches closely, her patience flickering like the sunlight streaming in. In this moment, art isn\u2019t just about the canvas; it\u2019s about peeling back layers\u2014a brushstroke at a time. ",
+        "metadata": {
+          "selectedSources": {
+            "buckets": [],
+            "tables": [
+              "characters"
+            ],
+            "brainstormVersions": []
+          },
+          "customizations": {
+            "tone": "creative",
+            "instructions": "Write a short scene introduction"
+          },
+          "dataSourcesCount": 1
+        }
+      }
+    ]
+  },
+  "buckets": {
+    "buckets": [
+      "dialogue_samples",
+      "plot_devices",
+      "character_research"
+    ],
+    "total_buckets": 3
+  },
+  "summary": {
+    "total_tables": 6,
+    "total_brainstorms": 0,
+    "total_writes": 1,
+    "total_buckets": 3
+  }
+}
