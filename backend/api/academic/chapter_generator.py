@@ -17,11 +17,146 @@ class AcademicChapterGenerator:
     - Uses your backend/api/writing/logic.py for AI content generation
     - Uses your projects/{name}/project.db structure
     - Uses your backend/api/project_versions.py for version tracking
+    - Incorporates humanizing writing guidelines for natural, accessible academic prose
     
     CONFIGURATION:
     - ALL BUCKETS: Every section queries ALL available document buckets for comprehensive source access
     - TARGETED TABLES: Each section uses intentionally selected SQL tables for specific data needs
+    - HUMANIZED WRITING: Natural language patterns, concrete details, accessible academic tone
     """
+    
+    # Comprehensive writing guidelines for natural academic prose
+    HUMANIZING_WRITING_GUIDELINES = """
+You are writing an academic textbook. These are your comprehensive writing guidelines. Your output will adhere to these guidelines exactly.
+
+POSITIVE DIRECTIVES (How you SHOULD write)
+
+Clarity and brevity
+• Craft sentences that average 10–20 words and focus on a single idea, with occasional longer sentences for variety.
+• Start paragraphs with clear topic sentences that state the main point directly.
+
+Active voice and direct verbs
+• Use active voice 90% of the time. Choose strong, specific verbs over weak linking verbs.
+• Write "Edison invented the Kinetoscope" not "The Kinetoscope was invented by Edison."
+
+Everyday vocabulary
+• Substitute common, concrete words for abstraction. Use "show" instead of "demonstrate," "help" instead of "facilitate."
+• Replace academic jargon: "paradigmatic" → "dual approach," "encompasses" → "includes," "facilitates" → "makes possible"
+
+Straightforward punctuation
+• Rely primarily on periods, commas, question marks, and occasional colons for lists.
+• NO semicolons ever. Break long sentences into two shorter ones instead.
+
+Varied sentence length, minimal complexity
+• Mix short and medium sentences. Avoid stacking clauses and complex subordination.
+• Maximum one subordinate clause per sentence. Prefer coordination over subordination.
+
+Logical flow without buzzwords
+• Build arguments with plain connectors: 'and', 'but', 'so', 'then', 'because'.
+• Use transitions that sound natural: "Next," "This led to," "As a result," "By 1905"
+
+Concrete detail over abstraction
+• Provide numbers, dates, names, and measurable facts whenever possible. Use specific examples.
+• Always give concrete examples before explaining abstract concepts.
+
+Human cadence and engagement
+• Vary paragraph length (3-8 sentences). Ask a genuine question no more than once per 300 words, and answer it immediately.
+• Use specific details that create mental pictures for readers.
+
+NEGATIVE DIRECTIVES (What you MUST AVOID)
+
+A. Punctuation to avoid
+
+Semicolons (;)
+✗ Example: 'Edison researched extensively; his results were groundbreaking.'
+✓ Rewrite: 'Edison researched extensively, and his results were groundbreaking.'
+
+B. Overused words & phrases to ban completely
+• Never use any of the following in any form:
+
+TRANSITION OVERUSE: At the end of the day, With that being said, It goes without saying, In a nutshell, Needless to say, When it comes to, A significant number of, It's worth mentioning, Last but not least, Moving forward, Going forward, On the other hand, Notwithstanding, Takeaway, As a matter of fact, In the realm of, In addition, It's important to note, In summary, In conclusion, Remember that, Take a dive into, In the midst, As previously mentioned, It's worth noting that, To summarize, To put it simply, As well as, In contrast, In order to, Due to, Given that, To consider, As a professional, Subsequently, In the world of, Ultimately
+
+ACADEMIC JARGON: Cutting-edge, Leveraging, Seamless integration, Robust framework, Paradigm shift, Synergy, Scale-up, Optimize, Game-changer, Unleash, Uncover, Elevate, Embark, Delve, Navigating (metaphorical), Landscape (metaphorical), Testament (e.g., 'a testament to'), Realm, Virtuoso, Symphony, Vibrant, Tapestry, Bustling, Digital landscape, Hustle and bustle, Revolutionize, Foster, Labyrinthine, Labyrinth, Gossamer, Enigma, Whispering, Sights unseen, Sounds unheard, Dance, Metamorphosis, Indelible, Soul, Crucible, Out of the box, Underscores, Pesky, Promptly, Dive into, In today's digital era, Reverberate, Enhance, Emphasise, Enable, Nestled, Remnant, Moist
+
+WEAK QUALIFIERS: Arguably, Generally, Essentially, Specifically, Importantly, Notably, Indeed, Alternatively, Despite, While, Unless, Also, Even though, Even if, Arguably, You may want to, This is not an exhaustive list, You could consider, It depends on, Sure, Folks
+
+OVERUSED SINGLE WORDS: however, moreover, furthermore, additionally, consequently, therefore, ultimately, generally, essentially, arguably, significant, innovative, efficient, dynamic, ensure, foster, leverage, utilize, encompasses, facilitates, demonstrates, represents, serves, appears, seems, tends, burgeoning, paradigmatic, strategic, comprehensive, extensive, substantial, considerable, multifaceted, intricate, profound, pivotal, crucial, vital, essential
+
+✗ Example: 'Moreover, the paradigmatic approach encompasses innovative strategies that leverage cutting-edge technology.'
+✓ Rewrite: 'The dual approach includes new strategies that use advanced technology.'
+
+C. Overused single words to minimize or ban
+however, moreover, furthermore, additionally, consequently, therefore, ultimately, generally, essentially, arguably, significant, innovative, efficient, dynamic, ensure, foster, leverage, utilize
+
+✗ Example: 'We must leverage dynamic, innovative approaches.'
+✓ Rewrite: 'We must try new approaches.'
+
+D. Sentence-structure patterns to eliminate
+
+Complex, multi-clause sentences.
+✗ Example: 'Because the technology was incomplete and the timeline was short, Edison postponed the demonstration, although he had secured funding.'
+✓ Preferred: 'The technology was incomplete. Edison had little time. He postponed the demonstration. Funding was ready.'
+
+• Overuse of subordinating conjunctions (because, although, since, if, unless, when, while, as, before).
+• Sentences containing more than one verb phrase.
+• Chains of prepositional phrases.
+• Multiple dependent clauses strung together.
+• Artificial parallelism used solely for rhythm.
+
+E. Tone and style
+• Never mention or reference AI limitations.
+• Do not apologize.
+• Do not hedge; state facts directly.
+• Avoid clichés, metaphors about journeys, music, or landscapes.
+• Maintain formal yet approachable tone that is free of corporate jargon.
+
+ACADEMIC-SPECIFIC GUIDELINES
+
+Historical writing standards
+• Use past tense for historical events and developments
+• Present tense for ongoing scholarly analysis and current understanding
+• Include specific dates, names, and quantifiable data
+• Cite sources naturally within the text flow
+• Give concrete examples first, then explain their significance
+
+Evidence integration
+• Start with specific facts: "In 1878, Muybridge photographed a galloping horse using 12 cameras."
+• Then explain significance: "This experiment proved that all four hooves leave the ground simultaneously."
+• Connect to broader themes: "The success attracted investors who saw commercial potential in motion photography."
+• Avoid starting paragraphs with abstract concepts
+
+Professional academic tone
+• Write for undergraduate students who are intelligent but unfamiliar with the topic
+• Explain technical concepts using everyday comparisons when possible
+• Use discipline-appropriate terminology when necessary, but define it clearly
+• Balance scholarly rigor with accessibility - sound smart without being pretentious
+
+Paragraph structure
+• Start each paragraph with a clear topic sentence stating the main point
+• Support with 2-4 specific examples or pieces of evidence
+• End with a sentence connecting to the next paragraph or main argument
+• Keep paragraphs focused on one main idea
+
+Sentence variety patterns
+• Mix sentence lengths: one 8-word sentence, one 15-word sentence, one 12-word sentence
+• Vary sentence beginnings: avoid starting multiple sentences with "The" or "This"
+• Use strong verbs: "Edison created" not "Edison was responsible for the creation of"
+
+CRITICAL TRANSFORMATION RULES
+• Replace "encompasses" with "includes" 
+• Replace "facilitates" with "makes possible" or "helps"
+• Replace "demonstrates" with "shows"
+• Replace "represents" with "is" or "means"
+• Replace "significant" with "important" or "major"
+• Replace "burgeoning" with "growing" or "expanding"
+• Replace "paradigmatic" with "typical" or use the actual concept
+• Replace "pivotal" with "key" or "important"
+• Replace "profound" with "deep" or "major"
+
+FAILURE TO COMPLY WITH ANY NEGATIVE DIRECTIVE INVALIDATES THE OUTPUT.
+
+When writing each sentence, verify it complies with these directions before moving to the next sentence.
+"""
     
     # TABLE CONFIGURATION - Modify these mappings to control which tables each section uses
     SECTION_TABLE_MAPPING = {
@@ -206,6 +341,7 @@ class AcademicChapterGenerator:
     async def _build_write_request(self, chapter_num: int, roman_numeral: str) -> Dict[str, Any]:
         """
         Build write request compatible with your existing backend/api/writing/logic.py
+        Now includes comprehensive humanizing writing guidelines
         """
         
         # Build comprehensive academic prompt
@@ -213,8 +349,10 @@ class AcademicChapterGenerator:
         template_data = self._get_section_template(roman_numeral)
         evidence_req = self._get_evidence_requirements(roman_numeral)
         
-        # Create comprehensive academic instructions with paradigmatic framework
+        # Create comprehensive academic instructions with paradigmatic framework AND humanizing guidelines
         academic_instructions = f"""
+{self.HUMANIZING_WRITING_GUIDELINES}
+
 ACADEMIC TEXTBOOK SECTION: {section_data['title']}
 
 PARADIGMATIC FRAMEWORK - "A Paradigmatic Perspective of The History of American Film":
@@ -236,7 +374,7 @@ TARGET LENGTH: {section_data['estimated_words']} words
 WRITING APPROACH:
 {template_data['prompt_template']}
 
-TONE: {template_data['tone_instructions']}
+TONE: {template_data['tone_instructions']} - but filtered through humanizing guidelines for natural academic prose
 
 SECTION OUTLINE:
 {section_data['outline']}
@@ -252,21 +390,32 @@ DATA SOURCE STRATEGY:
 - TARGETED SQL DATA: Use specific tables selected for this section's analytical needs and structural requirements
 - PARADIGMATIC ANALYSIS: Frame all evidence through the technology/business lens that defines this textbook's approach
 
-ACADEMIC STANDARDS:
-- Use proper Chicago citation style for film history
-- Include specific dates, names, and technical details
+ACADEMIC STANDARDS WITH HUMANIZED WRITING:
+- Use Chicago citation style for film history, integrated naturally into prose flow
+- Include specific dates, names, and technical details as concrete evidence
 - Balance primary and secondary sources across ALL available document collections
-- Maintain scholarly tone while remaining accessible to undergraduates
-- Create smooth transitions that connect to previous and next sections
+- Write in clear, accessible academic prose following the humanizing guidelines above
+- Create smooth transitions that connect to previous and next sections using simple connectors
 - Leverage both broad source knowledge and specific structural data
 - CONSISTENTLY apply the technology/business paradigmatic framework throughout
+- Write sentences that average 10-20 words, use active voice 90% of the time
+- Choose concrete, specific words over abstract terminology
+- Avoid all banned phrases and complex sentence structures listed in the guidelines
 
 FLOW REQUIREMENTS:
 Builds on: {section_data['builds_on_previous']}
 Sets up: {section_data['sets_up_next']}
 Transition strategy: {section_data['transition_notes']}
 
-Write Section {roman_numeral} as a complete, standalone section that flows naturally from previous content and sets up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. MOST IMPORTANTLY: Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development.
+CRITICAL WRITING REQUIREMENTS:
+- Every sentence must comply with the humanizing writing guidelines
+- Use straightforward punctuation (periods, commas, question marks, occasional colons)
+- Avoid all banned words and phrases completely
+- Write in natural, human cadence with varied paragraph lengths
+- State facts directly without hedging or corporate jargon
+- Use concrete details and specific examples before abstract concepts
+
+Write Section {roman_numeral} as a complete, standalone section that flows naturally from previous content and sets up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. MOST IMPORTANTLY: Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development, while following every humanizing writing guideline for natural, accessible academic prose.
 """
         
         # Get relevant buckets and tables using your existing structure
@@ -277,11 +426,12 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
         print(f"  - Buckets: {relevant_buckets}")
         print(f"  - Tables: {relevant_tables}")
         print(f"  - Instructions: {len(academic_instructions)} chars")
+        print(f"  - Humanized writing guidelines: ACTIVE")
         
         # Return request compatible with your existing writing system
         return {
             "project_id": self.project_name,
-            "prompt_tone": "academic",
+            "prompt_tone": "academic_humanized",
             "custom_instructions": academic_instructions,
             "selected_buckets": relevant_buckets,
             "selected_tables": relevant_tables,
@@ -353,7 +503,7 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
         }
     
     def _assemble_complete_chapter(self, chapter_num: int) -> str:
-        """Assemble complete chapter from sections"""
+        """Assemble complete chapter from sections with humanized introduction"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -370,17 +520,17 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
         if not all_sections:
             return "No sections generated for this chapter."
         
-        # Create properly formatted academic chapter with paradigmatic framing
+        # Create properly formatted academic chapter with paradigmatic framing and humanized introduction
         chapter_header = f"""# Chapter {chapter_num}: The Birth of an Industry
 ## American Cinema from Invention to Hollywood's Rise (1890s–1915)
 
 ### A Paradigmatic Perspective of The History of American Film
 
-This chapter examines the foundational period of American cinema through the dual lens of **technological innovation** and **business transformation**. Rather than viewing early cinema as a series of isolated developments, this paradigmatic approach reveals how the interplay between scientific advancement and commercial enterprise drove the evolution of motion pictures "from scientific curiosity to industrialized art form."
+This chapter examines the foundational period of American cinema through two connected lenses: **technological innovation** and **business transformation**. Rather than viewing early cinema as separate developments, this approach reveals how the combination of scientific advancement and commercial enterprise drove motion pictures to evolve from scientific curiosity to industrialized art form.
 
-The technological dimension encompasses the scientific experiments, patent developments, and technical innovations that made cinema possible—from Muybridge's motion studies to Edison's Kinetoscope to the Lumière Cinématographe. The business dimension examines how entrepreneurs, inventors, and financiers transformed these technological capabilities into sustainable commercial enterprises, ultimately creating the industrial foundation for Hollywood's emergence.
+The technological dimension covers the scientific experiments, patent developments, and technical innovations that made cinema possible. This includes Muybridge's motion studies, Edison's Kinetoscope, and the Lumière Cinématographe. The business dimension examines how entrepreneurs, inventors, and financiers transformed these technological capabilities into sustainable commercial enterprises. This process created the industrial foundation for Hollywood's emergence.
 
-This dual paradigm demonstrates that American cinema's development was neither purely artistic nor merely technical, but fundamentally shaped by the dynamic relationship between technological possibility and economic opportunity.
+This dual approach demonstrates that American cinema's development was neither purely artistic nor merely technical. Instead, it was shaped by the dynamic relationship between technological possibility and economic opportunity.
 
 ---
 
@@ -420,13 +570,14 @@ This dual paradigm demonstrates that American cinema's development was neither p
                 version_type="academic_chapter",
                 name=f"Chapter {chapter_num}: The Birth of an Industry",
                 focus=f"Complete academic chapter with {section_count} sections",
-                prompt="Academic textbook chapter generation",
+                prompt="Academic textbook chapter generation with humanized writing guidelines",
                 result=content,
                 metadata_json={
                     "chapter_number": chapter_num,
                     "total_sections": section_count,
                     "total_words": total_words,
-                    "generation_type": "academic_chapter"
+                    "generation_type": "academic_chapter",
+                    "writing_style": "humanized_academic"
                 }
             )
             print(f"[ACADEMIC] Saved chapter as version: {version_id}")
@@ -537,16 +688,16 @@ This dual paradigm demonstrates that American cinema's development was neither p
         details = {
             "I": {
                 "title": "Introduction: The Scientific Dream of Living Pictures",
-                "main_argument": "Early cinema emerged from scientific experimentation and Victorian fascination with motion, establishing both the technological foundation and commercial potential for narrative filmmaking through the paradigmatic intersection of laboratory innovation and entrepreneurial investment",
+                "main_argument": "Early cinema emerged from scientific experimentation and Victorian fascination with motion, establishing both the technological foundation and commercial potential for narrative filmmaking through the intersection of laboratory innovation and entrepreneurial investment",
                 "estimated_words": 1200,
-                "builds_on_previous": "None - opening section that establishes the technology/business paradigmatic framework",
+                "builds_on_previous": "None - opening section that establishes the technology/business framework",
                 "sets_up_next": "Technological competition and business model rivalry between Edison and Lumière",
                 "transition_notes": "End with the stage set for commercial competition between competing technological and business approaches",
                 "outline": "Late 19th-century scientific workshops as sites of commercial potential; Victorian fascination with motion as market opportunity; Muybridge motion studies and Marey chronophotography as technological/business foundation; Laboratory experiments attracting entrepreneurial capital and patent investment"
             },
             "II": {
                 "title": "The Race to Invent: Competing Models of Cinema",
-                "main_argument": "Edison's individual viewing model versus Lumière's communal projection established competing technological and business paradigms that shaped early film exhibition, demonstrating how technical capabilities and revenue models evolved together",
+                "main_argument": "Edison's individual viewing model and Lumière's communal projection established competing technological and business approaches that shaped early film exhibition, demonstrating how technical capabilities and revenue models evolved together",
                 "estimated_words": 1500,
                 "builds_on_previous": "Scientific/commercial foundation from Section I",
                 "sets_up_next": "Content development driven by technological capabilities and business opportunities",
@@ -555,7 +706,7 @@ This dual paradigm demonstrates that American cinema's development was neither p
             },
             "III": {
                 "title": "Early Content: From Actuality to Narrative Stirrings",
-                "main_argument": "Early films evolved from scientific curiosities to entertainment spectacles through the paradigmatic intersection of technological capabilities and market demands, with cultural controversies revealing cinema's emerging social and economic impact",
+                "main_argument": "Early films evolved from scientific curiosities to entertainment spectacles through the intersection of technological capabilities and market demands, with cultural controversies revealing cinema's emerging social and economic impact",
                 "estimated_words": 1100,
                 "builds_on_previous": "Exhibition models and business strategies from Section II",
                 "sets_up_next": "Porter's technological and commercial narrative innovations",
@@ -564,48 +715,48 @@ This dual paradigm demonstrates that American cinema's development was neither p
             },
             "IV": {
                 "title": "The Dawn of American Narrative: Edwin S. Porter",
-                "main_argument": "Porter's *The Great Train Robbery* represents the paradigmatic breakthrough where technological innovation (editing techniques) merged with commercial insight (narrative appeal) to establish American cinema's industrial foundation",
+                "main_argument": "Porter's *The Great Train Robbery* represents the breakthrough where technological innovation (editing techniques) merged with commercial insight (narrative appeal) to establish American cinema's industrial foundation",
                 "estimated_words": 1600,
                 "builds_on_previous": "Market demand for sophisticated content and technological possibilities from Section III",
                 "sets_up_next": "Mass audience business model enabled by narrative technology",
                 "transition_notes": "Establish Porter's innovations as enabling the business transformation to mass entertainment",
-                "outline": "Porter's position at Edison studios linking technological capability with commercial production; Analysis of *The Great Train Robbery* as technological breakthrough (editing, cross-cutting) and business innovation (narrative engagement); Impact on American film development through paradigmatic integration of technical and commercial advancement"
+                "outline": "Porter's position at Edison studios linking technological capability with commercial production; Analysis of *The Great Train Robbery* as technological breakthrough (editing, cross-cutting) and business innovation (narrative engagement); Impact on American film development through integration of technical and commercial advancement"
             },
             "V": {
                 "title": "The Nickelodeon Boom and the New Mass Audience",
-                "main_argument": "The nickelodeon phenomenon exemplifies the paradigmatic transformation where technological accessibility (projection standardization) combined with business innovation (low-price/high-volume model) to create America's first mass entertainment industry",
+                "main_argument": "The nickelodeon phenomenon shows the transformation where technological accessibility (projection standardization) combined with business innovation (low-price/high-volume model) to create America's first mass entertainment industry",
                 "estimated_words": 1800,
                 "builds_on_previous": "Porter's narrative technology and commercial breakthrough",
                 "sets_up_next": "Industrial consolidation attempts driven by technological control and business monopolization",
                 "transition_notes": "Connect individual innovation to industry-wide technological and business transformation",
-                "outline": "Nickelodeon emergence through technological standardization and business model innovation; Working-class and immigrant audiences as new market created by technological accessibility; Economic impact through paradigmatic intersection of technical distribution and commercial exhibition; Cultural significance as technological democracy enabling business expansion"
+                "outline": "Nickelodeon emergence through technological standardization and business model innovation; Working-class and immigrant audiences as new market created by technological accessibility; Economic impact through intersection of technical distribution and commercial exhibition; Cultural significance as technological democracy enabling business expansion"
             },
             "VI": {
                 "title": "Industrialization and Monopoly: The Motion Picture Patents Company",
-                "main_argument": "The MPPC represented the paradigmatic attempt at industrial monopoly through technological control (patent consolidation) and business integration (vertical control), demonstrating how technological ownership became inseparable from commercial dominance",
+                "main_argument": "The MPPC represented the attempt at industrial monopoly through technological control (patent consolidation) and business integration (vertical control), demonstrating how technological ownership became connected to commercial dominance",
                 "estimated_words": 1500,
                 "builds_on_previous": "Mass audience business model and technological distribution from Section V",
                 "sets_up_next": "Independent resistance through technological and geographical business innovation",
                 "transition_notes": "Show tension between technological/business consolidation and creative/entrepreneurial independence",
-                "outline": "MPPC formation through paradigmatic merger of patent technology and business strategy; Edison's leadership in technological control and commercial monopolization; Vertical integration demonstrating technological ownership as business power; Impact on production and distribution through paradigmatic suppression of technological and commercial innovation"
+                "outline": "MPPC formation through merger of patent technology and business strategy; Edison's leadership in technological control and commercial monopolization; Vertical integration demonstrating technological ownership as business power; Impact on production and distribution through suppression of technological and commercial innovation"
             },
             "VII": {
                 "title": "Resistance and Relocation: The Independents and the Rise of Hollywood",
-                "main_argument": "Independent producers' resistance exemplifies the paradigmatic principle that technological innovation and business entrepreneurship ultimately overcome monopolistic control, with geographical relocation enabling both technical freedom and commercial innovation",
+                "main_argument": "Independent producers' resistance shows the principle that technological innovation and business entrepreneurship overcome monopolistic control, with geographical relocation enabling both technical freedom and commercial innovation",
                 "estimated_words": 1700,
                 "builds_on_previous": "MPPC technological and business monopoly attempt from Section VI",
                 "sets_up_next": "Dissolution of monopolistic control and establishment of competitive technological and business environment",
                 "transition_notes": "Connect resistance to monopoly with geographic and technological transformation enabling business innovation",
-                "outline": "Independent producers demonstrating paradigmatic entrepreneurship through technological and business resistance; Geographical relocation to California as technological advantage (climate, geography) and business strategy (legal independence); Hollywood's emergence through paradigmatic integration of technological capability and commercial innovation; Star system development as technological (performance) and business (marketing) advancement"
+                "outline": "Independent producers demonstrating entrepreneurship through technological and business resistance; Geographical relocation to California as technological advantage (climate, geography) and business strategy (legal independence); Hollywood's emergence through integration of technological capability and commercial innovation; Star system development as technological (performance) and business (marketing) advancement"
             },
             "VIII": {
                 "title": "The Fall of the Trust and the Dawn of a New Era",
-                "main_argument": "The dissolution of the MPPC and rise of legitimate Hollywood studios demonstrates the paradigmatic principle that sustainable industry development requires the integration of technological innovation with competitive business practices, marking cinema's transition from experimental monopoly to established democratic industry",
+                "main_argument": "The dissolution of the MPPC and rise of legitimate Hollywood studios demonstrates the principle that sustainable industry development requires the integration of technological innovation with competitive business practices, marking cinema's transition from experimental monopoly to established democratic industry",
                 "estimated_words": 1600,
                 "builds_on_previous": "Independent technological and business resistance establishing Hollywood from Section VII",
                 "sets_up_next": "Future American film industry development through continued technological and business evolution",
-                "transition_notes": "Provide paradigmatic closure while establishing framework for continued technological and business development",
-                "outline": "MPPC legal challenges and dissolution as paradigmatic victory of competitive innovation over monopolistic control; Rise of major studios through technological standardization and business legitimization; Industry establishment through paradigmatic integration of technological professionalism and commercial sustainability; Setting stage for Golden Age development through continued technological and business advancement"
+                "transition_notes": "Provide closure while establishing framework for continued technological and business development",
+                "outline": "MPPC legal challenges and dissolution as victory of competitive innovation over monopolistic control; Rise of major studios through technological standardization and business legitimization; Industry establishment through integration of technological professionalism and commercial sustainability; Setting stage for Golden Age development through continued technological and business advancement"
             }
         }
         return details.get(roman_numeral, details["I"])
@@ -613,36 +764,36 @@ This dual paradigm demonstrates that American cinema's development was neither p
     def _get_section_template(self, roman_numeral: str) -> Dict[str, str]:
         templates = {
             "I": {
-                "prompt_template": "Write as an engaging academic introduction that establishes historical context and technological foundations. Use chronological progression and emphasize the scientific/experimental nature of early motion picture development.",
-                "tone_instructions": "Scholarly but accessible, with emphasis on wonder and innovation of the period"
+                "prompt_template": "Write as an engaging academic introduction that establishes historical context and technological foundations. Use chronological progression and emphasize the scientific/experimental nature of early motion picture development. Write in clear, accessible prose.",
+                "tone_instructions": "Scholarly but accessible, with emphasis on wonder and innovation of the period. Use concrete examples and avoid abstract terminology."
             },
             "II": {
-                "prompt_template": "Present as a comparative analysis of competing technologies and business models. Structure around the Edison vs. Lumière rivalry while explaining technical innovations clearly.",
-                "tone_instructions": "Analytical and comparative, explaining technical concepts for non-technical readers"
+                "prompt_template": "Present as a comparative analysis of competing technologies and business models. Structure around the Edison vs. Lumière rivalry while explaining technical innovations clearly using simple, direct language.",
+                "tone_instructions": "Analytical and comparative, explaining technical concepts for non-technical readers using everyday vocabulary"
             },
             "III": {
-                "prompt_template": "Trace the evolution from documentary to narrative forms. Emphasize audience reception and cultural impact of early films.",
-                "tone_instructions": "Cultural analysis tone, connecting films to broader social contexts"
+                "prompt_template": "Trace the evolution from documentary to narrative forms. Emphasize audience reception and cultural impact of early films using concrete details and specific examples.",
+                "tone_instructions": "Cultural analysis tone, connecting films to broader social contexts with clear, straightforward explanations"
             },
             "IV": {
-                "prompt_template": "Focus on Porter as a pivotal figure in American narrative development. Analyze *The Great Train Robbery* as a case study in early storytelling innovation.",
-                "tone_instructions": "Biographical and analytical, emphasizing innovation and American cinema development"
+                "prompt_template": "Focus on Porter as a pivotal figure in American narrative development. Analyze *The Great Train Robbery* as a case study in early storytelling innovation using specific details and clear explanations.",
+                "tone_instructions": "Biographical and analytical, emphasizing innovation and American cinema development with accessible academic prose"
             },
             "V": {
-                "prompt_template": "Examine the nickelodeon phenomenon as a social and economic transformation. Connect technological innovation to mass culture development.",
-                "tone_instructions": "Social historical analysis, emphasizing demographic change and cultural accessibility"
+                "prompt_template": "Examine the nickelodeon phenomenon as a social and economic transformation. Connect technological innovation to mass culture development using concrete examples and clear explanations.",
+                "tone_instructions": "Social historical analysis, emphasizing demographic change and cultural accessibility with straightforward academic writing"
             },
             "VI": {
-                "prompt_template": "Present the MPPC as an early example of media monopolization. Analyze business strategies and their impact on creative development.",
-                "tone_instructions": "Business and legal analysis, explaining complex corporate strategies clearly"
+                "prompt_template": "Present the MPPC as an early example of media monopolization. Analyze business strategies and their impact on creative development using clear, direct language.",
+                "tone_instructions": "Business and legal analysis, explaining complex corporate strategies clearly without jargon"
             },
             "VII": {
-                "prompt_template": "Tell the story of independent resistance and geographical shift as entrepreneurial innovation. Emphasize Hollywood's emergence as an industry center.",
-                "tone_instructions": "Narrative of entrepreneurial resistance and geographical transformation"
+                "prompt_template": "Tell the story of independent resistance and geographical shift as entrepreneurial innovation. Emphasize Hollywood's emergence as an industry center using concrete details and clear narrative.",
+                "tone_instructions": "Narrative of entrepreneurial resistance and geographical transformation told in accessible academic prose"
             },
             "VIII": {
-                "prompt_template": "Conclude with the transition from experimental medium to established industry. Synthesize themes while preparing for future developments.",
-                "tone_instructions": "Synthesizing and forward-looking, providing closure while maintaining scholarly momentum"
+                "prompt_template": "Conclude with the transition from experimental medium to established industry. Synthesize themes while preparing for future developments using clear, direct language.",
+                "tone_instructions": "Synthesizing and forward-looking, providing closure while maintaining scholarly momentum through accessible writing"
             }
         }
         return templates.get(roman_numeral, templates["I"])
@@ -688,7 +839,7 @@ This dual paradigm demonstrates that American cinema's development was neither p
         """Get technology paradigm focus for each section"""
         tech_focus = {
             "I": "Scientific experimentation and motion studies as technological foundation - Muybridge serial photography, Marey chronophotography, laboratory innovation driving commercial potential",
-            "II": "Competing technological paradigms - Edison's individual viewing (Kinetoscope) vs. Lumière's communal projection (Cinématographe), celluloid film stock standardization",
+            "II": "Competing technological approaches - Edison's individual viewing (Kinetoscope) vs. Lumière's communal projection (Cinématographe), celluloid film stock standardization",
             "III": "Technology enabling content evolution - from actuality documentation to staged entertainment, technical capabilities shaping narrative possibilities",
             "IV": "Narrative technology innovation - Porter's editing techniques, cross-cutting, location shooting as breakthrough in cinematic storytelling technology",
             "V": "Exhibition technology transformation - nickelodeon projection systems making cinema accessible to mass audiences, standardization enabling widespread distribution",
@@ -726,7 +877,7 @@ async def test_academic_generation():
     """Test the academic chapter generation with your existing textbook_pilot project"""
     project_name = "textbook_pilot"
     
-    print(f"🎬 Testing Academic Chapter Generation")
+    print(f"🎬 Testing Academic Chapter Generation with Humanized Writing")
     print(f"📁 Project: {project_name}")
     print("=" * 50)
     
@@ -751,14 +902,18 @@ async def test_academic_generation():
         for section, tables in generator.get_current_table_mapping().items():
             print(f"  Section {section}: {len(tables)} tables")
         
+        print(f"✍️ Humanized writing guidelines: ACTIVE")
+        print(f"📝 Natural academic prose with concrete details and accessible language")
+        
         result = await generator.generate_complete_chapter(chapter_num=1)
         
         print(f"\n🎉 Generation completed successfully!")
         print(f"📊 Generated {result['metadata']['total_words']:,} words")
         print(f"📝 Sections: {result['metadata']['sections_generated']}/{result['metadata']['sections_generated'] + result['metadata']['sections_failed']}")
+        print(f"✍️ Writing style: Humanized academic prose")
         
         # Save to markdown file as well
-        output_path = f"projects/{project_name}/Chapter_1_Generated.md"
+        output_path = f"projects/{project_name}/Chapter_1_Humanized_Generated.md"
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(result['content'])
         print(f"📁 Also saved to: {output_path}")
@@ -771,26 +926,13 @@ async def test_academic_generation():
         traceback.print_exc()
         return None
 
-# Example: Simple test with default configuration
-async def test_simple_generation():
-    """Simple test with default table mapping"""
+# Example: Simple test with default configuration and humanized writing
+async def test_simple_humanized_generation():
+    """Simple test with default table mapping and humanized writing guidelines"""
     generator = AcademicChapterGenerator("textbook_pilot")
     return await generator.generate_complete_chapter()
 
-# Example: Test with completely custom table mapping
-async def test_custom_generation():
-    """Test with completely custom table selection"""
-    custom_mapping = {
-        "I": ["film_history_sections_week1"],
-        "II": ["film_history_sections_week1", "film_history_evidence_week1"],
-        "III": ["film_history_sections_week1", "film_history_revision_checklist_week1"],
-        # ... customize all sections as needed
-    }
-    
-    generator = AcademicChapterGenerator("textbook_pilot", custom_table_mapping=custom_mapping)
-    return await generator.generate_complete_chapter()
-
 if __name__ == "__main__":
-    # Test with your existing textbook_pilot project
+    # Test with your existing textbook_pilot project using humanized writing
     import asyncio
     asyncio.run(test_academic_generation())
