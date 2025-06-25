@@ -18,13 +18,13 @@ class AcademicChapterGenerator:
     - Uses your projects/{name}/project.db structure
     - Uses your backend/api/project_versions.py for version tracking
     - Incorporates humanizing writing guidelines for natural, accessible academic prose
-    
+
     CONFIGURATION:
     - ALL BUCKETS: Every section queries ALL available document buckets for comprehensive source access
     - TARGETED TABLES: Each section uses intentionally selected SQL tables for specific data needs
     - HUMANIZED WRITING: Natural language patterns, concrete details, accessible academic tone
     """
-    
+
     # Comprehensive writing guidelines for natural academic prose
     HUMANIZING_WRITING_GUIDELINES = """
 You are writing an academic textbook. These are your comprehensive writing guidelines. Your output will adhere to these guidelines exactly.
@@ -80,7 +80,7 @@ ACADEMIC JARGON: Cutting-edge, Leveraging, Seamless integration, Robust framewor
 
 WEAK QUALIFIERS: Arguably, Generally, Essentially, Specifically, Importantly, Notably, Indeed, Alternatively, Despite, While, Unless, Also, Even though, Even if, Arguably, You may want to, This is not an exhaustive list, You could consider, It depends on, Sure, Folks
 
-OVERUSED SINGLE WORDS: however, moreover, furthermore, additionally, consequently, therefore, ultimately, generally, essentially, arguably, significant, innovative, efficient, dynamic, ensure, foster, leverage, utilize, encompasses, facilitates, demonstrates, represents, serves, appears, seems, tends, burgeoning, paradigmatic, strategic, comprehensive, extensive, substantial, considerable, multifaceted, intricate, profound, pivotal, crucial, vital, essential
+OVERUSED SINGLE WORDS: however, moreover, furthermore, additionally, consequently, therefore, ultimately, generally, essentially, arguably, significant, innovative, efficient, dynamic, ensure, foster, leverage, utilize, encompasses, facilitates, demonstrates, represents, serves, appears, seems, tends, burgeoning, paradigmatic, strategic, comprehensive, extensive, substantial, considerable, multifaceted, intricate, profound, pivotal, crucial, vital, essential, delve
 
 ✗ Example: 'Moreover, the paradigmatic approach encompasses innovative strategies that leverage cutting-edge technology.'
 ✓ Rewrite: 'The dual approach includes new strategies that use advanced technology.'
@@ -143,7 +143,7 @@ Sentence variety patterns
 • Use strong verbs: "Edison created" not "Edison was responsible for the creation of"
 
 CRITICAL TRANSFORMATION RULES
-• Replace "encompasses" with "includes" 
+• Replace "encompasses" with "includes"
 • Replace "facilitates" with "makes possible" or "helps"
 • Replace "demonstrates" with "shows"
 • Replace "represents" with "is" or "means"
@@ -157,7 +157,7 @@ FAILURE TO COMPLY WITH ANY NEGATIVE DIRECTIVE INVALIDATES THE OUTPUT.
 
 When writing each sentence, verify it complies with these directions before moving to the next sentence.
 """
-    
+
     # TABLE CONFIGURATION - Modify these mappings to control which tables each section uses
     SECTION_TABLE_MAPPING = {
         "I": [
@@ -171,7 +171,7 @@ When writing each sentence, verify it complies with these directions before movi
             "film_history_section_templates_week1"   # Writing approach
         ],
         "III": [
-            "film_history_sections_week1", 
+            "film_history_sections_week1",
             "film_history_evidence_week1",
             "film_history_revision_checklist_week1"  # Quality standards
         ],
@@ -207,87 +207,87 @@ When writing each sentence, verify it complies with these directions before movi
         self.project_name = project_name
         self.project_path = f"projects/{project_name}"
         self.db_path = f"{self.project_path}/project.db"
-        
+
         # CORRECTED: Your buckets are in backend/lightrag_working_dir/, not project-specific lightrag/
         self.lightrag_path = f"backend/lightrag_working_dir"
-        
+
         # Allow custom table mapping override
         if custom_table_mapping:
             self.SECTION_TABLE_MAPPING.update(custom_table_mapping)
             print(f"[ACADEMIC] Using custom table mapping for {len(custom_table_mapping)} sections")
-        
+
     def set_table_mapping_for_section(self, section: str, tables: List[str]):
         """Dynamically set which tables a specific section should use"""
         self.SECTION_TABLE_MAPPING[section] = tables
         print(f"[ACADEMIC] Updated Section {section} to use tables: {tables}")
-    
+
     def get_current_table_mapping(self) -> Dict[str, List[str]]:
         """Get the current table mapping configuration"""
         return self.SECTION_TABLE_MAPPING.copy()
-        
+
     def validate_project(self):
         """Validate project exists and has required structure"""
         if not os.path.exists(self.project_path):
             raise FileNotFoundError(f"Project directory not found: {self.project_path}")
-        
+
         if not os.path.exists(self.db_path):
             raise FileNotFoundError(f"Project database not found: {self.db_path}")
-        
+
         print(f"[ACADEMIC] ✅ Project validated: {self.project_name}")
-    
+
     async def generate_complete_chapter(self, chapter_num: int = 1) -> Dict[str, Any]:
         """
         Generate complete academic chapter using your existing infrastructure
         """
         self.validate_project()
-        
+
         # Create output tables using your database structure
         self._setup_academic_tables()
-        
+
         # Define Chapter 1 sections
         sections = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
-        
+
         # Track generation progress
         generation_log = []
         total_words = 0
-        
+
         print(f"🎬 Generating Chapter {chapter_num}: The Birth of an Industry")
         print(f"📁 Project: {self.project_name}")
         print(f"🗄️ Database: {self.db_path}")
         print("=" * 60)
-        
+
         # Generate each section using your existing writing system
         for i, roman_numeral in enumerate(sections, 1):
             section_title = self._get_section_title(roman_numeral)
             print(f"\n📝 [{i}/{len(sections)}] Generating Section {roman_numeral}: {section_title}")
-            
+
             try:
                 # Build section-specific write request using your existing structure
                 write_request = await self._build_write_request(chapter_num, roman_numeral)
-                
+
                 # Use your existing generate_written_output function
                 print(f"[ACADEMIC] Calling your existing writing system...")
                 result = await generate_written_output(**write_request)
-                
+
                 if result.get("status") == "success":
                     section_content = result.get("result", "")
-                    
+
                     # Save section using your database structure
                     section_data = self._save_section(
-                        chapter_num, 
+                        chapter_num,
                         self._roman_to_number(roman_numeral),
                         section_title,
                         section_content,
                         self._get_expected_summary(roman_numeral),
                         result.get("version_id")
                     )
-                    
+
                     generation_log.append(section_data)
                     total_words += section_data["word_count"]
-                    
+
                     print(f"✅ Section {roman_numeral} completed ({section_data['word_count']:,} words)")
                     print(f"📝 {self._get_expected_summary(roman_numeral)}")
-                    
+
                 else:
                     # Handle generation error
                     error_msg = result.get("error", "Unknown error")
@@ -297,29 +297,29 @@ When writing each sentence, verify it complies with these directions before movi
                         "status": "error",
                         "error": error_msg
                     })
-                    
+
             except Exception as e:
                 error_msg = f"Failed to generate Section {roman_numeral}: {str(e)}"
                 print(f"❌ {error_msg}")
                 generation_log.append({
                     "section": roman_numeral,
-                    "status": "error", 
+                    "status": "error",
                     "error": str(e)
                 })
                 continue
-            
+
             print("-" * 40)
-        
+
         # Assemble complete chapter
         complete_chapter = self._assemble_complete_chapter(chapter_num)
-        
+
         # Save complete chapter using your version system
         chapter_metadata = self._save_complete_chapter(chapter_num, complete_chapter, len(sections))
-        
+
         print(f"\n🎉 Chapter {chapter_num} Generation Complete!")
         print(f"📊 Total: {len([log for log in generation_log if log.get('status') != 'error'])} sections, {total_words:,} words")
         print(f"💾 Saved to: {self.db_path}")
-        
+
         return {
             "status": "success",
             "project_name": self.project_name,
@@ -337,21 +337,165 @@ When writing each sentence, verify it complies with these directions before movi
             "sections": generation_log,
             "generation_timestamp": datetime.now().isoformat()
         }
-    
+
     async def _build_write_request(self, chapter_num: int, roman_numeral: str) -> Dict[str, Any]:
         """
         Build write request compatible with your existing backend/api/writing/logic.py
         Now includes comprehensive humanizing writing guidelines
         """
-        
+
         # Build comprehensive academic prompt
         section_data = self._get_section_details(roman_numeral)
         template_data = self._get_section_template(roman_numeral)
         evidence_req = self._get_evidence_requirements(roman_numeral)
-        
+
         # Create comprehensive academic instructions with paradigmatic framework AND humanizing guidelines
         academic_instructions = f"""
 {self.HUMANIZING_WRITING_GUIDELINES}
+
+STORYTELLING VOICE AND APPROACH:
+
+You are telling a story - the story of how American cinema was born. Write as if you're a professor who has spent years studying these people and events, now sharing this compelling narrative with a colleague over coffee. You know these historical figures intimately from the sources - their habits, motivations, and personalities. 
+
+This is not a dry recitation of facts, but a true story that unfolds with natural narrative flow. You're not dramatically narrating, just naturally telling a fascinating story you've lived with. Think of yourself as a storyteller who happens to be a scholar, not a scholar who occasionally tells stories.
+
+NARRATIVE STRUCTURE:
+- Present events as they unfolded, building toward consequences
+- Show how one decision led to another, creating a chain of causation
+- Use the natural dramatic tension that exists in historical competition and conflict
+- Let the story breathe - don't rush to conclusions, let events unfold
+- Connect human motivations to larger historical forces
+
+ENGAGING STORYTELLING TECHNIQUES:
+- Start with compelling moments or turning points
+- Use specific scenes and situations to illustrate broader themes
+- Show characters making decisions rather than just stating outcomes
+- Include moments of uncertainty and discovery
+- Reveal information at the pace a reader would naturally want to know it
+- Use concrete details to create mental pictures
+- Connect the past to relatable human experiences
+
+SECOND-DEGREE WITNESS PERSPECTIVE:
+You've spent so much time in the archives and with the evidence that you feel like you almost witnessed these events. Share details that only someone who has deeply studied the period would notice. Root your insights in concrete evidence, but convey the sense that you've reconstructed these moments thoroughly.
+
+NATURAL STORYTELLING FLOW:
+Present information in the order someone would naturally discover it. Use conversational transitions: "What's interesting here is..." "This raises the question..." "The evidence shows something surprising..." Build understanding progressively rather than front-loading conclusions.
+
+CRITICAL RESTRAINT GUIDELINES:
+Maintain scholarly restraint. Do NOT use dramatic phrases like:
+- "Little did they know..." 
+- "The stage was set..."
+- "Plot twist..."
+- "You won't believe what happened next..."
+- "The mystery deepens..."
+- "Meanwhile, back in..."
+- "As fate would have it..."
+- "Ironically..."
+- "History would prove..."
+- "The die was cast..."
+
+Instead use natural academic curiosity:
+- "What emerges from the sources is..."
+- "The evidence suggests..."
+- "This detail caught my attention..."
+- "The question becomes..."
+- "Looking at the records..."
+- "What's interesting about this period is..."
+- "The documents reveal..."
+- "When you examine the timeline..."
+
+WHAT NOT TO DO - STORYTELLING MISTAKES TO AVOID:
+
+DO NOT write like a historical fiction novel:
+✗ "Edison wiped the sweat from his brow as he gazed at his latest invention..."
+✓ "Edison's lab notebooks from 1891 show he worked eighteen-hour days on the Kinetoscope..."
+
+DO NOT create dialogue or internal thoughts:
+✗ "Porter must have thought to himself, 'This will change everything...'"
+✓ "Porter's correspondence suggests he understood the commercial potential..."
+
+DO NOT use omniscient narrator voice:
+✗ "As Edison worked in his lab, he had no idea that across the Atlantic..."
+✓ "While Edison developed the Kinetoscope in New Jersey, the Lumière brothers in France..."
+
+DO NOT manufacture dramatic moments:
+✗ "In a moment that would change cinema forever..."
+✓ "The screening on December 28, 1895, marked a turning point..."
+
+DO NOT use modern perspectives inappropriately:
+✗ "Edison's invention would soon go viral..."
+✓ "Edison's invention quickly gained popularity..."
+
+DO NOT create false suspense:
+✗ "But Edison's triumph would be short-lived..."
+✓ "Edison's Kinetoscope faced new competition by 1895..."
+
+DO NOT anthropomorphize technology or concepts:
+✗ "Cinema was crying out for innovation..."
+✓ "The film industry needed technological advancement..."
+
+DO NOT use emotional manipulation:
+✗ "Tragically, many independent filmmakers suffered..."
+✓ "Independent filmmakers faced significant legal challenges..."
+
+DO NOT write cliffhanger endings:
+✗ "But what happened next would shock the industry..."
+✓ "The next development came from an unexpected source..."
+
+DO NOT use breathless, excited tone:
+✗ "This incredible breakthrough revolutionized everything!"
+✓ "This development had wide-ranging effects on the industry..."
+
+FACTUAL ACCURACY IS PARAMOUNT:
+- Every factual claim must be grounded in historical evidence
+- Use specific dates, names, locations, and numbers from the sources
+- If uncertain about a detail, indicate uncertainty rather than inventing
+- Prioritize documented facts over dramatic narrative possibilities
+- When making logical inferences, clearly signal them as such
+- Never sacrifice historical truth for narrative convenience
+- The story is compelling because it's true, not because it's embellished
+
+FACTUAL ACCURACY - WHAT NOT TO DO:
+
+DO NOT invent details for dramatic effect:
+✗ "Edison's hands trembled as he made the final adjustment..."
+✓ "Edison's final adjustments to the Kinetoscope were completed in late 1891..."
+
+DO NOT speculate beyond evidence:
+✗ "Porter was probably thinking about his childhood when he..."
+✓ "Porter's background in theater likely influenced his approach to..."
+
+DO NOT exaggerate for impact:
+✗ "The entire industry was in complete chaos..."
+✓ "The film industry faced significant disruption..."
+
+DO NOT present assumptions as facts:
+✗ "Everyone in the audience gasped when they saw..."
+✓ "Contemporary reviews suggest audiences were surprised by..."
+
+DO NOT romanticize the past:
+✗ "In those simpler times when movies were pure magic..."
+✓ "During this early period, films served primarily as novelties..."
+
+DO NOT use presentist language:
+✗ "Edison's viral moment came when..."
+✓ "Edison's breakthrough gained widespread attention when..."
+
+HUMAN-SCALE STORYTELLING:
+- Include small, concrete details that make historical figures feel real
+- Focus on decision-making moments and human reasoning behind big changes
+- Show genuine scholarly interest in these people without manufactured drama
+- Reveal character through actions and documented statements
+- Connect individual choices to larger historical movements
+- Make the past feel immediate and relevant
+
+NARRATIVE PACING AND STRUCTURE:
+- Build tension through real historical conflicts and competitions
+- Use the natural arc of each section to advance the overall story
+- Connect each section to the next with forward momentum
+- Balance exposition with action/decision-making
+- Show cause and effect relationships clearly
+- Let the historical drama emerge from the facts themselves
 
 ACADEMIC TEXTBOOK SECTION: {section_data['title']}
 
@@ -362,7 +506,7 @@ This chapter operates within a TECHNOLOGY & BUSINESS paradigm that views America
 
 The entire analysis should demonstrate how cinema evolved "from scientific curiosity to industrialized art form" through the interplay of technological capability and business innovation.
 
-WRITING OBJECTIVE:
+WRITING OBJECTIVE (Your Story's Central Thread):
 {section_data['main_argument']}
 
 PARADIGMATIC INTEGRATION FOR THIS SECTION:
@@ -371,15 +515,15 @@ PARADIGMATIC INTEGRATION FOR THIS SECTION:
 
 TARGET LENGTH: {section_data['estimated_words']} words
 
-WRITING APPROACH:
-{template_data['prompt_template']}
+NARRATIVE APPROACH FOR THIS SECTION:
+{template_data['prompt_template']} - Remember: tell this as a story while maintaining scholarly accuracy
 
-TONE: {template_data['tone_instructions']} - but filtered through humanizing guidelines for natural academic prose
+TONE: {template_data['tone_instructions']} - but filtered through engaging storytelling and humanizing guidelines
 
-SECTION OUTLINE:
+SECTION STORY ARC:
 {section_data['outline']}
 
-EVIDENCE REQUIREMENTS:
+EVIDENCE REQUIREMENTS (Your Source Material):
 {evidence_req['required_evidence']}
 
 SOURCE SYNTHESIS APPROACH:
@@ -390,19 +534,19 @@ DATA SOURCE STRATEGY:
 - TARGETED SQL DATA: Use specific tables selected for this section's analytical needs and structural requirements
 - PARADIGMATIC ANALYSIS: Frame all evidence through the technology/business lens that defines this textbook's approach
 
-ACADEMIC STANDARDS WITH HUMANIZED WRITING:
+ACADEMIC STANDARDS WITH ENGAGING STORYTELLING:
 - Use Chicago citation style for film history, integrated naturally into prose flow
-- Include specific dates, names, and technical details as concrete evidence
+- Include specific dates, names, and technical details as concrete evidence - FACTUAL ACCURACY IS ESSENTIAL
 - Balance primary and secondary sources across ALL available document collections
-- Write in clear, accessible academic prose following the humanizing guidelines above
-- Create smooth transitions that connect to previous and next sections using simple connectors
+- Write as a knowledgeable professor sharing a compelling true story, following all humanizing guidelines
+- Create smooth, natural transitions that advance the narrative
 - Leverage both broad source knowledge and specific structural data
 - CONSISTENTLY apply the technology/business paradigmatic framework throughout
 - Write sentences that average 10-20 words, use active voice 90% of the time
 - Choose concrete, specific words over abstract terminology
 - Avoid all banned phrases and complex sentence structures listed in the guidelines
 
-FLOW REQUIREMENTS:
+STORY FLOW REQUIREMENTS:
 Builds on: {section_data['builds_on_previous']}
 Sets up: {section_data['sets_up_next']}
 Transition strategy: {section_data['transition_notes']}
@@ -411,23 +555,29 @@ CRITICAL WRITING REQUIREMENTS:
 - Every sentence must comply with the humanizing writing guidelines
 - Use straightforward punctuation (periods, commas, question marks, occasional colons)
 - Avoid all banned words and phrases completely
-- Write in natural, human cadence with varied paragraph lengths
+- Write in natural, conversational storytelling voice with varied paragraph lengths
 - State facts directly without hedging or corporate jargon
 - Use concrete details and specific examples before abstract concepts
+- MAINTAIN FACTUAL ACCURACY - never sacrifice truth for narrative flow
+- Remember: scholarly restraint with engaging narrative warmth
+- The story should feel like it's unfolding, not being reported
 
-Write Section {roman_numeral} as a complete, standalone section that flows naturally from previous content and sets up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. MOST IMPORTANTLY: Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development, while following every humanizing writing guideline for natural, accessible academic prose.
+FINAL INSTRUCTION:
+Write Section {roman_numeral} as a complete, standalone section that tells this part of the story while flowing naturally from previous content and setting up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. 
+
+Tell this story as if you're sharing this fascinating true narrative with a colleague who trusts your expertise - make them feel like they're discovering this history alongside you. MOST IMPORTANTLY: Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development, while following every humanizing writing guideline and maintaining absolute factual accuracy. The goal is an engaging, true story that happens to be scholarly, not a scholarly text that happens to be engaging.
 """
-        
+
         # Get relevant buckets and tables using your existing structure
         relevant_buckets = self._get_relevant_buckets(roman_numeral)
         relevant_tables = self._get_relevant_tables(roman_numeral)
-        
+
         print(f"[ACADEMIC] Section {roman_numeral} will use:")
         print(f"  - Buckets: {relevant_buckets}")
         print(f"  - Tables: {relevant_tables}")
         print(f"  - Instructions: {len(academic_instructions)} chars")
         print(f"  - Humanized writing guidelines: ACTIVE")
-        
+
         # Return request compatible with your existing writing system
         return {
             "project_id": self.project_name,
@@ -437,12 +587,12 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
             "selected_tables": relevant_tables,
             "brainstorm_version_ids": []  # Could add brainstorm integration later
         }
-    
+
     def _setup_academic_tables(self):
         """Create academic output tables in your project database"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         # Academic sections table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS academic_sections (
@@ -457,7 +607,7 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
                 PRIMARY KEY (chapter_number, section_number)
             )
         """)
-        
+
         # Academic chapters table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS academic_chapters (
@@ -470,28 +620,28 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
                 generated_timestamp TEXT DEFAULT CURRENT_TIMESTAMP
             )
         """)
-        
+
         conn.commit()
         conn.close()
         print(f"[ACADEMIC] Academic tables initialized in {self.db_path}")
-    
-    def _save_section(self, chapter_num: int, section_num: int, title: str, 
+
+    def _save_section(self, chapter_num: int, section_num: int, title: str,
                      content: str, summary: str, version_id: str = None) -> Dict[str, Any]:
         """Save generated section to your database"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         word_count = len(content.split())
-        
+
         cursor.execute("""
-            INSERT OR REPLACE INTO academic_sections 
+            INSERT OR REPLACE INTO academic_sections
             (chapter_number, section_number, section_title, full_content, brief_summary, word_count, version_id)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (chapter_num, section_num, title, content, summary, word_count, version_id))
-        
+
         conn.commit()
         conn.close()
-        
+
         return {
             "section": self._number_to_roman(section_num),
             "section_number": section_num,
@@ -501,25 +651,25 @@ Write Section {roman_numeral} as a complete, standalone section that flows natur
             "version_id": version_id,
             "status": "completed"
         }
-    
+
     def _assemble_complete_chapter(self, chapter_num: int) -> str:
         """Assemble complete chapter from sections with humanized introduction"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         cursor.execute("""
-            SELECT section_number, section_title, full_content 
-            FROM academic_sections 
-            WHERE chapter_number = ? 
+            SELECT section_number, section_title, full_content
+            FROM academic_sections
+            WHERE chapter_number = ?
             ORDER BY section_number
         """, (chapter_num,))
-        
+
         all_sections = cursor.fetchall()
         conn.close()
-        
+
         if not all_sections:
             return "No sections generated for this chapter."
-        
+
         # Create properly formatted academic chapter with paradigmatic framing and humanized introduction
         chapter_header = f"""# Chapter {chapter_num}: The Birth of an Industry
 ## American Cinema from Invention to Hollywood's Rise (1890s–1915)
@@ -535,33 +685,33 @@ This dual approach demonstrates that American cinema's development was neither p
 ---
 
 """
-        
+
         sections_content = []
         for section_num, section_title, content in all_sections:
             roman = self._number_to_roman(section_num)
             sections_content.append(f"## {roman}. {section_title}\n\n{content}")
-        
+
         complete_chapter = chapter_header + "\n\n".join(sections_content)
         return complete_chapter
-    
+
     def _save_complete_chapter(self, chapter_num: int, content: str, section_count: int) -> Dict[str, Any]:
         """Save complete chapter using your version system"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
-        
+
         total_words = len(content.split())
         version_id = f"academic_chapter_{chapter_num}_{int(datetime.now().timestamp())}"
-        
+
         # Save to academic_chapters table
         cursor.execute("""
-            INSERT OR REPLACE INTO academic_chapters 
+            INSERT OR REPLACE INTO academic_chapters
             (chapter_number, chapter_title, full_content, total_sections, total_word_count, version_id)
             VALUES (?, ?, ?, ?, ?, ?)
         """, (chapter_num, "The Birth of an Industry", content, section_count, total_words, version_id))
-        
+
         conn.commit()
         conn.close()
-        
+
         # Also save as a version using your existing version system
         try:
             save_version_to_db(
@@ -583,36 +733,36 @@ This dual approach demonstrates that American cinema's development was neither p
             print(f"[ACADEMIC] Saved chapter as version: {version_id}")
         except Exception as e:
             print(f"[WARNING] Failed to save chapter version: {e}")
-        
+
         return {
             "chapter_number": chapter_num,
             "total_words": total_words,
             "sections": section_count,
             "version_id": version_id
         }
-    
+
     def _get_relevant_buckets(self, roman_numeral: str) -> List[str]:
         """Get ALL academic buckets for comprehensive source access across all sections"""
         # Your specific academic buckets from backend/lightrag_working_dir/
         academic_buckets = [
-            "balio_sources", 
+            "balio_sources",
             "bordwell_sources",
             "character_research",
             "cook_sources",
-            "cousins_sources", 
+            "cousins_sources",
             "cultural_sources",
             "dixon_foster_sources",
             "gomery_sources",
             "reference_sources",
             "knight_sources"
         ]
-        
+
         try:
             # Verify which buckets actually exist and are accessible
             if os.path.exists(self.lightrag_path):
-                existing_buckets = [bucket for bucket in academic_buckets 
+                existing_buckets = [bucket for bucket in academic_buckets
                                   if os.path.exists(os.path.join(self.lightrag_path, bucket))]
-                
+
                 if existing_buckets:
                     print(f"[ACADEMIC] Using {len(existing_buckets)} existing academic buckets for Section {roman_numeral}")
                     print(f"[ACADEMIC] Buckets: {existing_buckets}")
@@ -623,18 +773,18 @@ This dual approach demonstrates that American cinema's development was neither p
             else:
                 print(f"[ACADEMIC] LightRAG directory not found, using intended academic buckets for Section {roman_numeral}")
                 return academic_buckets
-                
+
         except Exception as e:
             print(f"[WARNING] Could not verify buckets: {e}")
             print(f"[ACADEMIC] Using all intended academic buckets for Section {roman_numeral}")
             return academic_buckets
-    
+
     def _get_relevant_tables(self, roman_numeral: str) -> List[str]:
         """Get intentionally selected SQL tables for each section"""
-        
+
         # Use the class-level configuration
         selected_tables = self.SECTION_TABLE_MAPPING.get(roman_numeral, ["film_history_sections_week1"])
-        
+
         # Verify tables exist in database
         try:
             conn = sqlite3.connect(self.db_path)
@@ -642,26 +792,26 @@ This dual approach demonstrates that American cinema's development was neither p
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
             existing_tables = [row[0] for row in cursor.fetchall()]
             conn.close()
-            
+
             # Filter to only existing tables
             verified_tables = [table for table in selected_tables if table in existing_tables]
-            
+
             if not verified_tables:
                 # Fallback to any film history tables if selected ones don't exist
-                verified_tables = [table for table in existing_tables 
+                verified_tables = [table for table in existing_tables
                                  if any(keyword in table.lower() for keyword in ['film_history', 'markdown_outline'])]
-            
+
             print(f"[ACADEMIC] Section {roman_numeral} using tables: {verified_tables}")
             return verified_tables
-            
+
         except Exception as e:
             print(f"[WARNING] Could not verify tables: {e}")
             return selected_tables  # Return intended tables even if verification fails
-    
+
     def _get_section_title(self, roman_numeral: str) -> str:
         titles = {
             "I": "Introduction: The Scientific Dream of Living Pictures",
-            "II": "The Race to Invent: Competing Models of Cinema", 
+            "II": "The Race to Invent: Competing Models of Cinema",
             "III": "Early Content: From Actuality to Narrative Stirrings",
             "IV": "The Dawn of American Narrative: Edwin S. Porter",
             "V": "The Nickelodeon Boom and the New Mass Audience",
@@ -670,11 +820,11 @@ This dual approach demonstrates that American cinema's development was neither p
             "VIII": "The Fall of the Trust and the Dawn of a New Era"
         }
         return titles.get(roman_numeral, f"Section {roman_numeral}")
-    
+
     def _get_expected_summary(self, roman_numeral: str) -> str:
         summaries = {
             "I": "Establishes the scientific and experimental origins of motion pictures through Muybridge and Marey, setting technological foundation",
-            "II": "Compares Edison's individual Kinetoscope model with Lumière's communal Cinématographe, establishing competing exhibition paradigms", 
+            "II": "Compares Edison's individual Kinetoscope model with Lumière's communal Cinématographe, establishing competing exhibition paradigms",
             "III": "Traces evolution from actuality films to entertainment, highlighting *The Kiss* controversy and cinema's emerging social impact",
             "IV": "Analyzes Porter's *The Great Train Robbery* as breakthrough in American narrative cinema through innovative editing and storytelling",
             "V": "Examines nickelodeon boom creating working-class mass audience and transforming film from novelty to cultural necessity",
@@ -683,7 +833,7 @@ This dual approach demonstrates that American cinema's development was neither p
             "VIII": "Concludes with MPCC dissolution and establishment of Hollywood as legitimate film industry center"
         }
         return summaries.get(roman_numeral, f"Summary for Section {roman_numeral}")
-    
+
     def _get_section_details(self, roman_numeral: str) -> Dict[str, Any]:
         details = {
             "I": {
@@ -760,7 +910,7 @@ This dual approach demonstrates that American cinema's development was neither p
             }
         }
         return details.get(roman_numeral, details["I"])
-    
+
     def _get_section_template(self, roman_numeral: str) -> Dict[str, str]:
         templates = {
             "I": {
@@ -797,7 +947,7 @@ This dual approach demonstrates that American cinema's development was neither p
             }
         }
         return templates.get(roman_numeral, templates["I"])
-    
+
     def _get_evidence_requirements(self, roman_numeral: str) -> Dict[str, str]:
         requirements = {
             "I": {
@@ -834,7 +984,7 @@ This dual approach demonstrates that American cinema's development was neither p
             }
         }
         return requirements.get(roman_numeral, requirements["I"])
-    
+
     def _get_tech_paradigm_focus(self, roman_numeral: str) -> str:
         """Get technology paradigm focus for each section"""
         tech_focus = {
@@ -848,7 +998,7 @@ This dual approach demonstrates that American cinema's development was neither p
             "VIII": "Technology legitimization - standardized production methods, technical professionalism establishing cinema as legitimate technological industry"
         }
         return tech_focus.get(roman_numeral, "Technological innovation and its impact on cinema development")
-    
+
     def _get_business_paradigm_focus(self, roman_numeral: str) -> str:
         """Get business paradigm focus for each section"""
         business_focus = {
@@ -866,7 +1016,7 @@ This dual approach demonstrates that American cinema's development was neither p
     def _roman_to_number(self, roman: str) -> int:
         roman_map = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8}
         return roman_map.get(roman, 1)
-    
+
     def _number_to_roman(self, num: int) -> str:
         number_map = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V", 6: "VI", 7: "VII", 8: "VIII"}
         return number_map.get(num, "I")
@@ -876,50 +1026,50 @@ This dual approach demonstrates that American cinema's development was neither p
 async def test_academic_generation():
     """Test the academic chapter generation with your existing textbook_pilot project"""
     project_name = "textbook_pilot"
-    
+
     print(f"🎬 Testing Academic Chapter Generation with Humanized Writing")
     print(f"📁 Project: {project_name}")
     print("=" * 50)
-    
+
     try:
         # Example: Custom table mapping (optional)
         custom_tables = {
             "I": ["film_history_sections_week1", "film_history_scaffolding_week1"],
             "VIII": ["film_history_sections_week1", "Markdown Outline for SQL  Sheet1", "film_history_revision_checklist_week1"]
         }
-        
+
         generator = AcademicChapterGenerator(project_name, custom_table_mapping=custom_tables)
-        
+
         # Example: Dynamically modify table selection for specific section
         generator.set_table_mapping_for_section("IV", [
-            "film_history_sections_week1", 
+            "film_history_sections_week1",
             "film_history_evidence_week1",
             "Markdown Outline for SQL  Sheet1"
         ])
-        
+
         # Show current configuration
         print(f"📊 Table mapping configuration:")
         for section, tables in generator.get_current_table_mapping().items():
             print(f"  Section {section}: {len(tables)} tables")
-        
+
         print(f"✍️ Humanized writing guidelines: ACTIVE")
         print(f"📝 Natural academic prose with concrete details and accessible language")
-        
+
         result = await generator.generate_complete_chapter(chapter_num=1)
-        
+
         print(f"\n🎉 Generation completed successfully!")
         print(f"📊 Generated {result['metadata']['total_words']:,} words")
         print(f"📝 Sections: {result['metadata']['sections_generated']}/{result['metadata']['sections_generated'] + result['metadata']['sections_failed']}")
         print(f"✍️ Writing style: Humanized academic prose")
-        
+
         # Save to markdown file as well
         output_path = f"projects/{project_name}/Chapter_1_Humanized_Generated.md"
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(result['content'])
         print(f"📁 Also saved to: {output_path}")
-        
+
         return result
-        
+
     except Exception as e:
         print(f"❌ Generation failed: {e}")
         import traceback
