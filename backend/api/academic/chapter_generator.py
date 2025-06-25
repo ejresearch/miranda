@@ -515,6 +515,21 @@ PARADIGMATIC INTEGRATION FOR THIS SECTION:
 
 TARGET LENGTH: {section_data['estimated_words']} words
 
+SECTION STRUCTURE REQUIREMENTS:
+- Opening: Scene-setting with specific historical details (300-400 words)
+- Development: 3-4 major analytical points with rich evidence (400-600 words each)
+- Transitions: Forward-looking connections to next section with narrative momentum (100-150 words)
+- Total target: 1600-2000 words with dense historical content and college-level analysis
+
+SUCCESS INDICATORS - YOUR SECTION MUST ACHIEVE:
+- Reader learns 8+ specific historical facts they didn't know before
+- Include minimum 4 direct quotes from historical sources or contemporary accounts
+- Provide at least 10 specific dates, measurements, costs, or technical specifications
+- Clearly explain 2-3 technological innovations with detailed specifications
+- Demonstrate business calculations, profit margins, or economic data with actual numbers
+- Show 3+ cause-and-effect relationships between technological and business developments
+- Include biographical details that reveal personality and motivation of key figures
+
 NARRATIVE APPROACH FOR THIS SECTION:
 {template_data['prompt_template']} - Remember: tell this as a story while maintaining scholarly accuracy
 
@@ -574,6 +589,33 @@ DEPTH AND RICHNESS REQUIREMENTS:
 - Connect individual stories to broader economic, social, and technological trends
 - Target college-level intellectual sophistication while keeping the engaging tone
 
+SCHOLARLY INVESTIGATION MINDSET:
+Stop thinking like a student completing an assignment. Think like a detective uncovering a fascinating mystery:
+- What secrets do these sources reveal that most people don't know?
+- What human dramas and personalities emerge from the evidence?
+- What surprising connections exist between different pieces of evidence?
+- What do the technical details tell us about the ingenuity required?
+- What do the financial records reveal about the real business pressures?
+- What do contemporary reactions show about how radical these changes were?
+
+EVIDENCE ANALYSIS QUESTIONS:
+Before writing about any historical element, ask yourself:
+- What specific details can I extract from the sources about this?
+- What would it have been like to witness this firsthand?
+- What technical, financial, or social challenges were involved?
+- How does this particular detail illuminate the broader story?
+- What would a contemporary observer have found most remarkable?
+- What patterns or contradictions emerge when I examine multiple sources?
+
+INTELLECTUAL DEPTH INDICATORS:
+Your writing should demonstrate that you understand:
+- The specific technical innovations and how they worked
+- The precise business calculations and market dynamics
+- The personal motivations and backgrounds of key figures  
+- The cultural context and contemporary reactions
+- The legal and patent complexities involved
+- The interconnections between technological and business developments
+
 STORY FLOW REQUIREMENTS:
 Builds on: {section_data['builds_on_previous']}
 Sets up: {section_data['sets_up_next']}
@@ -623,16 +665,30 @@ DO NOT use formulaic transitions:
 FINAL INSTRUCTION:
 Write Section {roman_numeral} as a complete, standalone section that tells this part of the story while flowing naturally from previous content and setting up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. 
 
-Tell this story as if you're sharing this fascinating true narrative with a colleague who trusts your expertise - make them feel like they're discovering this history alongside you. Pack the narrative with rich historical details, specific evidence, and substantial analysis that demonstrates college-level scholarship.
+You are not completing an assignment - you are sharing a fascinating discovery with a colleague. Think like a passionate historian who has spent months in archives and laboratories, uncovering details that illuminate this remarkable period. Your reader trusts you to reveal the full richness of what you've found.
+
+APPROACH EACH ELEMENT WITH CURIOSITY:
+- When you encounter Edison's lab notebooks, what specific entries caught your attention?
+- When you examine patent documents, what technical innovations do they reveal?  
+- When you analyze business records, what economic pressures emerge?
+- When you read contemporary accounts, what surprised people at the time?
+- When you study technical specifications, what engineering challenges were overcome?
+
+SCHOLARLY DETECTIVE WORK:
+- Investigate the evidence thoroughly before writing about it
+- Look for the human stories behind the technical achievements
+- Connect individual innovations to broader patterns of change
+- Reveal the complexity and ingenuity required for these developments
+- Show how technological possibilities intersected with business opportunities
 
 MOST IMPORTANTLY: 
 - Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development
 - Follow every humanizing writing guideline and maintain absolute factual accuracy
-- Mine the evidence requirements thoroughly - don't just mention them, fully explore what they reveal
-- Create a densely informative yet engaging narrative that balances storytelling with substantial historical content
-- The goal is an engaging, richly detailed true story that demonstrates deep historical knowledge, not a lightweight overview
+- Mine the evidence requirements thoroughly - investigate what they actually contain, don't just reference them
+- Create a densely informative yet engaging narrative that demonstrates deep historical knowledge gained through thorough investigation
+- The goal is to share the excitement of historical discovery - make your reader feel like they're learning fascinating things they never knew
 
-REMEMBER: The evidence requirements and source materials contain the specific historical details needed for college-level depth. Your job is to unpack these thoroughly and weave them into a compelling narrative that both educates and engages.
+REMEMBER: You have access to rich historical sources that contain specific details, technical specifications, business records, personal correspondence, and contemporary accounts. Your job is to investigate these sources thoroughly and share the remarkable discoveries they contain. Think like a historian who has found something genuinely fascinating and wants to share every compelling detail.
 """
 
         # Get relevant buckets and tables using your existing structure
