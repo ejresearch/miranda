@@ -526,8 +526,26 @@ SECTION STORY ARC:
 EVIDENCE REQUIREMENTS (Your Source Material):
 {evidence_req['required_evidence']}
 
+CRITICAL: FULLY UTILIZE HISTORICAL EVIDENCE
+The evidence listed above is not just for citation - it contains the rich historical details that make this story compelling and college-level. You must:
+
+- UNPACK the actual content of these sources, not just mention them
+- Include specific technical specifications, measurements, dates, and figures
+- Quote from documents, letters, and contemporary accounts when possible
+- Describe the physical details of equipment, locations, and processes
+- Provide business figures, attendance numbers, financial data, and market statistics
+- Include legal document details, patent specifications, and court decision language
+- Use biographical information, personal correspondence, and career details
+- Incorporate contemporary newspaper accounts, trade publication reports, and industry analyses
+
+EXAMPLE OF DEPTH REQUIRED:
+❌ SHALLOW: "Muybridge used cameras to photograph a horse"
+✅ COLLEGE-LEVEL: "Muybridge's setup at Palo Alto racetrack involved precisely 12 cameras spaced 27 inches apart, each equipped with Dallmeyer lenses and triggered by threads stretched across the track at a height of 18 inches. The exposure time was 1/2000th of a second, captured on wet-plate collodion glass negatives measuring 8x10 inches, with each camera housing costing $2,000 - a substantial investment that attracted backing from Leland Stanford..."
+
 SOURCE SYNTHESIS APPROACH:
 {evidence_req['comprehensive_query']}
+
+The sources and evidence requirements already contain the rich historical details needed for college-level depth. Your job is to mine these thoroughly and weave them into the narrative, not just reference them superficially.
 
 DATA SOURCE STRATEGY:
 - COMPREHENSIVE DOCUMENT ACCESS: Query ALL document buckets for maximum source diversity and evidence depth
@@ -546,6 +564,16 @@ ACADEMIC STANDARDS WITH ENGAGING STORYTELLING:
 - Choose concrete, specific words over abstract terminology
 - Avoid all banned phrases and complex sentence structures listed in the guidelines
 
+DEPTH AND RICHNESS REQUIREMENTS:
+- Each section should be densely packed with historical information while maintaining narrative flow
+- Don't just mention sources - thoroughly explore what they reveal
+- Include specific measurements, costs, dates, patent numbers, attendance figures, and technical specifications
+- Use actual quotes from historical figures when documented
+- Describe physical environments in detail - what did the Black Maria look like inside? What sounds filled early nickelodeons?
+- Provide context about what else was happening in America during these developments
+- Connect individual stories to broader economic, social, and technological trends
+- Target college-level intellectual sophistication while keeping the engaging tone
+
 STORY FLOW REQUIREMENTS:
 Builds on: {section_data['builds_on_previous']}
 Sets up: {section_data['sets_up_next']}
@@ -562,10 +590,49 @@ CRITICAL WRITING REQUIREMENTS:
 - Remember: scholarly restraint with engaging narrative warmth
 - The story should feel like it's unfolding, not being reported
 
+CRITICAL WRITING REQUIREMENTS - WHAT NOT TO DO:
+
+DO NOT write like a documentary narrator:
+✗ "This is the story of how cinema began..."
+✓ Natural opening with context and specific details
+
+DO NOT use textbook summarizing:
+✗ "In this section we will explore..."
+✓ Jump directly into the story/content
+
+DO NOT write conclusions that summarize:
+✗ "In conclusion, we have seen that Edison..."
+✓ End with forward momentum or connection to next development
+
+DO NOT use academic hedging excessively:
+✗ "It seems that Edison may have possibly considered..."
+✓ "The evidence suggests Edison considered..." OR "Edison considered..."
+
+DO NOT write in passive, distant voice:
+✗ "It has been argued that cinema's development was influenced by..."
+✓ "Cinema's development came from the intersection of..."
+
+DO NOT stack multiple clauses:
+✗ "Because Edison, who had been working on motion pictures since 1888, wanted to create a device that could show moving images to individual viewers, he developed the Kinetoscope, which became popular in arcades."
+✓ "Edison had been working on motion pictures since 1888. He wanted to create a device for individual viewers. The result was the Kinetoscope, which became popular in arcades."
+
+DO NOT use formulaic transitions:
+✗ "Moving on to the next topic..." "Another important factor..." "Furthermore..."
+✓ Use natural, conversational bridges between ideas
+
 FINAL INSTRUCTION:
 Write Section {roman_numeral} as a complete, standalone section that tells this part of the story while flowing naturally from previous content and setting up the next section. Draw from ALL available document sources while using targeted table data for structure and specific requirements. Include proper academic citations, historical evidence, and analysis. 
 
-Tell this story as if you're sharing this fascinating true narrative with a colleague who trusts your expertise - make them feel like they're discovering this history alongside you. MOST IMPORTANTLY: Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development, while following every humanizing writing guideline and maintaining absolute factual accuracy. The goal is an engaging, true story that happens to be scholarly, not a scholarly text that happens to be engaging.
+Tell this story as if you're sharing this fascinating true narrative with a colleague who trusts your expertise - make them feel like they're discovering this history alongside you. Pack the narrative with rich historical details, specific evidence, and substantial analysis that demonstrates college-level scholarship.
+
+MOST IMPORTANTLY: 
+- Frame all content through the paradigmatic lens of technology and business as the driving forces of American cinema development
+- Follow every humanizing writing guideline and maintain absolute factual accuracy
+- Mine the evidence requirements thoroughly - don't just mention them, fully explore what they reveal
+- Create a densely informative yet engaging narrative that balances storytelling with substantial historical content
+- The goal is an engaging, richly detailed true story that demonstrates deep historical knowledge, not a lightweight overview
+
+REMEMBER: The evidence requirements and source materials contain the specific historical details needed for college-level depth. Your job is to unpack these thoroughly and weave them into a compelling narrative that both educates and engages.
 """
 
         # Get relevant buckets and tables using your existing structure
