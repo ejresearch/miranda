@@ -1,4 +1,4 @@
-# backend/api/sql_api.py - COMPLETE REWRITE WITH ALL FIXES
+# backend/api/sql_api.py - COMPLETE REWRITE WITH ALL PHASE 1 ENHANCEMENTS
 
 import os
 import sqlite3
@@ -46,7 +46,7 @@ def execute_query_safely(db_path: str, query: str, params: tuple = ()) -> List[D
 # EXISTING ENDPOINTS (Enhanced)
 # ===================================================================
 
-@router.get("/tables/list")
+@router.get("/list")
 async def list_tables(project: str) -> Dict[str, List[str]]:
     """List all tables in project database"""
     db_path = validate_project_exists(project)
@@ -78,7 +78,7 @@ async def get_table_data(project: str, table_name: str) -> Dict[str, Any]:
             raise HTTPException(status_code=404, detail=f"Table '{table_name}' not found")
         
         # Get table data
-        data = execute_query_safely(db_path, f'SELECT * FROM "{table_name}"')
+        data = execute_query_safely(db_path, f'SELECT rowid, * FROM "{table_name}"')
         
         return {
             "table_name": table_name,
@@ -91,7 +91,7 @@ async def get_table_data(project: str, table_name: str) -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail=str(e))
 
 # ===================================================================
-# NEW CSV UPLOAD ENDPOINT (Fix #1)
+# PHASE 1 NEW ENDPOINT: CSV UPLOAD (Enhanced)
 # ===================================================================
 
 @router.post("/upload_csv")
@@ -100,7 +100,7 @@ async def upload_csv(
     table_name: str,
     file: UploadFile = File(...)
 ) -> Dict[str, Any]:
-    """Upload CSV file to create and populate table - COMPLETELY REWRITTEN"""
+    """Upload CSV file to create and populate table - ENHANCED VERSION"""
     
     # Validate project exists
     db_path = validate_project_exists(project)
@@ -128,7 +128,6 @@ async def upload_csv(
         try:
             df = pd.read_csv(tmp_path, encoding='utf-8')
         except UnicodeDecodeError:
-            # Try different encodings
             try:
                 df = pd.read_csv(tmp_path, encoding='latin-1')
             except:
@@ -226,12 +225,12 @@ async def upload_csv(
                 pass  # Ignore cleanup errors
 
 # ===================================================================
-# ENHANCED TABLE CRUD OPERATIONS 
+# PHASE 1 NEW ENDPOINTS: ENHANCED TABLE CRUD OPERATIONS 
 # ===================================================================
 
-@router.post("/tables/create")
+@router.post("/create")
 async def create_empty_table(project: str, table_data: dict) -> Dict[str, Any]:
-    """Create a new empty table with specified columns - ENHANCED"""
+    """Create a new empty table with specified columns"""
     table_name = table_data.get("name")
     columns = table_data.get("columns", [])
     
@@ -284,7 +283,7 @@ async def create_empty_table(project: str, table_data: dict) -> Dict[str, Any]:
 
 @router.post("/tables/{table_name}/rows")
 async def add_table_row(project: str, table_name: str, row_data: dict) -> Dict[str, Any]:
-    """Add a new row to existing table - ENHANCED"""
+    """Add a new row to existing table"""
     db_path = validate_project_exists(project)
     
     try:
@@ -329,7 +328,7 @@ async def add_table_row(project: str, table_name: str, row_data: dict) -> Dict[s
 
 @router.put("/tables/{table_name}/rows/{row_id}")
 async def update_table_row(project: str, table_name: str, row_id: int, row_data: dict) -> Dict[str, Any]:
-    """Update existing table row by rowid - ENHANCED"""
+    """Update existing table row by rowid"""
     db_path = validate_project_exists(project)
     
     try:
@@ -378,7 +377,7 @@ async def update_table_row(project: str, table_name: str, row_id: int, row_data:
 
 @router.delete("/tables/{table_name}/rows/{row_id}")
 async def delete_table_row(project: str, table_name: str, row_id: int) -> Dict[str, Any]:
-    """Delete specific table row by rowid - ENHANCED"""
+    """Delete specific table row by rowid"""
     db_path = validate_project_exists(project)
     
     try:
@@ -413,7 +412,7 @@ async def delete_table_row(project: str, table_name: str, row_id: int) -> Dict[s
 
 @router.delete("/tables/{table_name}")
 async def delete_table(project: str, table_name: str) -> Dict[str, Any]:
-    """Delete entire table - ENHANCED"""
+    """Delete entire table"""
     db_path = validate_project_exists(project)
     
     try:
@@ -449,7 +448,7 @@ async def delete_table(project: str, table_name: str) -> Dict[str, Any]:
 
 @router.get("/tables/{table_name}/schema")
 async def get_table_schema(project: str, table_name: str) -> Dict[str, Any]:
-    """Get table schema information - NEW"""
+    """Get table schema information"""
     db_path = validate_project_exists(project)
     
     try:
@@ -491,57 +490,9 @@ async def get_table_schema(project: str, table_name: str) -> Dict[str, Any]:
     except sqlite3.Error as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
-@router.get("/tables/{table_name}/rows")
-async def get_table_rows_with_ids(
-    project: str, 
-    table_name: str, 
-    limit: Optional[int] = 100, 
-    offset: Optional[int] = 0
-) -> Dict[str, Any]:
-    """Get table rows with rowid for editing purposes - NEW"""
-    db_path = validate_project_exists(project)
-    
-    try:
-        conn = sqlite3.connect(db_path)
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        
-        # Check if table exists
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
-        if not cursor.fetchone():
-            conn.close()
-            raise HTTPException(status_code=404, detail=f"Table '{table_name}' does not exist")
-        
-        # Get rows with rowid for editing
-        cursor.execute(f'SELECT rowid, * FROM "{table_name}" LIMIT ? OFFSET ?', (limit, offset))
-        rows = cursor.fetchall()
-        
-        # Get total count
-        cursor.execute(f'SELECT COUNT(*) FROM "{table_name}"')
-        total_count = cursor.fetchone()[0]
-        
-        result_rows = [dict(row) for row in rows]
-        conn.close()
-        
-        return {
-            "table_name": table_name,
-            "rows": result_rows,
-            "total_rows": total_count,
-            "limit": limit,
-            "offset": offset,
-            "has_more": (offset + limit) < total_count
-        }
-        
-    except sqlite3.Error as e:
-        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
-
-# ===================================================================
-# HEALTH CHECK
-# ===================================================================
-
-@router.get("/tables/health")
+@router.get("/health")
 async def tables_health_check(project: str) -> Dict[str, Any]:
-    """Health check for table operations - NEW"""
+    """Health check for table operations"""
     try:
         db_path = validate_project_exists(project)
         
@@ -564,7 +515,8 @@ async def tables_health_check(project: str) -> Dict[str, Any]:
             "project": project,
             "database_accessible": True,
             "table_count": table_count,
-            "test_query_successful": test_result is not None
+            "test_query_successful": test_result is not None,
+            "enhanced_crud": "available"
         }
     except Exception as e:
         return {

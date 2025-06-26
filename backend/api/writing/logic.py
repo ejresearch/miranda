@@ -1,16 +1,85 @@
-# backend/api/writing/logic.py - COMPLETE REWRITE WITH ERROR HANDLING
+# backend/api/writing/logic.py - COMPLETE REWRITE WITH PERPLEXITY SUPPORT
 
 import os
 import sqlite3
 import json
+import httpx
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 import traceback
 
+from lightrag import QueryParam
 from backend.core.lightrag_singleton import get_lightrag
 from backend.api.project_versions import save_version_to_db
 
 PROJECTS_DIR = "projects"
+
+# ===================================================================
+# PERPLEXITY INTEGRATION
+# ===================================================================
+
+async def perplexity_model_complete(
+    prompt: str,
+    model: str = "llama-3.1-sonar-large-128k-online",
+    **kwargs
+) -> str:
+    """
+    Perplexity API completion function with fallback to OpenAI
+    """
+    api_key = os.getenv("PERPLEXITY_API_KEY")
+    use_perplexity = os.getenv("USE_PERPLEXITY", "false").lower() == "true"
+    
+    if not use_perplexity or not api_key:
+        print("[WRITING] Using OpenAI (Perplexity not configured)")
+        # Fallback to existing LightRAG/OpenAI
+        lightrag = get_lightrag()
+        return await lightrag.llm_model_func(prompt)
+    
+    try:
+        print(f"[WRITING] Using Perplexity API with model: {model}")
+        
+        # Prepare messages for Perplexity API
+        messages = [{"role": "user", "content": prompt}]
+        
+        # API request payload
+        payload = {
+            "model": model,
+            "messages": messages,
+            "max_tokens": kwargs.get("max_tokens", 2000),
+            "temperature": kwargs.get("temperature", 0.1),
+            "top_p": kwargs.get("top_p", 0.9)
+        }
+        
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            response = await client.post(
+                "https://api.perplexity.ai/chat/completions",
+                json=payload,
+                headers=headers
+            )
+            response.raise_for_status()
+            
+            result = response.json()
+            content = result["choices"][0]["message"]["content"]
+            
+            print(f"[WRITING] Perplexity generation successful: {len(content)} chars")
+            return content
+            
+    except Exception as e:
+        print(f"[ERROR] Perplexity API failed: {str(e)}")
+        print("[WRITING] Falling back to OpenAI...")
+        
+        # Fallback to OpenAI
+        try:
+            lightrag = get_lightrag()
+            return await lightrag.llm_model_func(prompt)
+        except Exception as fallback_error:
+            print(f"[ERROR] OpenAI fallback also failed: {str(fallback_error)}")
+            return f"Content generation failed: {str(e)}"
 
 # ===================================================================
 # UTILITY FUNCTIONS
@@ -146,7 +215,7 @@ async def load_sql_table_data(project_id: str, table_name: str) -> List[Dict[str
         return []
 
 # ===================================================================
-# BUCKET QUERYING (MAJOR FIX)
+# BUCKET QUERYING (ENHANCED)
 # ===================================================================
 
 async def query_buckets(buckets: List[str], instructions: str, project_id: str = None) -> Dict[str, str]:
@@ -184,9 +253,7 @@ async def query_buckets(buckets: List[str], instructions: str, project_id: str =
                 query_text = f"Summarize content from {bucket} for writing context"
             
             # Query with proper error handling
-            from lightrag import QueryParam
             query_param = QueryParam(mode="hybrid", top_k=5)
-            
             response = await lightrag.aquery(query_text, param=query_param)
             
             # Validate and process response
@@ -280,7 +347,7 @@ def build_prompt(
     if buckets:
         prompt_parts.append("\n--- RESEARCH CONTEXT ---")
         for bucket_name, content in buckets.items():
-            if content and len(content.strip()) > 0:
+            if content and len(content.strip()) > 0 and not content.startswith("[Error"):
                 # Truncate very long content
                 display_content = content.strip()
                 if len(display_content) > 1000:
@@ -297,7 +364,7 @@ def build_prompt(
     return final_prompt
 
 # ===================================================================
-# MAIN GENERATION FUNCTION (COMPLETELY REWRITTEN)
+# MAIN GENERATION FUNCTION (WITH PERPLEXITY SUPPORT)
 # ===================================================================
 
 async def generate_written_output(
@@ -308,7 +375,7 @@ async def generate_written_output(
     selected_tables: List[str],
     brainstorm_version_ids: List[str]
 ) -> Dict[str, Any]:
-    """Generate written content with comprehensive error handling and logging"""
+    """Generate written content with Perplexity support and comprehensive error handling"""
     
     # Input validation
     if not project_id or not isinstance(project_id, str):
@@ -383,14 +450,10 @@ async def generate_written_output(
             print(f"[ERROR] Failed to build prompt: {str(e)}")
             final_prompt = f"Error building prompt: {str(e)}"
         
-        # Generate content with LightRAG
+        # Generate content with Perplexity or OpenAI
         print(f"[WRITING] === GENERATING CONTENT ===")
         try:
-            lightrag = get_lightrag()
-            if not lightrag:
-                raise Exception("Failed to get LightRAG instance")
-            
-            result = await lightrag.llm_model_func(final_prompt)
+            result = await perplexity_model_complete(final_prompt)
             
             if not result or len(result.strip()) < 10:
                 print(f"[WARNING] Generated content is very short: {len(result) if result else 0} chars")
@@ -406,6 +469,12 @@ async def generate_written_output(
         # Create version metadata
         generation_end_time = datetime.now()
         generation_duration = (generation_end_time - generation_start_time).total_seconds()
+        
+        # Check if Perplexity was used
+        perplexity_used = (
+            os.getenv("USE_PERPLEXITY", "false").lower() == "true" and 
+            os.getenv("PERPLEXITY_API_KEY") is not None
+        )
         
         metadata = {
             "selectedSources": {
@@ -423,7 +492,8 @@ async def generate_written_output(
                 "end_time": generation_end_time.isoformat(),
                 "duration_seconds": generation_duration,
                 "prompt_length": len(final_prompt),
-                "result_length": len(result) if result else 0
+                "result_length": len(result) if result else 0,
+                "model_used": "perplexity" if perplexity_used else "openai"
             },
             "status": "success" if result and not result.startswith("Error") else "error"
         }
@@ -451,6 +521,7 @@ async def generate_written_output(
         print(f"[WRITING] ===== GENERATION COMPLETE =====")
         print(f"[WRITING] Duration: {generation_duration:.2f} seconds")
         print(f"[WRITING] Content length: {len(result)} characters")
+        print(f"[WRITING] Model used: {'Perplexity' if perplexity_used else 'OpenAI'}")
         
         return {
             "version_id": version_id,
@@ -458,7 +529,8 @@ async def generate_written_output(
             "prompt": final_prompt,
             "sources": metadata,
             "status": "success",
-            "generation_time": generation_duration
+            "generation_time": generation_duration,
+            "model_used": "perplexity" if perplexity_used else "openai"
         }
         
     except FileNotFoundError as e:

@@ -1,0 +1,23 @@
+{
+  "name": "perplexity_test",
+  "original_name": "perplexity_test",
+  "description": "Testing Perplexity AI with sample data",
+  "template": "screenplay",
+  "template_name": "Screenplay Writing",
+  "category": "creative",
+  "created": "2025-06-26T12:54:51.343320",
+  "updated": "2025-06-26T12:54:51.343436",
+  "buckets": [
+    "character_research",
+    "plot_devices",
+    "dialogue_samples"
+  ],
+  "tables": [
+    "characters",
+    "scenes",
+    "themes",
+    "locations"
+  ],
+  "include_sample_data": true,
+  "version": "1.0"
+}
