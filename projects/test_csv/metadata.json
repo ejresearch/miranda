@@ -1,0 +1,15 @@
+{
+  "name": "test_csv",
+  "created": "2025-07-07T11:26:59.761287",
+  "updated": "2025-07-07T11:26:59.761290",
+  "type": "custom",
+  "template": "unknown",
+  "buckets": [],
+  "tables": [],
+  "stats": {
+    "table_count": 2,
+    "bucket_count": 0
+  },
+  "auto_created": true,
+  "version": "1.0"
+}
