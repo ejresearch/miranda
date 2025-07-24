@@ -1,10 +1,10 @@
 import React from 'react';
-import MirandaWorkflowGUI from './MirandaWorkflowGUI';
+import WorkingMiranda from './WorkingMiranda';
 
 function App() {
   return (
     <div className="App">
-      <MirandaWorkflowGUI />
+      <WorkingMiranda />
     </div>
   );
 }
