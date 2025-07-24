@@ -1,0 +1,15 @@
+{
+  "name": "Test",
+  "created": "2025-07-24T13:12:50.080620",
+  "updated": "2025-07-24T13:12:50.080625",
+  "type": "custom",
+  "template": "unknown",
+  "buckets": [],
+  "tables": [],
+  "stats": {
+    "table_count": 2,
+    "bucket_count": 0
+  },
+  "auto_created": true,
+  "version": "1.0"
+}

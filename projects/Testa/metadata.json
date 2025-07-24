@@ -1,0 +1,23 @@
+{
+  "name": "Testa",
+  "original_name": "Testa",
+  "description": "Created from Miranda Desktop App",
+  "template": "screenplay",
+  "template_name": "Screenplay Writing",
+  "category": "creative",
+  "created": "2025-07-24T10:47:43.999172",
+  "updated": "2025-07-24T10:47:43.999294",
+  "buckets": [
+    "character_research",
+    "plot_devices",
+    "dialogue_samples"
+  ],
+  "tables": [
+    "characters",
+    "scenes",
+    "themes",
+    "locations"
+  ],
+  "include_sample_data": true,
+  "version": "1.0"
+}
