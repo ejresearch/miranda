@@ -1,0 +1,23 @@
+{
+  "name": "miranda_test_1753367258",
+  "original_name": "miranda_test_1753367258",
+  "description": "",
+  "template": "screenplay",
+  "template_name": "Screenplay Writing",
+  "category": "creative",
+  "created": "2025-07-24T09:27:38.213774",
+  "updated": "2025-07-24T09:27:38.213784",
+  "buckets": [
+    "character_research",
+    "plot_devices",
+    "dialogue_samples"
+  ],
+  "tables": [
+    "characters",
+    "scenes",
+    "themes",
+    "locations"
+  ],
+  "include_sample_data": true,
+  "version": "1.0"
+}
