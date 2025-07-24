@@ -1,4 +1,4 @@
-# backend/api/templates.py (NEW)
+# backend/api/templates.py (FIXED VERSION)
 
 from fastapi import APIRouter, HTTPException
 from typing import Dict, List, Optional
@@ -11,7 +11,7 @@ router = APIRouter()
 
 PROJECTS_DIR = "projects"
 
-# Template definitions
+# Template definitions (your existing TEMPLATES dict remains the same)
 TEMPLATES = {
     "screenplay": {
         "name": "Screenplay Writing",
@@ -230,6 +230,55 @@ TEMPLATES = {
     }
 }
 
+# 🔧 FIX: Add complete database schema function
+def ensure_complete_database_schema(db_path: str, project_name: str):
+    """Ensure all required tables exist in the project database"""
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        
+        # Create versions table (this was missing!)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS versions (
+                id TEXT PRIMARY KEY,
+                project_id TEXT NOT NULL,
+                type TEXT NOT NULL,
+                name TEXT NOT NULL,
+                focus TEXT,
+                created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                prompt TEXT NOT NULL,
+                result TEXT NOT NULL,
+                metadata_json TEXT
+            );
+        """)
+        
+        # Create project_info table for metadata
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS project_info (
+                key TEXT PRIMARY KEY,
+                value TEXT,
+                updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        
+        # Insert basic project info
+        cursor.execute(
+            "INSERT OR REPLACE INTO project_info (key, value) VALUES (?, ?)",
+            ("project_name", project_name)
+        )
+        cursor.execute(
+            "INSERT OR REPLACE INTO project_info (key, value) VALUES (?, ?)",
+            ("created", datetime.now().isoformat())
+        )
+        
+        conn.commit()
+        conn.close()
+        print(f"✅ Complete database schema ensured for: {project_name}")
+        
+    except sqlite3.Error as e:
+        print(f"❌ Database schema error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database initialization failed: {str(e)}")
+
 @router.get("/templates")
 async def list_templates():
     """Get all available project templates with categories"""
@@ -297,6 +346,13 @@ async def create_from_template(template_data: dict):
         
         # Create database
         db_path = os.path.join(project_path, "project.db")
+        conn = sqlite3.connect(db_path)
+        
+        # 🔧 FIX: Add complete database schema (this is the key fix!)
+        conn.close()  # Close the connection first
+        ensure_complete_database_schema(db_path, project_name)
+        
+        # Reopen connection for template tables
         conn = sqlite3.connect(db_path)
         
         tables_created = []

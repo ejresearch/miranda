@@ -1,15 +1,23 @@
 {
   "name": "Test",
-  "created": "2025-07-24T13:12:50.080620",
-  "updated": "2025-07-24T13:12:50.080625",
-  "type": "custom",
-  "template": "unknown",
-  "buckets": [],
-  "tables": [],
-  "stats": {
-    "table_count": 2,
-    "bucket_count": 0
-  },
-  "auto_created": true,
+  "original_name": "Test",
+  "description": "Full screenplay development with character arcs and scene structure",
+  "template": "screenplay",
+  "template_name": "Screenplay Writing",
+  "category": "creative",
+  "created": "2025-07-24T18:48:26.431830",
+  "updated": "2025-07-24T18:48:26.431838",
+  "buckets": [
+    "character_research",
+    "plot_devices",
+    "dialogue_samples"
+  ],
+  "tables": [
+    "characters",
+    "scenes",
+    "themes",
+    "locations"
+  ],
+  "include_sample_data": true,
   "version": "1.0"
 }

@@ -1,12 +1,12 @@
 {
-  "name": "Elle",
-  "original_name": "Elle",
-  "description": "Feature film or TV screenplay development",
+  "name": "Hia",
+  "original_name": "Hia",
+  "description": "Full screenplay development with character arcs and scene structure",
   "template": "screenplay",
   "template_name": "Screenplay Writing",
   "category": "creative",
-  "created": "2025-07-24T15:41:17.584950",
-  "updated": "2025-07-24T15:41:17.585177",
+  "created": "2025-07-24T18:48:13.103799",
+  "updated": "2025-07-24T18:48:13.103809",
   "buckets": [
     "character_research",
     "plot_devices",
