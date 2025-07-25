@@ -1,0 +1,24 @@
+{
+  "name": "xxx",
+  "original_name": "xxx",
+  "description": "Research-driven academic writing with citations and structured chapters",
+  "template": "academic_textbook",
+  "template_name": "Academic Textbook",
+  "category": "academic",
+  "created": "2025-07-24T22:49:14.787007",
+  "updated": "2025-07-24T22:49:14.787017",
+  "buckets": [
+    "primary_sources",
+    "secondary_research",
+    "case_studies",
+    "methodologies"
+  ],
+  "tables": [
+    "chapters",
+    "references",
+    "figures",
+    "key_terms"
+  ],
+  "include_sample_data": true,
+  "version": "1.0"
+}

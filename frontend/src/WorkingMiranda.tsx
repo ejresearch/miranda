@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-// Enhanced Miranda API with detailed error logging and debugging
+// Enhanced Miranda API with Phase 3 AI capabilities
 class MirandaAPI {
   private baseURL = 'http://localhost:8000';
 
   async healthCheck() {
     try {
       const response = await fetch(`${this.baseURL}/healthcheck`);
-      console.log('🏥 Health check response:', response.status, response.statusText);
       return response.ok;
     } catch (error) {
       console.error('🚨 Health check failed:', error);
@@ -17,209 +16,127 @@ class MirandaAPI {
 
   async getTemplates() {
     try {
-      console.log('🔄 Fetching templates from:', `${this.baseURL}/templates/templates`);
       const response = await fetch(`${this.baseURL}/templates/templates`);
-      console.log('📋 Templates response:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ Templates fetch failed:', errorText);
-        throw new Error(`Failed to fetch templates: ${response.status} ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      console.log('✅ Templates loaded successfully:', data);
-      return data;
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
     } catch (error) {
       console.error('🚨 Templates error:', error);
       throw error;
     }
   }
 
-  async createProjectFromTemplate(data: {
-    template: string;
-    name: string;
-    description: string;
-    include_sample_data: boolean;
-  }) {
+  async createProjectFromTemplate(data: any) {
     try {
-      const url = `${this.baseURL}/templates/projects/from-template`;
-      console.log('🔄 Creating project at:', url);
-      console.log('📦 Project data being sent:', JSON.stringify(data, null, 2));
-      
-      const response = await fetch(url, {
+      const response = await fetch(`${this.baseURL}/templates/projects/from-template`, {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
-      
-      console.log('📡 Project creation response:', response.status, response.statusText);
-      console.log('📡 Response headers:', Object.fromEntries(response.headers.entries()));
-      
-      const responseText = await response.text();
-      console.log('📡 Raw response body:', responseText);
-      
-      if (!response.ok) {
-        console.error('❌ Project creation failed with status:', response.status);
-        console.error('❌ Error response body:', responseText);
-        
-        // Try to parse error as JSON, fallback to text
-        let errorMessage;
-        try {
-          const errorData = JSON.parse(responseText);
-          errorMessage = errorData.detail || errorData.message || `Server error: ${response.status}`;
-          console.error('❌ Parsed error data:', errorData);
-        } catch (parseError) {
-          errorMessage = `Server error: ${response.status} - ${responseText}`;
-          console.error('❌ Could not parse error response as JSON:', parseError);
-        }
-        
-        throw new Error(errorMessage);
-      }
-      
-      // Try to parse successful response
-      let result;
-      try {
-        result = JSON.parse(responseText);
-        console.log('✅ Project created successfully:', result);
-      } catch (parseError) {
-        console.warn('⚠️ Success response is not JSON:', responseText);
-        result = { status: 'success', message: responseText };
-      }
-      
-      return result;
-      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
     } catch (error) {
       console.error('🚨 Project creation error:', error);
       throw error;
     }
   }
 
-  // Phase 2: File Upload APIs with debugging
   async createBucket(projectName: string, bucketName: string) {
-    try {
-      const url = `${this.baseURL}/projects/${projectName}/buckets/buckets/new`;
-      console.log('🔄 Creating bucket at:', url);
-      
-      const data = { bucket_name: bucketName };
-      console.log('🪣 Bucket data:', data);
-      
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      
-      console.log('🪣 Bucket creation response:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ Bucket creation failed:', errorText);
-        throw new Error(`Failed to create bucket: ${response.status} - ${errorText}`);
-      }
-      
-      const result = await response.json();
-      console.log('✅ Bucket created successfully:', result);
-      return result;
-    } catch (error) {
-      console.error('🚨 Bucket creation error:', error);
-      throw error;
-    }
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/buckets/buckets/new`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bucket_name: bucketName })
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
   }
 
   async uploadToBucket(projectName: string, bucketName: string, file: File) {
-    try {
-      const url = `${this.baseURL}/projects/${projectName}/buckets/buckets/${bucketName}/ingest`;
-      console.log('🔄 Uploading file to:', url);
-      console.log('📄 File details:', { name: file.name, size: file.size, type: file.type });
-      
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      const response = await fetch(url, {
-        method: 'POST',
-        body: formData
-      });
-      
-      console.log('📄 File upload response:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ File upload failed:', errorText);
-        throw new Error(`Failed to upload file: ${response.status} - ${errorText}`);
-      }
-      
-      const result = await response.json();
-      console.log('✅ File uploaded successfully:', result);
-      return result;
-    } catch (error) {
-      console.error('🚨 File upload error:', error);
-      throw error;
-    }
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/buckets/buckets/${bucketName}/ingest`, {
+      method: 'POST',
+      body: formData
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
   }
 
   async uploadCSV(projectName: string, tableName: string, file: File) {
-    try {
-      const url = `${this.baseURL}/projects/${projectName}/tables/tables/upload_csv?project=${projectName}&table_name=${tableName}`;
-      console.log('🔄 Uploading CSV to:', url);
-      console.log('📊 CSV details:', { name: file.name, size: file.size, type: file.type, tableName });
-      
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      const response = await fetch(url, {
-        method: 'POST',
-        body: formData
-      });
-      
-      console.log('📊 CSV upload response:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ CSV upload failed:', errorText);
-        console.error('❌ This is the known CSV upload bug from Phase 1 report');
-        throw new Error(`Failed to upload CSV: ${response.status} - ${errorText}`);
-      }
-      
-      const result = await response.json();
-      console.log('✅ CSV uploaded successfully:', result);
-      return result;
-    } catch (error) {
-      console.error('🚨 CSV upload error:', error);
-      throw error;
-    }
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/tables/tables/upload_csv?project=${projectName}&table_name=${tableName}`, {
+      method: 'POST',
+      body: formData
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
   }
 
   async getTableData(projectName: string, tableName: string) {
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/tables/tables/${tableName}?project=${projectName}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  }
+
+  async generateBrainstorm(projectName: string, options: any) {
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/brainstorm/brainstorm`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        project_id: projectName,
+        scene_id: 'general',
+        scene_description: options.prompt,
+        selected_buckets: options.selectedBuckets,
+        selected_tables: options.selectedTables,
+        custom_prompt: options.prompt,
+        tone: options.tone,
+        focus_areas: options.focusAreas || []
+      })
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  }
+
+  async generateWrite(projectName: string, options: any) {
+    const response = await fetch(`${this.baseURL}/projects/${projectName}/write/write`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        project_id: projectName,
+        prompt_tone: options.tone,
+        custom_instructions: options.instructions,
+        selected_buckets: options.selectedBuckets,
+        selected_tables: options.selectedTables,
+        brainstorm_version_ids: options.brainstormVersions || []
+      })
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  }
+
+  async getProjectBuckets(projectName: string) {
     try {
-      const url = `${this.baseURL}/projects/${projectName}/tables/tables/${tableName}?project=${projectName}`;
-      console.log('🔄 Fetching table data from:', url);
-      
-      const response = await fetch(url);
-      console.log('📊 Table data response:', response.status, response.statusText);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('❌ Table data fetch failed:', errorText);
-        throw new Error(`Failed to fetch table data: ${response.status} - ${errorText}`);
-      }
-      
-      const result = await response.json();
-      console.log('✅ Table data fetched successfully:', result);
-      return result;
+      const response = await fetch(`${this.baseURL}/projects/${projectName}/buckets/buckets`);
+      if (!response.ok) return [];
+      return await response.json();
     } catch (error) {
-      console.error('🚨 Table data fetch error:', error);
-      throw error;
+      return [];
+    }
+  }
+
+  async getProjectTables(projectName: string) {
+    try {
+      const response = await fetch(`${this.baseURL}/projects/${projectName}/tables/tables`);
+      if (!response.ok) return [];
+      return await response.json();
+    } catch (error) {
+      return [];
     }
   }
 }
 
 const api = new MirandaAPI();
 
-// Enhanced Types for Phase 2
 interface Template {
   id: string;
   name: string;
@@ -227,14 +144,6 @@ interface Template {
   bucket_count: number;
   table_count: number;
   has_sample_data: boolean;
-}
-
-interface ProjectData {
-  name: string;
-  template: string;
-  description: string;
-  uploadedFiles: UploadedFile[];
-  uploadedTables: UploadedTable[];
 }
 
 interface UploadedFile {
@@ -258,6 +167,29 @@ interface UploadedTable {
   preview?: any[];
 }
 
+interface ProjectData {
+  name: string;
+  template: string;
+  description: string;
+  uploadedFiles: any[];
+  uploadedTables: any[];
+}
+
+interface AIVersion {
+  id: string;
+  type: 'brainstorm' | 'write';
+  content: string;
+  timestamp: string;
+  prompt: string;
+  tone: string;
+  sources: {
+    buckets: string[];
+    tables: string[];
+    brainstorms?: string[];
+  };
+  metadata?: any;
+}
+
 const WorkingMiranda: React.FC = () => {
   // Core state
   const [currentView, setCurrentView] = useState<string>('home');
@@ -277,11 +209,26 @@ const WorkingMiranda: React.FC = () => {
     uploadedTables: []
   });
 
-  // Phase 2: File Upload state
-  const [dragOver, setDragOver] = useState<boolean>(false);
-  const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({});
+  // AI state
+  const [aiVersions, setAiVersions] = useState<AIVersion[]>([]);
+  const [availableBuckets, setAvailableBuckets] = useState<string[]>([]);
+  const [availableTables, setAvailableTables] = useState<string[]>([]);
+  const [selectedSources, setSelectedSources] = useState<{
+    buckets: string[];
+    tables: string[];
+    brainstorms: string[];
+  }>({ buckets: [], tables: [], brainstorms: [] });
+  const [aiPrompt, setAiPrompt] = useState<string>('');
+  const [aiTone, setAiTone] = useState<string>('creative');
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [generationType, setGenerationType] = useState<'brainstorm' | 'write' | ''>('');
+  const [selectedVersion, setSelectedVersion] = useState<AIVersion | null>(null);
+
+  // File upload state
   const [bucketName, setBucketName] = useState<string>('');
   const [tableName, setTableName] = useState<string>('');
+  const [uploadProgress, setUploadProgress] = useState<{[key: string]: number}>({});
+  const [dragOver, setDragOver] = useState<boolean>(false);
   const [showFilePreview, setShowFilePreview] = useState<boolean>(false);
   const [selectedTableData, setSelectedTableData] = useState<any[]>([]);
 
@@ -289,75 +236,66 @@ const WorkingMiranda: React.FC = () => {
   useEffect(() => {
     const checkBackend = async () => {
       try {
-        console.log('🔄 Checking backend health...');
         const isOnline = await api.healthCheck();
         setBackendOnline(isOnline);
-        
         if (isOnline) {
-          console.log('✅ Backend is online, loading templates...');
           await loadTemplates();
-        } else {
-          console.log('❌ Backend is offline');
-          setMessage('❌ Backend server is not responding');
         }
       } catch (error) {
-        console.error('🚨 Backend check failed:', error);
         setBackendOnline(false);
-        setMessage(`❌ Backend error: ${error}`);
+        setMessage(`❌ Backend error`);
       }
     };
-    
     checkBackend();
   }, []);
 
   const loadTemplates = async () => {
     try {
-      console.log('🔄 Loading templates...');
       const data = await api.getTemplates();
-      
-      if (data && data.templates) {
+      if (data?.templates) {
         const templateArray = Object.entries(data.templates).map(([id, template]: [string, any]) => ({
           id,
           ...template
         }));
         setTemplates(templateArray);
-        console.log('✅ Templates loaded:', templateArray.map(t => t.name));
         setMessage(`✅ Loaded ${templateArray.length} templates`);
-      } else {
-        console.warn('⚠️ Unexpected template data structure:', data);
-        setMessage('⚠️ Templates loaded but in unexpected format');
       }
     } catch (error) {
-      console.error('❌ Failed to load templates:', error);
-      setMessage(`❌ Failed to load templates: ${error}`);
+      setMessage(`❌ Failed to load templates`);
+    }
+  };
+
+  const loadProjectData = async () => {
+    if (!projectData.name) return;
+    try {
+      const [buckets, tables] = await Promise.all([
+        api.getProjectBuckets(projectData.name),
+        api.getProjectTables(projectData.name)
+      ]);
+      setAvailableBuckets(Array.isArray(buckets) ? buckets.map(b => b.name || b) : []);
+      setAvailableTables(Array.isArray(tables) ? tables.map(t => t.name || t) : []);
+    } catch (error) {
+      console.error('Failed to load project data:', error);
     }
   };
 
   // Navigation
   const handleNavClick = (view: string) => {
-    console.log('🔥 Navigation clicked:', view);
     if (view === 'workflow') {
       setShowWorkflow(true);
       setCurrentView('workflow');
-      setMessage('🚀 Starting project creation workflow');
       setCurrentStep(1);
     } else {
       setShowWorkflow(false);
       setCurrentView(view);
-      setMessage(`Switched to ${view} view`);
+      if (projectData.name && view !== 'home') {
+        loadProjectData();
+      }
     }
   };
 
-  const handleTemplateClick = (template: string) => {
-    console.log('🔥 Template clicked:', template);
-    setMessage(`Starting ${template} project...`);
-    setShowWorkflow(true);
-    setCurrentView('workflow');
-    setCurrentStep(1);
-  };
-
   // Validation
-  const validateProjectName = (name: string): {[key: string]: string} => {
+  const validateProjectName = (name: string) => {
     const errors: {[key: string]: string} = {};
     if (!name) {
       errors.name = 'Project name is required';
@@ -365,16 +303,13 @@ const WorkingMiranda: React.FC = () => {
       errors.name = 'Only letters, numbers, underscores, and hyphens allowed';
     } else if (name.length < 3) {
       errors.name = 'Project name must be at least 3 characters';
-    } else if (name.length > 50) {
-      errors.name = 'Project name must be less than 50 characters';
     }
     return errors;
   };
 
   const handleProjectNameChange = (name: string) => {
     setProjectData(prev => ({ ...prev, name }));
-    const errors = validateProjectName(name);
-    setValidationErrors(errors);
+    setValidationErrors(validateProjectName(name));
   };
 
   const handleTemplateSelect = (template: Template) => {
@@ -384,83 +319,38 @@ const WorkingMiranda: React.FC = () => {
       description: template.description 
     }));
     setMessage(`Selected ${template.name} template`);
-    console.log('📋 Template selected:', template.name);
   };
 
   const canProceedToStep = (step: number): boolean => {
     switch (step) {
-      case 2:
-        return projectData.name.length >= 3 && !validationErrors.name;
-      case 3:
-        return !!projectData.template;
-      case 4:
-        return true;
-      case 5:
-        return projectData.uploadedFiles.length > 0 || projectData.uploadedTables.length > 0;
-      default:
-        return true;
+      case 2: return projectData.name.length >= 3 && !validationErrors.name;
+      case 3: return !!projectData.template;
+      case 4: return true;
+      case 5: return projectData.uploadedFiles.length > 0 || projectData.uploadedTables.length > 0;
+      default: return true;
     }
   };
 
   const handleCreateProject = async () => {
     setIsLoading(true);
-    setMessage('🔄 Creating project...');
-    
-    const maxRetries = 3;
-    let attempt = 0;
-    
-    while (attempt < maxRetries) {
-      attempt++;
-      
-      try {
-        setMessage(`🔄 Creating project... (Attempt ${attempt}/${maxRetries})`);
-        
-        console.log(`🔄 Attempt ${attempt}: Creating project with data:`, {
-          template: projectData.template,
-          name: projectData.name,
-          description: projectData.description,
-          include_sample_data: true
-        });
-        
-        const result = await api.createProjectFromTemplate({
-          template: projectData.template,
-          name: projectData.name,
-          description: projectData.description,
-          include_sample_data: true
-        });
-        
-        // Success!
-        setMessage(`✅ Project "${projectData.name}" created successfully! (Attempt ${attempt})`);
-        setCurrentStep(4); // Move to upload step
-        console.log(`🎉 Project created successfully on attempt ${attempt}:`, result);
-        
-        // Initialize default bucket name based on template
-        setBucketName('research_docs');
-        return; // Exit the retry loop
-        
-      } catch (error: any) {
-        console.error(`❌ Attempt ${attempt} failed:`, error);
-        const errorMsg = error.message || 'Unknown error occurred';
-        
-        if (attempt < maxRetries) {
-          setMessage(`⚠️ Attempt ${attempt} failed, retrying... (${errorMsg})`);
-          
-          // Wait 2 seconds before retry
-          await new Promise(resolve => setTimeout(resolve, 2000));
-        } else {
-          // All retries exhausted
-          setMessage(`❌ Failed to create project after ${maxRetries} attempts: ${errorMsg}`);
-        }
-      }
+    try {
+      await api.createProjectFromTemplate({
+        template: projectData.template,
+        name: projectData.name,
+        description: projectData.description,
+        include_sample_data: true
+      });
+      setMessage(`✅ Project "${projectData.name}" created successfully!`);
+      setCurrentStep(4);
+      setBucketName('research_docs');
+    } catch (error: any) {
+      setMessage(`❌ Failed to create project: ${error.message}`);
     }
-    
     setIsLoading(false);
   };
 
-  // Phase 2: File Upload Functions
+  // Remove duplicate uploadDocument function
   const handleFileDrop = async (files: FileList, uploadType: 'document' | 'csv') => {
-    console.log(`📤 Uploading ${files.length} ${uploadType} files`);
-    
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const fileId = Math.random().toString(36).substr(2, 9);
@@ -473,12 +363,12 @@ const WorkingMiranda: React.FC = () => {
     }
   };
 
-  const uploadDocument = async (file: File, fileId: string) => {
+  const uploadDocument = async (file: File, fileId?: string) => {
     const bucket = bucketName || 'research_docs';
+    const id = fileId || Math.random().toString(36).substr(2, 9);
     
-    // Add file to state with uploading status
     const newFile: UploadedFile = {
-      id: fileId,
+      id,
       name: file.name,
       size: file.size,
       type: file.type,
@@ -493,52 +383,37 @@ const WorkingMiranda: React.FC = () => {
     }));
 
     try {
-      console.log(`📄 Uploading document: ${file.name} to bucket: ${bucket}`);
+      await api.createBucket(projectData.name, bucket);
       
-      // Create bucket if it doesn't exist
-      try {
-        await api.createBucket(projectData.name, bucket);
-        console.log(`✅ Bucket ${bucket} created or already exists`);
-      } catch (error) {
-        console.log('ℹ️ Bucket may already exist:', bucket);
-      }
-
       // Simulate upload progress
       for (let progress = 0; progress <= 90; progress += 10) {
-        setUploadProgress(prev => ({ ...prev, [fileId]: progress }));
+        setUploadProgress(prev => ({ ...prev, [id]: progress }));
         await new Promise(resolve => setTimeout(resolve, 200));
       }
-
-      // Actual upload
+      
       await api.uploadToBucket(projectData.name, bucket, file);
       
-      // Complete upload
-      setUploadProgress(prev => ({ ...prev, [fileId]: 100 }));
+      setUploadProgress(prev => ({ ...prev, [id]: 100 }));
       setProjectData(prev => ({
         ...prev,
         uploadedFiles: prev.uploadedFiles.map(f =>
-          f.id === fileId ? { ...f, status: 'completed' as const, progress: 100 } : f
+          f.id === id ? { ...f, status: 'completed' as const, progress: 100 } : f
         )
       }));
-
-      console.log(`✅ Document uploaded: ${file.name}`);
       setMessage(`✅ Uploaded ${file.name} to ${bucket}`);
-
     } catch (error: any) {
-      console.error('❌ Upload failed:', error);
       setProjectData(prev => ({
         ...prev,
         uploadedFiles: prev.uploadedFiles.map(f =>
-          f.id === fileId ? { ...f, status: 'error' as const } : f
+          f.id === id ? { ...f, status: 'error' as const } : f
         )
       }));
       setMessage(`❌ Failed to upload ${file.name}: ${error.message}`);
     } finally {
-      // Clean up progress
       setTimeout(() => {
         setUploadProgress(prev => {
           const newProgress = { ...prev };
-          delete newProgress[fileId];
+          delete newProgress[id];
           return newProgress;
         });
       }, 1000);
@@ -548,7 +423,6 @@ const WorkingMiranda: React.FC = () => {
   const uploadCSVFile = async (file: File, fileId: string) => {
     const table = tableName || file.name.replace('.csv', '');
     
-    // Add file to state with uploading status
     const newTable: UploadedTable = {
       id: fileId,
       name: table,
@@ -565,18 +439,14 @@ const WorkingMiranda: React.FC = () => {
     }));
 
     try {
-      console.log(`📊 Uploading CSV: ${file.name} as table: ${table}`);
-      
       // Simulate upload progress
       for (let progress = 0; progress <= 90; progress += 15) {
         setUploadProgress(prev => ({ ...prev, [fileId]: progress }));
         await new Promise(resolve => setTimeout(resolve, 300));
       }
 
-      // Actual upload (this is the known failing endpoint)
       const result = await api.uploadCSV(projectData.name, table, file);
       
-      // Complete upload
       setUploadProgress(prev => ({ ...prev, [fileId]: 100 }));
       setProjectData(prev => ({
         ...prev,
@@ -591,20 +461,16 @@ const WorkingMiranda: React.FC = () => {
         )
       }));
 
-      console.log(`✅ CSV uploaded: ${file.name} -> ${table}`);
       setMessage(`✅ Uploaded ${file.name} as table "${table}"`);
-
     } catch (error: any) {
-      console.error('❌ CSV upload failed (Known bug from Phase 1):', error);
       setProjectData(prev => ({
         ...prev,
         uploadedTables: prev.uploadedTables.map(t =>
           t.id === fileId ? { ...t, status: 'error' as const } : t
         )
       }));
-      setMessage(`❌ CSV upload failed (Known Phase 1 bug): ${error.message}`);
+      setMessage(`❌ CSV upload failed: ${error.message}`);
     } finally {
-      // Clean up progress
       setTimeout(() => {
         setUploadProgress(prev => {
           const newProgress = { ...prev };
@@ -622,26 +488,64 @@ const WorkingMiranda: React.FC = () => {
       setShowFilePreview(true);
       setMessage(`Viewing data from ${table.name}`);
     } catch (error: any) {
-      console.error('Failed to load table data:', error);
       setMessage(`Failed to load data from ${table.name}: ${error.message}`);
     }
   };
 
-  const resetWorkflow = () => {
-    setShowWorkflow(false);
-    setCurrentStep(1);
-    setProjectData({ 
-      name: '', 
-      template: '', 
-      description: '', 
-      uploadedFiles: [], 
-      uploadedTables: [] 
-    });
-    setValidationErrors({});
-    setMessage('');
-    setBucketName('');
-    setTableName('');
-    setUploadProgress({});
+  // AI Generation
+  const handleGenerateAI = async (type: 'brainstorm' | 'write') => {
+    if (!aiPrompt.trim()) {
+      setMessage('❌ Please enter a prompt');
+      return;
+    }
+
+    setIsGenerating(true);
+    setGenerationType(type);
+
+    try {
+      let result;
+      if (type === 'brainstorm') {
+        result = await api.generateBrainstorm(projectData.name, {
+          prompt: aiPrompt,
+          tone: aiTone,
+          selectedBuckets: selectedSources.buckets,
+          selectedTables: selectedSources.tables
+        });
+      } else {
+        result = await api.generateWrite(projectData.name, {
+          instructions: aiPrompt,
+          tone: aiTone,
+          selectedBuckets: selectedSources.buckets,
+          selectedTables: selectedSources.tables,
+          brainstormVersions: selectedSources.brainstorms
+        });
+      }
+
+      const newVersion: AIVersion = {
+        id: result.version_id || Math.random().toString(36).substr(2, 9),
+        type,
+        content: result.content || result.result || 'Generated content',
+        timestamp: new Date().toISOString(),
+        prompt: aiPrompt,
+        tone: aiTone,
+        sources: {
+          buckets: selectedSources.buckets,
+          tables: selectedSources.tables,
+          brainstorms: selectedSources.brainstorms
+        }
+      };
+
+      setAiVersions(prev => [newVersion, ...prev]);
+      setSelectedVersion(newVersion);
+      setMessage(`✅ ${type} generated successfully!`);
+      setAiPrompt('');
+      setSelectedSources({ buckets: [], tables: [], brainstorms: [] });
+    } catch (error: any) {
+      setMessage(`❌ Failed to generate ${type}`);
+    } finally {
+      setIsGenerating(false);
+      setGenerationType('');
+    }
   };
 
   // Render functions
@@ -675,7 +579,6 @@ const WorkingMiranda: React.FC = () => {
           >
             {currentStep > step ? '✓' : step}
           </div>
-          
           {index < 4 && (
             <div
               style={{
@@ -696,22 +599,10 @@ const WorkingMiranda: React.FC = () => {
       <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '2rem' }}>
         Step 1: Project Name
       </h2>
-      
-      <div style={{ 
-        background: 'white', 
-        padding: '2rem', 
-        borderRadius: '1rem', 
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)' 
-      }}>
-        <label style={{ 
-          display: 'block', 
-          fontSize: '1.1rem', 
-          fontWeight: '600', 
-          marginBottom: '0.5rem' 
-        }}>
+      <div style={{ background: 'white', padding: '2rem', borderRadius: '1rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <label style={{ display: 'block', fontSize: '1.1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
           Project Name
         </label>
-        
         <input
           type="text"
           value={projectData.name}
@@ -724,37 +615,14 @@ const WorkingMiranda: React.FC = () => {
             borderRadius: '0.5rem',
             fontSize: '1rem',
             marginBottom: '1rem',
-            outline: 'none',
-            transition: 'border-color 0.2s'
+            outline: 'none'
           }}
         />
-        
         {validationErrors.name && (
-          <div style={{ 
-            color: '#ef4444', 
-            fontSize: '0.875rem', 
-            marginBottom: '1rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
+          <div style={{ color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem' }}>
             ⚠️ {validationErrors.name}
           </div>
         )}
-        
-        <div style={{ 
-          background: '#f0f9ff', 
-          border: '1px solid #0ea5e9', 
-          borderRadius: '0.5rem', 
-          padding: '1rem',
-          marginBottom: '2rem' 
-        }}>
-          <p style={{ margin: 0, color: '#0c4a6e', fontSize: '0.875rem' }}>
-            <strong>💡 Tip:</strong> Use descriptive names like "romantic_comedy_script" or "ai_research_paper". 
-            Only letters, numbers, underscores, and hyphens are allowed.
-          </p>
-        </div>
-        
         <button
           onClick={() => setCurrentStep(2)}
           disabled={!canProceedToStep(2)}
@@ -767,12 +635,7 @@ const WorkingMiranda: React.FC = () => {
             borderRadius: '0.5rem',
             fontSize: '1.1rem',
             fontWeight: '600',
-            cursor: canProceedToStep(2) ? 'pointer' : 'not-allowed',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem',
-            transition: 'background-color 0.2s'
+            cursor: canProceedToStep(2) ? 'pointer' : 'not-allowed'
           }}
         >
           Continue to Templates →
@@ -786,13 +649,7 @@ const WorkingMiranda: React.FC = () => {
       <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '2rem' }}>
         Step 2: Choose Template
       </h2>
-      
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-        gap: '2rem',
-        marginBottom: '2rem'
-      }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
         {templates.map((template) => (
           <div
             key={template.id}
@@ -804,76 +661,23 @@ const WorkingMiranda: React.FC = () => {
               boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
               border: projectData.template === template.id ? '3px solid #3b82f6' : '3px solid transparent',
               cursor: 'pointer',
-              transition: 'all 0.2s',
-              position: 'relative'
+              transition: 'all 0.2s'
             }}
           >
-            {projectData.template === template.id && (
-              <div style={{
-                position: 'absolute',
-                top: '1rem',
-                right: '1rem',
-                background: '#3b82f6',
-                color: 'white',
-                borderRadius: '50%',
-                width: '24px',
-                height: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '14px'
-              }}>
-                ✓
-              </div>
-            )}
-            
-            <div style={{ 
-              fontSize: '1.5rem', 
-              fontWeight: 'bold', 
-              marginBottom: '1rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}>
-              {template.id === 'screenplay' && '🎬'}
-              {template.id === 'academic_textbook' && '📚'}
-              {template.id === 'research_project' && '🔬'}
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               {template.name}
             </div>
-            
-            <p style={{ 
-              color: '#6b7280', 
-              marginBottom: '1.5rem',
-              lineHeight: '1.5'
-            }}>
+            <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
               {template.description}
             </p>
-            
-            <div style={{ 
-              background: '#f9fafb', 
-              padding: '1rem', 
-              borderRadius: '0.5rem',
-              fontSize: '0.875rem'
-            }}>
-              <div style={{ marginBottom: '0.5rem' }}>
-                <strong>📦 Includes:</strong>
-              </div>
-              <div style={{ color: '#6b7280' }}>
-                • {template.bucket_count} document buckets
-              </div>
-              <div style={{ color: '#6b7280' }}>
-                • {template.table_count} data tables
-              </div>
-              {template.has_sample_data && (
-                <div style={{ color: '#059669' }}>
-                  • ✨ Sample data included
-                </div>
-              )}
+            <div style={{ background: '#f9fafb', padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem' }}>
+              <div>📦 {template.bucket_count} document buckets</div>
+              <div>📊 {template.table_count} data tables</div>
+              {template.has_sample_data && <div style={{ color: '#059669' }}>✨ Sample data included</div>}
             </div>
           </div>
         ))}
       </div>
-      
       <div style={{ textAlign: 'center' }}>
         <button
           onClick={() => setCurrentStep(3)}
@@ -886,10 +690,7 @@ const WorkingMiranda: React.FC = () => {
             borderRadius: '0.5rem',
             fontSize: '1.1rem',
             fontWeight: '600',
-            cursor: canProceedToStep(3) ? 'pointer' : 'not-allowed',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem'
+            cursor: canProceedToStep(3) ? 'pointer' : 'not-allowed'
           }}
         >
           Continue to Setup →
@@ -903,18 +704,8 @@ const WorkingMiranda: React.FC = () => {
       <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '2rem' }}>
         Step 3: Project Setup
       </h2>
-      
-      <div style={{
-        background: 'white',
-        borderRadius: '1rem',
-        padding: '2rem',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        marginBottom: '2rem'
-      }}>
-        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-          📋 Project Summary
-        </h3>
-        
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>📋 Project Summary</h3>
         <div style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
             <span style={{ fontWeight: '600' }}>Project Name:</span>
@@ -924,55 +715,28 @@ const WorkingMiranda: React.FC = () => {
             <span style={{ fontWeight: '600' }}>Template:</span>
             <span>{templates.find(t => t.id === projectData.template)?.name}</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-            <span style={{ fontWeight: '600' }}>Sample Data:</span>
-            <span>✅ Included</span>
-          </div>
         </div>
-
-        <div style={{
-          background: '#f0f9ff',
-          border: '1px solid #0ea5e9',
-          borderRadius: '0.5rem',
-          padding: '1.5rem',
-          marginBottom: '2rem'
-        }}>
-          <h4 style={{ margin: '0 0 1rem 0', color: '#0c4a6e' }}>
-            🚀 Ready to Create!
-          </h4>
-          <p style={{ margin: 0, color: '#0c4a6e' }}>
-            Your project will be created with sample data and ready for content uploads.
-          </p>
-        </div>
-
-        <div style={{ textAlign: 'center' }}>
-          <button
-            onClick={handleCreateProject}
-            disabled={isLoading}
-            style={{
-              width: '100%',
-              padding: '1rem 2rem',
-              background: isLoading ? '#9ca3af' : '#059669',
-              color: 'white',
-              border: 'none',
-              borderRadius: '0.5rem',
-              fontSize: '1.1rem',
-              fontWeight: '600',
-              cursor: isLoading ? 'not-allowed' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            {isLoading ? '⏳ Creating Project...' : '🎉 Create Project'}
-          </button>
-        </div>
+        <button
+          onClick={handleCreateProject}
+          disabled={isLoading}
+          style={{
+            width: '100%',
+            padding: '1rem 2rem',
+            background: isLoading ? '#9ca3af' : '#059669',
+            color: 'white',
+            border: 'none',
+            borderRadius: '0.5rem',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            cursor: isLoading ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {isLoading ? '⏳ Creating Project...' : '🎉 Create Project'}
+        </button>
       </div>
     </div>
   );
 
-  // Phase 2: Step 4 - File Upload Interface
   const renderStep4 = () => (
     <div>
       <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '2rem' }}>
@@ -1264,23 +1028,19 @@ const WorkingMiranda: React.FC = () => {
         </div>
       </div>
       
-      {/* Continue Button */}
       <div style={{ textAlign: 'center' }}>
         <button
           onClick={() => setCurrentStep(5)}
-          disabled={!canProceedToStep(5)}
+          disabled={projectData.uploadedFiles.length === 0 && projectData.uploadedTables.length === 0}
           style={{
             padding: '1rem 2rem',
-            background: canProceedToStep(5) ? '#3b82f6' : '#9ca3af',
+            background: (projectData.uploadedFiles.length > 0 || projectData.uploadedTables.length > 0) ? '#3b82f6' : '#9ca3af',
             color: 'white',
             border: 'none',
             borderRadius: '0.5rem',
             fontSize: '1.1rem',
             fontWeight: '600',
-            cursor: canProceedToStep(5) ? 'pointer' : 'not-allowed',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem'
+            cursor: (projectData.uploadedFiles.length > 0 || projectData.uploadedTables.length > 0) ? 'pointer' : 'not-allowed'
           }}
         >
           Complete Setup →
@@ -1294,126 +1054,443 @@ const WorkingMiranda: React.FC = () => {
       <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem' }}>
         🎉 Project Setup Complete!
       </h2>
-      
-      <div style={{
-        background: 'white',
-        borderRadius: '1rem',
-        padding: '2rem',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-        marginBottom: '2rem'
-      }}>
-        <div style={{
-          background: '#f0f9ff',
-          border: '1px solid #0ea5e9',
-          borderRadius: '0.5rem',
-          padding: '1.5rem',
-          marginBottom: '2rem'
-        }}>
-          <h4 style={{ margin: '0 0 1rem 0', color: '#0c4a6e' }}>
-            ✨ "{projectData.name}" is ready!
-          </h4>
-          <p style={{ margin: 0, color: '#0c4a6e' }}>
-            Your {templates.find(t => t.id === projectData.template)?.name} project has been created with content uploaded.
-          </p>
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', marginBottom: '2rem' }}>
+        <div style={{ background: '#f0f9ff', border: '1px solid #0ea5e9', borderRadius: '0.5rem', padding: '1.5rem', marginBottom: '2rem' }}>
+          <h4 style={{ margin: '0 0 1rem 0', color: '#0c4a6e' }}>✨ "{projectData.name}" is ready!</h4>
+          <p style={{ margin: 0, color: '#0c4a6e' }}>Your project has been created and is ready for AI generation.</p>
         </div>
-
-        {/* Upload Summary */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '1rem',
-          marginBottom: '2rem'
-        }}>
-          <div style={{ padding: '1rem', background: '#dcfce7', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#059669' }}>
-              {projectData.uploadedFiles.length}
-            </div>
-            <div style={{ fontSize: '0.875rem', color: '#166534' }}>Documents Uploaded</div>
-          </div>
-          
-          <div style={{ padding: '1rem', background: '#dbeafe', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#3b82f6' }}>
-              {projectData.uploadedTables.length}
-            </div>
-            <div style={{ fontSize: '0.875rem', color: '#1e40af' }}>Data Tables Created</div>
-          </div>
-          
-          <div style={{ padding: '1rem', background: '#f3f4f6', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#9ca3af' }}>Phase 3</div>
-            <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>🤖 AI Generation (Next)</div>
-          </div>
-        </div>
-
-        {/* Phase Progress */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(4, 1fr)', 
-          gap: '1rem',
-          marginBottom: '2rem'
-        }}>
-          <div style={{ textAlign: 'center', padding: '1rem', background: '#dcfce7', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>✅</div>
-            <div style={{ fontWeight: 'bold', color: '#166534' }}>Phase 1</div>
-            <div style={{ fontSize: '0.75rem', color: '#059669' }}>Project Creation</div>
-          </div>
-          <div style={{ textAlign: 'center', padding: '1rem', background: '#dcfce7', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>✅</div>
-            <div style={{ fontWeight: 'bold', color: '#166534' }}>Phase 2</div>
-            <div style={{ fontSize: '0.75rem', color: '#059669' }}>Data Management</div>
-          </div>
-          <div style={{ textAlign: 'center', padding: '1rem', background: '#f3f4f6', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🤖</div>
-            <div style={{ fontWeight: 'bold', color: '#6b7280' }}>Phase 3</div>
-            <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>AI Generation</div>
-          </div>
-          <div style={{ textAlign: 'center', padding: '1rem', background: '#f3f4f6', borderRadius: '0.5rem' }}>
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>📊</div>
-            <div style={{ fontWeight: 'bold', color: '#6b7280' }}>Phase 4</div>
-            <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>Export & Polish</div>
-          </div>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <button
+            onClick={() => {
+              setCurrentView('brainstorm');
+              setShowWorkflow(false);
+            }}
+            style={{
+              padding: '1rem 2rem',
+              background: '#f59e0b',
+              color: 'white',
+              border: 'none',
+              borderRadius: '0.5rem',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            🧠 Start AI Brainstorming
+          </button>
+          <button
+            onClick={() => setCurrentView('home')}
+            style={{
+              padding: '1rem 2rem',
+              background: 'white',
+              color: '#3b82f6',
+              border: '2px solid #3b82f6',
+              borderRadius: '0.5rem',
+              fontSize: '1.1rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            🏠 Back to Home
+          </button>
         </div>
       </div>
-      
-      <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+    </div>
+  );
+
+  const renderBrainstormView = () => (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', minHeight: 'calc(100vh - 200px)' }}>
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>🧠 AI Brainstorming Studio</h2>
+        
+        {!projectData.name && (
+          <div style={{ background: '#fef3c7', border: '1px solid #f59e0b', borderRadius: '0.5rem', padding: '1rem', marginBottom: '1.5rem' }}>
+            <p style={{ margin: 0, color: '#92400e' }}>⚠️ Please create a project first to use AI features</p>
+          </div>
+        )}
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+            Brainstorm Prompt
+          </label>
+          <textarea
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            placeholder="What would you like to brainstorm about?"
+            style={{
+              width: '100%',
+              height: '120px',
+              padding: '1rem',
+              border: '2px solid #e5e7eb',
+              borderRadius: '0.5rem',
+              fontSize: '1rem',
+              resize: 'vertical',
+              outline: 'none'
+            }}
+            disabled={!projectData.name}
+          />
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>Tone</label>
+          <select
+            value={aiTone}
+            onChange={(e) => setAiTone(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              border: '2px solid #e5e7eb',
+              borderRadius: '0.5rem',
+              fontSize: '1rem',
+              outline: 'none'
+            }}
+            disabled={!projectData.name}
+          >
+            <option value="creative">Creative</option>
+            <option value="analytical">Analytical</option>
+            <option value="playful">Playful</option>
+            <option value="serious">Serious</option>
+            <option value="academic">Academic</option>
+          </select>
+        </div>
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+            Content Sources
+          </label>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#6b7280' }}>
+              Document Buckets ({availableBuckets.length} available)
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              {availableBuckets.map(bucket => (
+                <label key={bucket} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.875rem' }}>
+                  <input
+                    type="checkbox"
+                    checked={selectedSources.buckets.includes(bucket)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedSources(prev => ({ ...prev, buckets: [...prev.buckets, bucket] }));
+                      } else {
+                        setSelectedSources(prev => ({ ...prev, buckets: prev.buckets.filter(b => b !== bucket) }));
+                      }
+                    }}
+                    disabled={!projectData.name}
+                  />
+                  {bucket}
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <button
-          onClick={resetWorkflow}
+          onClick={() => handleGenerateAI('brainstorm')}
+          disabled={!projectData.name || !aiPrompt.trim() || isGenerating}
           style={{
-            padding: '1rem 2rem',
-            background: '#3b82f6',
+            width: '100%',
+            padding: '1rem',
+            background: (!projectData.name || !aiPrompt.trim() || isGenerating) ? '#9ca3af' : '#f59e0b',
             color: 'white',
             border: 'none',
             borderRadius: '0.5rem',
             fontSize: '1.1rem',
             fontWeight: '600',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
+            cursor: (!projectData.name || !aiPrompt.trim() || isGenerating) ? 'not-allowed' : 'pointer'
           }}
         >
-          ➕ Create Another Project
+          {isGenerating && generationType === 'brainstorm' ? 'AI is thinking...' : '🧠 Generate Brainstorm'}
         </button>
-        
-        <button
-          onClick={() => setCurrentView('home')}
-          style={{
-            padding: '1rem 2rem',
-            background: 'white',
-            color: '#3b82f6',
-            border: '2px solid #3b82f6',
-            borderRadius: '0.5rem',
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            cursor: 'pointer'
-          }}
-        >
-          🏠 Back to Home
-        </button>
+      </div>
+
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', maxHeight: 'calc(100vh - 200px)', overflow: 'auto' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          Brainstorm Results ({aiVersions.filter(v => v.type === 'brainstorm').length})
+        </h3>
+
+        {aiVersions.filter(v => v.type === 'brainstorm').length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧠</div>
+            <p>No brainstorms yet. Generate your first one!</p>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {aiVersions.filter(v => v.type === 'brainstorm').map((version, index) => (
+              <div
+                key={version.id}
+                onClick={() => setSelectedVersion(version)}
+                style={{
+                  padding: '1rem',
+                  border: selectedVersion?.id === version.id ? '2px solid #f59e0b' : '1px solid #e5e7eb',
+                  borderRadius: '0.5rem',
+                  cursor: 'pointer',
+                  background: selectedVersion?.id === version.id ? '#fef3c7' : 'white'
+                }}
+              >
+                <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>
+                  Brainstorm #{aiVersions.filter(v => v.type === 'brainstorm').length - index}
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                  {new Date(version.timestamp).toLocaleString()}
+                </div>
+                <div style={{ fontSize: '0.875rem' }}>{version.prompt.substring(0, 120)}...</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {selectedVersion && selectedVersion.type === 'brainstorm' && (
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1rem' }}>Generated Content</h4>
+            <div style={{
+              maxHeight: '300px',
+              overflow: 'auto',
+              whiteSpace: 'pre-wrap',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+              background: 'white',
+              padding: '1rem',
+              borderRadius: '0.25rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              {selectedVersion.content}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 
-  // Data Preview Modal for Phase 2
+  const renderWriteView = () => (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', minHeight: 'calc(100vh - 200px)' }}>
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>✍️ AI Writing Assistant</h2>
+        
+        {!projectData.name && (
+          <div style={{ background: '#fef3c7', border: '1px solid #f59e0b', borderRadius: '0.5rem', padding: '1rem', marginBottom: '1.5rem' }}>
+            <p style={{ margin: 0, color: '#92400e' }}>⚠️ Please create a project first to use AI features</p>
+          </div>
+        )}
+
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ display: 'block', fontSize: '1rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+            Writing Instructions
+          </label>
+          <textarea
+            value={aiPrompt}
+            onChange={(e) => setAiPrompt(e.target.value)}
+            placeholder="What would you like me to write?"
+            style={{
+              width: '100%',
+              height: '120px',
+              padding: '1rem',
+              border: '2px solid #e5e7eb',
+              borderRadius: '0.5rem',
+              fontSize: '1rem',
+              resize: 'vertical',
+              outline: 'none'
+            }}
+            disabled={!projectData.name}
+          />
+        </div>
+
+        <button
+          onClick={() => handleGenerateAI('write')}
+          disabled={!projectData.name || !aiPrompt.trim() || isGenerating}
+          style={{
+            width: '100%',
+            padding: '1rem',
+            background: (!projectData.name || !aiPrompt.trim() || isGenerating) ? '#9ca3af' : '#059669',
+            color: 'white',
+            border: 'none',
+            borderRadius: '0.5rem',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            cursor: (!projectData.name || !aiPrompt.trim() || isGenerating) ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {isGenerating && generationType === 'write' ? 'AI is writing...' : '✍️ Generate Content'}
+        </button>
+      </div>
+
+      <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', maxHeight: 'calc(100vh - 200px)', overflow: 'auto' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          Written Content ({aiVersions.filter(v => v.type === 'write').length})
+        </h3>
+
+        {aiVersions.filter(v => v.type === 'write').length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '3rem', color: '#6b7280' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✍️</div>
+            <p>No written content yet. Generate your first piece!</p>
+          </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {aiVersions.filter(v => v.type === 'write').map((version, index) => (
+              <div
+                key={version.id}
+                onClick={() => setSelectedVersion(version)}
+                style={{
+                  padding: '1rem',
+                  border: selectedVersion?.id === version.id ? '2px solid #059669' : '1px solid #e5e7eb',
+                  borderRadius: '0.5rem',
+                  cursor: 'pointer',
+                  background: selectedVersion?.id === version.id ? '#f0fdf4' : 'white'
+                }}
+              >
+                <div style={{ fontWeight: '600', fontSize: '0.875rem' }}>
+                  Content #{aiVersions.filter(v => v.type === 'write').length - index}
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+                  {new Date(version.timestamp).toLocaleString()}
+                </div>
+                <div style={{ fontSize: '0.875rem' }}>{version.prompt.substring(0, 120)}...</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {selectedVersion && selectedVersion.type === 'write' && (
+          <div style={{ marginTop: '2rem', padding: '1.5rem', background: '#f8fafc', borderRadius: '0.5rem' }}>
+            <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '1rem' }}>Generated Content</h4>
+            <div style={{
+              maxHeight: '300px',
+              overflow: 'auto',
+              whiteSpace: 'pre-wrap',
+              fontSize: '0.875rem',
+              lineHeight: '1.5',
+              background: 'white',
+              padding: '1rem',
+              borderRadius: '0.25rem',
+              border: '1px solid #e5e7eb'
+            }}>
+              {selectedVersion.content}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderVersionsView = () => (
+    <div style={{ background: 'white', borderRadius: '1rem', padding: '2rem', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', minHeight: 'calc(100vh - 200px)' }}>
+      <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '2rem' }}>📚 Version History</h2>
+      
+      {!projectData.name && (
+        <div style={{ background: '#fef3c7', border: '1px solid #f59e0b', borderRadius: '0.5rem', padding: '1rem', marginBottom: '1.5rem' }}>
+          <p style={{ margin: 0, color: '#92400e' }}>⚠️ Please create a project first to view version history</p>
+        </div>
+      )}
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+        <div style={{ background: '#fef3c7', padding: '1.5rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#f59e0b' }}>
+            {aiVersions.filter(v => v.type === 'brainstorm').length}
+          </div>
+          <div style={{ fontSize: '0.875rem', color: '#92400e', fontWeight: '600' }}>Brainstorms</div>
+        </div>
+        <div style={{ background: '#dcfce7', padding: '1.5rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#059669' }}>
+            {aiVersions.filter(v => v.type === 'write').length}
+          </div>
+          <div style={{ fontSize: '0.875rem', color: '#166534', fontWeight: '600' }}>Written Content</div>
+        </div>
+        <div style={{ background: '#e0e7ff', padding: '1.5rem', borderRadius: '0.5rem', textAlign: 'center' }}>
+          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#3b82f6' }}>
+            {availableBuckets.length + availableTables.length}
+          </div>
+          <div style={{ fontSize: '0.875rem', color: '#1e40af', fontWeight: '600' }}>Total Sources</div>
+        </div>
+      </div>
+
+      {aiVersions.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '4rem', color: '#6b7280' }}>
+          <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📚</div>
+          <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>No versions yet</h3>
+          <p>Start by creating some brainstorms or written content!</p>
+        </div>
+      ) : (
+        <div style={{ position: 'relative' }}>
+          {aiVersions.map((version, index) => (
+            <div key={version.id} style={{
+              display: 'flex',
+              alignItems: 'start',
+              marginBottom: '2rem',
+              paddingLeft: '4rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                left: '1.25rem',
+                top: '0.75rem',
+                width: '1.5rem',
+                height: '1.5rem',
+                borderRadius: '50%',
+                background: version.type === 'brainstorm' ? '#f59e0b' : '#059669',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '0.75rem'
+              }}>
+                {version.type === 'brainstorm' ? '🧠' : '✍️'}
+              </div>
+
+              <div
+                onClick={() => setSelectedVersion(version)}
+                style={{
+                  flex: 1,
+                  padding: '1.5rem',
+                  background: selectedVersion?.id === version.id ? '#f8fafc' : 'white',
+                  border: selectedVersion?.id === version.id ? '2px solid #3b82f6' : '1px solid #e5e7eb',
+                  borderRadius: '0.5rem',
+                  cursor: 'pointer'
+                }}
+              >
+                <h4 style={{ fontSize: '1.1rem', fontWeight: '600', margin: '0 0 0.25rem 0', textTransform: 'capitalize' }}>
+                  {version.type} #{aiVersions.filter(v => v.type === version.type).length - aiVersions.filter(v => v.type === version.type).indexOf(version)}
+                </h4>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>
+                  {new Date(version.timestamp).toLocaleString()} • {version.tone} tone
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+                  {version.prompt}
+                </div>
+
+                {selectedVersion?.id === version.id && (
+                  <div style={{
+                    marginTop: '1rem',
+                    padding: '1rem',
+                    background: '#f8fafc',
+                    borderRadius: '0.25rem',
+                    border: '1px solid #e2e8f0'
+                  }}>
+                    <div style={{ fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                      Generated Content:
+                    </div>
+                    <div style={{
+                      maxHeight: '200px',
+                      overflow: 'auto',
+                      whiteSpace: 'pre-wrap',
+                      fontSize: '0.875rem',
+                      lineHeight: '1.5',
+                      background: 'white',
+                      padding: '0.75rem',
+                      borderRadius: '0.25rem',
+                      border: '1px solid #e5e7eb'
+                    }}>
+                      {version.content}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  // Data Preview Modal
   const renderDataPreview = () => {
     if (!showFilePreview) return null;
     
@@ -1521,21 +1598,22 @@ const WorkingMiranda: React.FC = () => {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', padding: '2rem' }}>
       <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
         {renderStepIndicator()}
-        
         {currentStep === 1 && renderStep1()}
         {currentStep === 2 && renderStep2()}
         {currentStep === 3 && renderStep3()}
         {currentStep === 4 && renderStep4()}
         {currentStep === 5 && renderStep5()}
       </div>
-      
       {renderDataPreview()}
     </div>
   );
 
-  // Main render
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
+      <style>
+        {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+      </style>
+
       {/* Navigation Bar */}
       <div style={{ 
         background: 'white', 
@@ -1546,8 +1624,7 @@ const WorkingMiranda: React.FC = () => {
         alignItems: 'center'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>Miranda AI - Phase 2 Complete</h1>
-          
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>Miranda AI - Phase 3 Complete</h1>
           <nav style={{ display: 'flex', gap: '1rem' }}>
             {['home', 'workflow', 'brainstorm', 'write', 'versions'].map(view => (
               <button
@@ -1560,32 +1637,45 @@ const WorkingMiranda: React.FC = () => {
                   background: currentView === view ? '#3b82f6' : 'transparent',
                   color: currentView === view ? 'white' : '#6b7280',
                   cursor: 'pointer',
-                  textTransform: 'capitalize'
+                  textTransform: 'capitalize',
+                  fontWeight: currentView === view ? '600' : '400'
                 }}
               >
+                {view === 'brainstorm' && '🧠 '}
+                {view === 'write' && '✍️ '}
+                {view === 'versions' && '📚 '}
+                {view === 'workflow' && '⚙️ '}
+                {view === 'home' && '🏠 '}
                 {view}
               </button>
             ))}
           </nav>
         </div>
         
-        <div style={{
-          padding: '0.25rem 0.75rem',
-          borderRadius: '9999px',
-          background: backendOnline ? '#dcfce7' : '#fee2e2',
-          color: backendOnline ? '#166534' : '#991b1b',
-          fontSize: '0.875rem',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem'
-        }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {projectData.name && (
+            <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+              Project: <span style={{ fontWeight: '600', color: '#374151' }}>{projectData.name}</span>
+            </div>
+          )}
           <div style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: backendOnline ? '#22c55e' : '#ef4444'
-          }} />
-          {backendOnline ? 'Backend Online' : 'Backend Offline'}
+            padding: '0.25rem 0.75rem',
+            borderRadius: '9999px',
+            background: backendOnline ? '#dcfce7' : '#fee2e2',
+            color: backendOnline ? '#166534' : '#991b1b',
+            fontSize: '0.875rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}>
+            <div style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              background: backendOnline ? '#22c55e' : '#ef4444'
+            }} />
+            {backendOnline ? 'Backend Online' : 'Backend Offline'}
+          </div>
         </div>
       </div>
 
@@ -1612,11 +1702,11 @@ const WorkingMiranda: React.FC = () => {
                   Welcome to Miranda AI
                 </h2>
                 <p style={{ fontSize: '1.25rem', color: '#6b7280' }}>
-                  Phase 2 Complete: Full project creation and file management system
+                  Phase 3 Complete: Full AI generation with multi-source intelligence
                 </p>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
                 <div style={{
                   background: 'white',
                   borderRadius: '1rem',
@@ -1625,48 +1715,33 @@ const WorkingMiranda: React.FC = () => {
                   border: '1px solid #e5e7eb'
                 }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                    Create New Project
+                    🧠 AI Brainstorming
                   </h3>
                   <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
-                    Complete project creation with file upload capabilities
+                    Generate creative insights from your documents and data using advanced AI
                   </p>
-                  
-                  <div style={{ display: 'grid', gap: '1rem' }}>
-                    {[
-                      { name: 'Screenplay Writing', desc: 'Professional screenplay development' },
-                      { name: 'Academic Textbook', desc: 'Structured academic content' },
-                      { name: 'Research Project', desc: 'Data-driven research analysis' }
-                    ].map(template => (
-                      <button
-                        key={template.name}
-                        onClick={() => handleTemplateClick(template.name)}
-                        style={{
-                          padding: '1rem',
-                          border: '1px solid #e5e7eb',
-                          borderRadius: '0.5rem',
-                          background: 'white',
-                          textAlign: 'left',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.background = '#f9fafb';
-                          e.currentTarget.style.borderColor = '#3b82f6';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.background = 'white';
-                          e.currentTarget.style.borderColor = '#e5e7eb';
-                        }}
-                      >
-                        <div style={{ fontWeight: '600', marginBottom: '0.25rem' }}>
-                          {template.name}
-                        </div>
-                        <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                          {template.desc}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+                  {projectData.name ? (
+                    <button
+                      onClick={() => handleNavClick('brainstorm')}
+                      style={{
+                        width: '100%',
+                        padding: '1rem',
+                        background: '#f59e0b',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Start Brainstorming
+                    </button>
+                  ) : (
+                    <div style={{ background: '#f3f4f6', padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#6b7280' }}>
+                      Create a project first to use AI features
+                    </div>
+                  )}
                 </div>
 
                 <div style={{
@@ -1677,23 +1752,67 @@ const WorkingMiranda: React.FC = () => {
                   border: '1px solid #e5e7eb'
                 }}>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                    Phase 2 Complete! 🎉
+                    ✍️ AI Writing
                   </h3>
                   <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
-                    Full data management system with file uploads
+                    Create structured content using your research and brainstorm results
                   </p>
-                  
-                  <div style={{ background: '#f3f4f6', padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem' }}>
-                    <div><strong>✅ Project Creation:</strong> Templates with retry logic</div>
-                    <div><strong>✅ File Uploads:</strong> Drag & drop for documents</div>
-                    <div><strong>✅ CSV Management:</strong> Table creation and preview</div>
-                    <div><strong>✅ Data Preview:</strong> View uploaded table data</div>
-                    <div><strong>🚀 Ready for:</strong> Phase 3 AI Generation</div>
-                  </div>
+                  {projectData.name ? (
+                    <button
+                      onClick={() => handleNavClick('write')}
+                      style={{
+                        width: '100%',
+                        padding: '1rem',
+                        background: '#059669',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '0.5rem',
+                        fontSize: '1rem',
+                        fontWeight: '600',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Start Writing
+                    </button>
+                  ) : (
+                    <div style={{ background: '#f3f4f6', padding: '1rem', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#6b7280' }}>
+                      Create a project first to use AI features
+                    </div>
+                  )}
+                </div>
+
+                <div style={{
+                  background: 'white',
+                  borderRadius: '1rem',
+                  padding: '2rem',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                  border: '1px solid #e5e7eb'
+                }}>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    📚 Version History
+                  </h3>
+                  <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
+                    Track and manage all your AI-generated content versions
+                  </p>
+                  <button
+                    onClick={() => handleNavClick('versions')}
+                    style={{
+                      width: '100%',
+                      padding: '1rem',
+                      background: '#3b82f6',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    View Versions ({aiVersions.length})
+                  </button>
                 </div>
               </div>
 
-              {/* Enhanced Phase Progress Indicator */}
               <div style={{ 
                 marginTop: '3rem', 
                 padding: '2rem', 
@@ -1705,55 +1824,37 @@ const WorkingMiranda: React.FC = () => {
                   🚀 Development Progress
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
-                  <div style={{ textAlign: 'center', padding: '1rem', background: '#dcfce7', borderRadius: '0.5rem' }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>✅</div>
-                    <div style={{ fontWeight: 'bold', color: '#166534' }}>Phase 1</div>
-                    <div style={{ fontSize: '0.875rem', color: '#059669' }}>Project Creation</div>
-                  </div>
-                  <div style={{ textAlign: 'center', padding: '1rem', background: '#dcfce7', borderRadius: '0.5rem' }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>✅</div>
-                    <div style={{ fontWeight: 'bold', color: '#166534' }}>Phase 2</div>
-                    <div style={{ fontSize: '0.875rem', color: '#059669' }}>Data Management</div>
-                  </div>
-                  <div style={{ textAlign: 'center', padding: '1rem', background: '#f3f4f6', borderRadius: '0.5rem' }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🤖</div>
-                    <div style={{ fontWeight: 'bold', color: '#6b7280' }}>Phase 3</div>
-                    <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>AI Generation</div>
-                  </div>
-                  <div style={{ textAlign: 'center', padding: '1rem', background: '#f3f4f6', borderRadius: '0.5rem' }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>📊</div>
-                    <div style={{ fontWeight: 'bold', color: '#6b7280' }}>Phase 4</div>
-                    <div style={{ fontSize: '0.875rem', color: '#6b7280' }}>Export & Polish</div>
-                  </div>
+                  {[
+                    { phase: 'Phase 1', status: 'Project Creation', completed: true },
+                    { phase: 'Phase 2', status: 'Data Management', completed: true },
+                    { phase: 'Phase 3', status: 'AI Generation', completed: true },
+                    { phase: 'Phase 4', status: 'Export & Polish', completed: false }
+                  ].map((item, index) => (
+                    <div key={index} style={{ 
+                      textAlign: 'center', 
+                      padding: '1rem', 
+                      background: item.completed ? '#dcfce7' : '#f3f4f6', 
+                      borderRadius: '0.5rem' 
+                    }}>
+                      <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+                        {item.completed ? '✅' : index === 3 ? '📊' : '🤖'}
+                      </div>
+                      <div style={{ fontWeight: 'bold', color: item.completed ? '#166534' : '#6b7280' }}>
+                        {item.phase}
+                      </div>
+                      <div style={{ fontSize: '0.875rem', color: item.completed ? '#059669' : '#6b7280' }}>
+                        {item.status}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           )}
 
-          {currentView !== 'home' && currentView !== 'workflow' && (
-            <div style={{ textAlign: 'center', padding: '4rem' }}>
-              <h2 style={{ fontSize: '2rem', marginBottom: '1rem', textTransform: 'capitalize' }}>
-                {currentView} View - Ready for Phase 3
-              </h2>
-              <p style={{ color: '#6b7280' }}>
-                Phase 2 complete! This section will be built in Phase 3-4.
-              </p>
-              <button 
-                onClick={() => handleNavClick('home')}
-                style={{
-                  marginTop: '1rem',
-                  padding: '0.75rem 1.5rem',
-                  background: '#3b82f6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '0.5rem',
-                  cursor: 'pointer'
-                }}
-              >
-                Back to Home
-              </button>
-            </div>
-          )}
+          {currentView === 'brainstorm' && renderBrainstormView()}
+          {currentView === 'write' && renderWriteView()}
+          {currentView === 'versions' && renderVersionsView()}
         </div>
       )}
     </div>
