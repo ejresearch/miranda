@@ -689,3 +689,51 @@ async def tables_health_check(project: str = Query(...)) -> Dict[str, Any]:
             "database_accessible": False,
             "timestamp": datetime.now().isoformat()
         }
+
+# ===================================================================
+# FRONTEND-COMPATIBLE ROUTING FIX
+# ===================================================================
+
+@router.post("/tables/upload_csv")
+async def upload_csv_frontend_compatible(
+    file: UploadFile = File(...),
+    project: str = Query(..., description="Project name"),
+    table_name: str = Query(..., description="Table name for the CSV data")
+) -> Dict[str, Any]:
+    """
+    Frontend-compatible CSV upload endpoint
+    Matches the exact URL pattern your React app is calling:
+    /projects/{project}/tables/tables/upload_csv
+    """
+    print(f"[CSV UPLOAD] Frontend-compatible route called")
+    print(f"  Project: {project}")
+    print(f"  Table: {table_name}")
+    print(f"  File: {file.filename}")
+    
+    # Call the existing bulletproof upload function
+    return await upload_csv(file=file, project=project, table_name=table_name)
+
+
+# ===================================================================
+# FRONTEND-COMPATIBLE ROUTING FIX
+# ===================================================================
+
+@router.post("/tables/upload_csv")
+async def upload_csv_frontend_compatible(
+    file: UploadFile = File(...),
+    project: str = Query(..., description="Project name"),
+    table_name: str = Query(..., description="Table name for the CSV data")
+) -> Dict[str, Any]:
+    """
+    Frontend-compatible CSV upload endpoint
+    Matches the exact URL pattern your React app is calling:
+    /projects/{project}/tables/tables/upload_csv
+    """
+    print(f"[CSV UPLOAD] Frontend-compatible route called")
+    print(f"  Project: {project}")
+    print(f"  Table: {table_name}")
+    print(f"  File: {file.filename}")
+    
+    # Call the existing bulletproof upload function
+    return await upload_csv(file=file, project=project, table_name=table_name)
+

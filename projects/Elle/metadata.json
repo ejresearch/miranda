@@ -1,12 +1,12 @@
 {
-  "name": "Ell",
-  "original_name": "Ell",
+  "name": "Elle",
+  "original_name": "Elle",
   "description": "Full screenplay development with character arcs and scene structure",
   "template": "screenplay",
   "template_name": "Screenplay Writing",
   "category": "creative",
-  "created": "2025-07-24T21:38:36.888000",
-  "updated": "2025-07-24T21:38:36.888005",
+  "created": "2025-07-24T21:51:18.230126",
+  "updated": "2025-07-24T21:51:18.230130",
   "buckets": [
     "character_research",
     "plot_devices",

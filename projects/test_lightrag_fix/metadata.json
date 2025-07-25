@@ -1,12 +1,12 @@
 {
-  "name": "Ell",
-  "original_name": "Ell",
-  "description": "Full screenplay development with character arcs and scene structure",
+  "name": "test_lightrag_fix",
+  "original_name": "test_lightrag_fix",
+  "description": "",
   "template": "screenplay",
   "template_name": "Screenplay Writing",
   "category": "creative",
-  "created": "2025-07-24T21:38:36.888000",
-  "updated": "2025-07-24T21:38:36.888005",
+  "created": "2025-07-24T21:37:19.736712",
+  "updated": "2025-07-24T21:37:19.736717",
   "buckets": [
     "character_research",
     "plot_devices",
@@ -18,6 +18,6 @@
     "themes",
     "locations"
   ],
-  "include_sample_data": true,
+  "include_sample_data": false,
   "version": "1.0"
 }
